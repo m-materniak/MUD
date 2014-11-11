@@ -8,10 +8,14 @@ import java.util.ArrayList;
 public class Map {
     private  ArrayList<Room> rooms;
     public String name;
-    int cellSize=10;
+    int cellSize=16;
     int width=1;//ilosc komórek w poziomie
     int height=1;//ilsoc komórek w pionie
+        
+    public Map(){
+        rooms=new ArrayList<>();
 
+    }
     public ArrayList<Room> getRooms() {
         return rooms;
     }
@@ -33,4 +37,12 @@ public class Map {
     public void removeRoom(Room toRemoveRoom){
         rooms.remove(toRemoveRoom);
     }
+    public Room getRoom(int i){
+        if (i<rooms.size()){
+            return rooms.get(i);
+        }else{
+            return null;
+        }
+    }
+    
 }

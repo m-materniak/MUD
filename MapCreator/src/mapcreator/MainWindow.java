@@ -2,6 +2,8 @@ package mapcreator;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 
 /**
  * @author Tomek
@@ -44,6 +46,7 @@ public class MainWindow extends javax.swing.JFrame {
         lstContainer = new javax.swing.JList();
         jLabel9 = new javax.swing.JLabel();
         cobContainerParent = new javax.swing.JComboBox();
+        lblNumContainer = new javax.swing.JLabel();
         pnlItem = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         txtItemName = new javax.swing.JTextField();
@@ -54,6 +57,7 @@ public class MainWindow extends javax.swing.JFrame {
         lstItem = new javax.swing.JList();
         jLabel7 = new javax.swing.JLabel();
         cobItemParent = new javax.swing.JComboBox();
+        lblNumItems = new javax.swing.JLabel();
         pnlEnemy = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         lstEnemy = new javax.swing.JList();
@@ -64,6 +68,7 @@ public class MainWindow extends javax.swing.JFrame {
         btnSaveEnemy = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         cobEnemyParent = new javax.swing.JComboBox();
+        lblNumEnemies = new javax.swing.JLabel();
         pnlRooms = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         lstRooms = new javax.swing.JList();
@@ -76,6 +81,7 @@ public class MainWindow extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        lblNumRooms = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,6 +96,11 @@ public class MainWindow extends javax.swing.JFrame {
         jButton6.setText("Wczytaj");
 
         btnNewMap.setText("Nowa Mapa");
+        btnNewMap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewMapActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlMapLayout = new javax.swing.GroupLayout(pnlMap);
         pnlMap.setLayout(pnlMapLayout);
@@ -151,15 +162,22 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel9.setText("Rodzic:");
 
+        lblNumContainer.setText("jLabel10");
+
         javax.swing.GroupLayout pnlContainerLayout = new javax.swing.GroupLayout(pnlContainer);
         pnlContainer.setLayout(pnlContainerLayout);
         pnlContainerLayout.setHorizontalGroup(
             pnlContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlContainerLayout.createSequentialGroup()
+            .addGroup(pnlContainerLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel9)
-                .addGap(38, 38, 38)
-                .addComponent(cobContainerParent, 0, 94, Short.MAX_VALUE)
+                .addGroup(pnlContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlContainerLayout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(38, 38, 38)
+                        .addComponent(cobContainerParent, 0, 94, Short.MAX_VALUE))
+                    .addGroup(pnlContainerLayout.createSequentialGroup()
+                        .addComponent(lblNumContainer)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(pnlContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlContainerLayout.createSequentialGroup()
@@ -186,7 +204,9 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(pnlContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(cobContainerParent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(359, Short.MAX_VALUE))
+                .addGap(116, 116, 116)
+                .addComponent(lblNumContainer)
+                .addContainerGap(229, Short.MAX_VALUE))
             .addGroup(pnlContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlContainerLayout.createSequentialGroup()
                     .addContainerGap()
@@ -219,15 +239,22 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel7.setText("Rodzic:");
 
+        lblNumItems.setText("jLabel10");
+
         javax.swing.GroupLayout pnlItemLayout = new javax.swing.GroupLayout(pnlItem);
         pnlItem.setLayout(pnlItemLayout);
         pnlItemLayout.setHorizontalGroup(
             pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlItemLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel7)
-                .addGap(38, 38, 38)
-                .addComponent(cobItemParent, 0, 94, Short.MAX_VALUE)
+                .addGroup(pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlItemLayout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addGap(38, 38, 38)
+                        .addComponent(cobItemParent, 0, 94, Short.MAX_VALUE))
+                    .addGroup(pnlItemLayout.createSequentialGroup()
+                        .addComponent(lblNumItems)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlItemLayout.createSequentialGroup()
@@ -254,7 +281,9 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(cobItemParent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(361, Short.MAX_VALUE))
+                .addGap(115, 115, 115)
+                .addComponent(lblNumItems)
+                .addContainerGap(232, Short.MAX_VALUE))
             .addGroup(pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlItemLayout.createSequentialGroup()
                     .addContainerGap()
@@ -287,15 +316,22 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel8.setText("Rodzic:");
 
+        lblNumEnemies.setText("jLabel10");
+
         javax.swing.GroupLayout pnlEnemyLayout = new javax.swing.GroupLayout(pnlEnemy);
         pnlEnemy.setLayout(pnlEnemyLayout);
         pnlEnemyLayout.setHorizontalGroup(
             pnlEnemyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlEnemyLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel8)
-                .addGap(38, 38, 38)
-                .addComponent(cobEnemyParent, 0, 94, Short.MAX_VALUE)
+                .addGroup(pnlEnemyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlEnemyLayout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(38, 38, 38)
+                        .addComponent(cobEnemyParent, 0, 94, Short.MAX_VALUE))
+                    .addGroup(pnlEnemyLayout.createSequentialGroup()
+                        .addComponent(lblNumEnemies)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(pnlEnemyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlEnemyLayout.createSequentialGroup()
@@ -322,7 +358,9 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(pnlEnemyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(cobEnemyParent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(358, Short.MAX_VALUE))
+                .addGap(112, 112, 112)
+                .addComponent(lblNumEnemies)
+                .addContainerGap(232, Short.MAX_VALUE))
             .addGroup(pnlEnemyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlEnemyLayout.createSequentialGroup()
                     .addContainerGap()
@@ -342,11 +380,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         pnlSide.addTab("Wrogowie", pnlEnemy);
 
-        lstRooms.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane1.setViewportView(lstRooms);
 
         btnEditRoom.setText("Edytuj");
@@ -364,6 +397,8 @@ public class MainWindow extends javax.swing.JFrame {
         jButton3.setText("W");
 
         jButton4.setText("S");
+
+        lblNumRooms.setText("jLabel10");
 
         javax.swing.GroupLayout pnlRoomsLayout = new javax.swing.GroupLayout(pnlRooms);
         pnlRooms.setLayout(pnlRoomsLayout);
@@ -392,7 +427,8 @@ public class MainWindow extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtRoomName))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlRoomsLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(lblNumRooms)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnSaveRoom)))
                 .addContainerGap())
         );
@@ -415,7 +451,9 @@ public class MainWindow extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jButton4)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
-                .addComponent(btnSaveRoom)
+                .addGroup(pnlRoomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSaveRoom)
+                    .addComponent(lblNumRooms))
                 .addGap(0, 0, 0)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -432,7 +470,7 @@ public class MainWindow extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(638, Short.MAX_VALUE)
+                .addContainerGap(678, Short.MAX_VALUE)
                 .addComponent(pnlSide, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -446,6 +484,22 @@ public class MainWindow extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnNewMapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewMapActionPerformed
+        rooms=new ArrayList<>();
+        enemies=new ArrayList<>();
+        items=new ArrayList<>();
+        containers=new ArrayList<>();
+        map=new Map();
+        map.setName(this.txtMapName.getText());
+        Room firstRoom=new Room();
+        firstRoom.setName("START");
+        firstRoom.setCordX(15);
+        firstRoom.setCordY(20);
+        map.addRoom(firstRoom);
+        rooms.add(firstRoom);
+       repaint();
+    }//GEN-LAST:event_btnNewMapActionPerformed
 
     /**
      * @param args the command line arguments
@@ -478,29 +532,64 @@ public class MainWindow extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainWindow().setVisible(true);
-               
             }
         });
+    }
+    public void updateRoomsList(Map map){
+        DefaultListModel  model = new DefaultListModel();
+        lstRooms.setModel(model);
+        this.lblNumRooms.setText("Liczba pokoi: "+rooms.size());
+        for (int i=0;i< rooms.size();i++){
+            String s=Integer.toString(i)+rooms.get(i).getLine();
+            model.addElement(s);
+        }
+    }
+    public void updateEnemiesList(Map map){
+        DefaultListModel  model = new DefaultListModel();
+        lstEnemy.setModel(model);
+        this.lblNumEnemies.setText("Liczba wrogów: "+enemies.size());
+        for (int i=0;i< rooms.size();i++){
+            String s=Integer.toString(i)+rooms.get(i).getLine();
+            model.addElement(s);
+        }
     }
     
     public void paint(Graphics arg0) {
        super.paint(arg0);
        int recSize=16;
        int start=20;
-       
-       for(int i=0;i<50;i++){
-           for(int j=0;j<30;j++){
+       //rysowanie planszy
+       for(int i=0;i<30;i++){
+           for(int j=0;j<40;j++){
                arg0.setColor(Color.GRAY);
                arg0.fillRect(start+recSize*j,2*start+ recSize*i,recSize-1, recSize-1);
                arg0.setColor(Color.black);
                arg0.drawRect(start+recSize*j,2*start+recSize*i,recSize-1, recSize-1);
            }
        }
+       //rysowanie pokoi
+       if(map!=null){
+           int i=0;
+           while(map.getRoom(i)!=null){
+               Room room=map.getRoom(i);
+               int x=room.getCordX();
+               int y=room.getCordY();
+               arg0.setColor(room.getColor());
+               arg0.fillRect(start+recSize*y,2*start+ recSize*x,recSize-1, recSize-1);
+               i++;
+           }
+           
+       }
        
                     
     }
-     
-
+    public Map map;
+    public ArrayList<Room> rooms;
+    public ArrayList<Room> enemies;
+    public ArrayList<Room> items;
+    public ArrayList<Room> containers;
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEditContainer;
     private javax.swing.JButton btnEditEnemy;
@@ -537,6 +626,10 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JLabel lblNumContainer;
+    private javax.swing.JLabel lblNumEnemies;
+    private javax.swing.JLabel lblNumItems;
+    private javax.swing.JLabel lblNumRooms;
     private javax.swing.JList lstContainer;
     private javax.swing.JList lstEnemy;
     private javax.swing.JList lstItem;

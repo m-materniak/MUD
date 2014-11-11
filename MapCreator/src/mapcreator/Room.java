@@ -21,7 +21,14 @@ public class Room {
     private int cordX;
     private int cordY;
     
-    
+    public Room(){
+        items=new ArrayList<>();
+        containers=new ArrayList<>();
+        enemies=new ArrayList<>();
+        color=Color.GREEN;
+        type=1;
+
+    }
     public Room getNorthRoom() {
         return northRoom;
     }
@@ -144,5 +151,7 @@ public class Room {
     public void setCordY(int cordY) {
         this.cordY = cordY;
     }
-    
+    public String getLine(){
+        return Integer.toString(id)+"|"+name;
+    }
 }
