@@ -11,10 +11,10 @@ public class Map {
     int cellSize=16;
     int width=1;//ilosc komórek w poziomie
     int height=1;//ilsoc komórek w pionie
-        
+
+    
     public Map(){
         rooms=new ArrayList<>();
-
     }
     public ArrayList<Room> getRooms() {
         return rooms;
@@ -44,5 +44,7 @@ public class Map {
             return null;
         }
     }
-    
+    public boolean isEmpty(int x,int y){
+        return true;
+    }
 }

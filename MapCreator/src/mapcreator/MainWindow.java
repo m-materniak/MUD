@@ -36,6 +36,10 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
         btnNewMap = new javax.swing.JButton();
+        lblMapNumRooms = new javax.swing.JLabel();
+        lblMapNumEnemies = new javax.swing.JLabel();
+        lblMapNumContainers = new javax.swing.JLabel();
+        lblMapNumItems = new javax.swing.JLabel();
         pnlContainer = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         txtContainerName = new javax.swing.JTextField();
@@ -77,10 +81,10 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtRoomName = new javax.swing.JTextField();
         btnSaveRoom = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnN = new javax.swing.JButton();
+        btnE = new javax.swing.JButton();
+        btnW = new javax.swing.JButton();
+        btnS = new javax.swing.JButton();
         lblNumRooms = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -102,6 +106,14 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
+        lblMapNumRooms.setText("jLabel10");
+
+        lblMapNumEnemies.setText("jLabel11");
+
+        lblMapNumContainers.setText("jLabel12");
+
+        lblMapNumItems.setText("jLabel13");
+
         javax.swing.GroupLayout pnlMapLayout = new javax.swing.GroupLayout(pnlMap);
         pnlMap.setLayout(pnlMapLayout);
         pnlMapLayout.setHorizontalGroup(
@@ -114,17 +126,21 @@ public class MainWindow extends javax.swing.JFrame {
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtFileName))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlMapLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnNewMap))
                     .addGroup(pnlMapLayout.createSequentialGroup()
                         .addGroup(pnlMapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addGroup(pnlMapLayout.createSequentialGroup()
                                 .addComponent(btnSaveToFile, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlMapLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnNewMap)))
+                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblMapNumRooms)
+                            .addComponent(lblMapNumEnemies)
+                            .addComponent(lblMapNumContainers)
+                            .addComponent(lblMapNumItems))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         pnlMapLayout.setVerticalGroup(
@@ -136,7 +152,15 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(txtMapName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnNewMap)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 270, Short.MAX_VALUE)
+                .addGap(8, 8, 8)
+                .addComponent(lblMapNumRooms)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblMapNumEnemies)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblMapNumContainers)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblMapNumItems)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 188, Short.MAX_VALUE)
                 .addGroup(pnlMapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtFileName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
@@ -383,20 +407,55 @@ public class MainWindow extends javax.swing.JFrame {
         jScrollPane1.setViewportView(lstRooms);
 
         btnEditRoom.setText("Edytuj");
+        btnEditRoom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditRoomActionPerformed(evt);
+            }
+        });
 
         btnRemoveRoom.setText("Usuń");
+        btnRemoveRoom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoveRoomActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Nazwa pokoju:");
 
         btnSaveRoom.setText("Zapisz");
+        btnSaveRoom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveRoomActionPerformed(evt);
+            }
+        });
 
-        jButton1.setText("N");
+        btnN.setText("N");
+        btnN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("E");
+        btnE.setText("E");
+        btnE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("W");
+        btnW.setText("W");
+        btnW.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnWActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("S");
+        btnS.setText("S");
+        btnS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSActionPerformed(evt);
+            }
+        });
 
         lblNumRooms.setText("jLabel10");
 
@@ -406,13 +465,13 @@ public class MainWindow extends javax.swing.JFrame {
             pnlRoomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlRoomsLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(jButton3)
+                .addComponent(btnW)
                 .addGap(0, 0, 0)
                 .addGroup(pnlRoomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton4)
-                    .addComponent(jButton1))
+                    .addComponent(btnS)
+                    .addComponent(btnN))
                 .addGap(0, 0, 0)
-                .addComponent(jButton2)
+                .addComponent(btnE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(pnlRoomsLayout.createSequentialGroup()
                 .addContainerGap()
@@ -444,12 +503,12 @@ public class MainWindow extends javax.swing.JFrame {
                     .addGroup(pnlRoomsLayout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addGroup(pnlRoomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton2)
-                            .addComponent(jButton3)))
+                            .addComponent(btnE)
+                            .addComponent(btnW)))
                     .addGroup(pnlRoomsLayout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btnN)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton4)))
+                        .addComponent(btnS)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                 .addGroup(pnlRoomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSaveRoom)
@@ -493,13 +552,124 @@ public class MainWindow extends javax.swing.JFrame {
         map=new Map();
         map.setName(this.txtMapName.getText());
         Room firstRoom=new Room();
+        firstRoom.setId(idRoom++);
         firstRoom.setName("START");
         firstRoom.setCordX(15);
         firstRoom.setCordY(20);
         map.addRoom(firstRoom);
         rooms.add(firstRoom);
+        updateRoomsList();
+        updateEnemiesList();
+        updateContainerList();
+        updateItemsList();
+        
        repaint();
     }//GEN-LAST:event_btnNewMapActionPerformed
+
+    private void btnRemoveRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveRoomActionPerformed
+        int index=-1;
+        index=lstRooms.getSelectedIndex();
+        if(index>=0 ){
+            Room removeRoom=rooms.get(index);
+            rooms.remove(removeRoom);
+            map.removeRoom(removeRoom);
+        }
+        inxRoom=-1;
+        repaint();
+        updateRoomsList();
+    }//GEN-LAST:event_btnRemoveRoomActionPerformed
+
+    private void btnEditRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditRoomActionPerformed
+        inxRoom=lstRooms.getSelectedIndex();
+        if(inxRoom>=0 ){
+            Room editRoom=rooms.get(inxRoom);
+            txtRoomName.setText(editRoom.getName());
+        }
+        repaint();
+        updateRoomsList();
+    }//GEN-LAST:event_btnEditRoomActionPerformed
+
+    private void btnNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNActionPerformed
+        if(inxRoom>=0){
+            Room baseRoom=rooms.get(inxRoom);
+            if(baseRoom.getCordX()>0 && map.isEmpty(baseRoom.getCordX(), baseRoom.getCordY())){
+                Room newRoom=new Room();
+                newRoom.setId(idRoom++);
+                newRoom.setName("-");
+                newRoom.setCordX(baseRoom.getCordX()-1);
+                newRoom.setCordY(baseRoom.getCordY());
+                map.addRoom(newRoom);
+                rooms.add(newRoom);
+                inxRoom=rooms.size()-1;
+            }
+        }
+        repaint();
+        updateRoomsList();
+    }//GEN-LAST:event_btnNActionPerformed
+
+    private void btnSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSActionPerformed
+        if(inxRoom>=0){
+            Room baseRoom=rooms.get(inxRoom);
+            if(baseRoom.getCordX()<30 && map.isEmpty(baseRoom.getCordX(), baseRoom.getCordY())){
+                Room newRoom=new Room();
+                newRoom.setId(idRoom++);
+                newRoom.setName("-");
+                newRoom.setCordX(baseRoom.getCordX()+1);
+                newRoom.setCordY(baseRoom.getCordY());
+                map.addRoom(newRoom);
+                rooms.add(newRoom);
+                inxRoom=rooms.size()-1;
+            }
+        }
+        repaint();
+        updateRoomsList();
+    }//GEN-LAST:event_btnSActionPerformed
+
+    private void btnWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWActionPerformed
+        if(inxRoom>=0){
+            Room baseRoom=rooms.get(inxRoom);
+            if(baseRoom.getCordY()>0 && map.isEmpty(baseRoom.getCordX(), baseRoom.getCordY())){
+                Room newRoom=new Room();
+                newRoom.setId(idRoom++);
+                newRoom.setName("-");
+                newRoom.setCordX(baseRoom.getCordX());
+                newRoom.setCordY(baseRoom.getCordY()-1);
+                map.addRoom(newRoom);
+                rooms.add(newRoom);
+                inxRoom=rooms.size()-1;
+            }
+        }
+        repaint();
+        updateRoomsList();
+    }//GEN-LAST:event_btnWActionPerformed
+
+    private void btnSaveRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveRoomActionPerformed
+        if(inxRoom>=0){
+            Room saveRoom=rooms.get(inxRoom);
+            if(saveRoom!=null){
+                saveRoom.setName(txtRoomName.getText());
+            }
+        }
+        updateRoomsList();
+    }//GEN-LAST:event_btnSaveRoomActionPerformed
+
+    private void btnEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEActionPerformed
+        if(inxRoom>=0){
+            Room baseRoom=rooms.get(inxRoom);
+            if(baseRoom.getCordY()<40 && map.isEmpty(baseRoom.getCordX(), baseRoom.getCordY())){
+                Room newRoom=new Room();
+                newRoom.setId(idRoom++);
+                newRoom.setName("-");
+                newRoom.setCordX(baseRoom.getCordX());
+                newRoom.setCordY(baseRoom.getCordY()+1);
+                map.addRoom(newRoom);
+                rooms.add(newRoom);
+                inxRoom=rooms.size()-1;
+            }
+        }
+        repaint();
+        updateRoomsList();
+    }//GEN-LAST:event_btnEActionPerformed
 
     /**
      * @param args the command line arguments
@@ -535,21 +705,43 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
     }
-    public void updateRoomsList(Map map){
+    public void updateRoomsList(){
         DefaultListModel  model = new DefaultListModel();
         lstRooms.setModel(model);
         this.lblNumRooms.setText("Liczba pokoi: "+rooms.size());
+        this.lblMapNumRooms.setText("Liczba pokoi: "+rooms.size());
         for (int i=0;i< rooms.size();i++){
             String s=Integer.toString(i)+rooms.get(i).getLine();
             model.addElement(s);
         }
     }
-    public void updateEnemiesList(Map map){
+    public void updateEnemiesList(){
         DefaultListModel  model = new DefaultListModel();
         lstEnemy.setModel(model);
         this.lblNumEnemies.setText("Liczba wrogów: "+enemies.size());
-        for (int i=0;i< rooms.size();i++){
-            String s=Integer.toString(i)+rooms.get(i).getLine();
+        this.lblMapNumEnemies.setText("Liczba wrogów: "+enemies.size());
+        for (int i=0;i< enemies.size();i++){
+            String s=Integer.toString(i)+enemies.get(i).getLine();
+            model.addElement(s);
+        }
+    }
+    public void updateContainerList(){
+        DefaultListModel  model = new DefaultListModel();
+        lstContainer.setModel(model);
+        this.lblNumContainer.setText("Liczba kontenerów: "+containers.size());
+        this.lblMapNumContainers.setText("Liczba kontenerów: "+containers.size());
+        for (int i=0;i< containers.size();i++){
+            String s=Integer.toString(i)+containers.get(i).getLine();
+            model.addElement(s);
+        }
+    }
+    public void updateItemsList(){
+        DefaultListModel  model = new DefaultListModel();
+        lstItem.setModel(model);
+        this.lblNumItems.setText("Liczba Przedmiotów: "+items.size());
+        this.lblMapNumItems.setText("Liczba Przedmiotów: "+items.size());
+        for (int i=0;i< items.size();i++){
+            String s=Integer.toString(i)+items.get(i).getLine();
             model.addElement(s);
         }
     }
@@ -575,7 +767,12 @@ public class MainWindow extends javax.swing.JFrame {
                int x=room.getCordX();
                int y=room.getCordY();
                arg0.setColor(room.getColor());
+               if(inxRoom==i){
+                   arg0.setColor(Color.RED);
+               }
                arg0.fillRect(start+recSize*y,2*start+ recSize*x,recSize-1, recSize-1);
+               arg0.setColor(Color.DARK_GRAY);
+               arg0.drawRect(start+recSize*y,2*start+ recSize*x,recSize-1, recSize-1);
                i++;
            }
            
@@ -589,29 +786,38 @@ public class MainWindow extends javax.swing.JFrame {
     public ArrayList<Room> items;
     public ArrayList<Room> containers;
     
+    public int inxRoom=-1;
+    public int inxContainer=-1;
+    public int inxItem=-1;
+    public int inxEnemy=-1;
+    
+    public int idRoom=0;
+    public int idItem=0;
+    public int idContainer=0;
+    public int idEnemy=0;
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnE;
     private javax.swing.JButton btnEditContainer;
     private javax.swing.JButton btnEditEnemy;
     private javax.swing.JButton btnEditItem;
     private javax.swing.JButton btnEditRoom;
+    private javax.swing.JButton btnN;
     private javax.swing.JButton btnNewMap;
     private javax.swing.JButton btnRemoveContainer;
     private javax.swing.JButton btnRemoveEnemy;
     private javax.swing.JButton btnRemoveItem;
     private javax.swing.JButton btnRemoveRoom;
+    private javax.swing.JButton btnS;
     private javax.swing.JButton btnSaveContainer;
     private javax.swing.JButton btnSaveEnemy;
     private javax.swing.JButton btnSaveItem;
     private javax.swing.JButton btnSaveRoom;
     private javax.swing.JButton btnSaveToFile;
+    private javax.swing.JButton btnW;
     private javax.swing.JComboBox cobContainerParent;
     private javax.swing.JComboBox cobEnemyParent;
     private javax.swing.JComboBox cobItemParent;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -626,6 +832,10 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JLabel lblMapNumContainers;
+    private javax.swing.JLabel lblMapNumEnemies;
+    private javax.swing.JLabel lblMapNumItems;
+    private javax.swing.JLabel lblMapNumRooms;
     private javax.swing.JLabel lblNumContainer;
     private javax.swing.JLabel lblNumEnemies;
     private javax.swing.JLabel lblNumItems;
