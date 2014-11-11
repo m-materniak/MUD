@@ -18,6 +18,9 @@ public class Room {
     private ArrayList<Enemy> enemies;
     private Color color;
     private int type;
+    private int cordX;
+    private int cordY;
+    
     
     public Room getNorthRoom() {
         return northRoom;
@@ -109,4 +112,37 @@ public class Room {
     public void removeItem(Item toRemoveItem) {
         items.remove(toRemoveItem);
     }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public int getCordX() {
+        return cordX;
+    }
+
+    public void setCordX(int cordX) {
+        this.cordX = cordX;
+    }
+
+    public int getCordY() {
+        return cordY;
+    }
+
+    public void setCordY(int cordY) {
+        this.cordY = cordY;
+    }
+    
 }

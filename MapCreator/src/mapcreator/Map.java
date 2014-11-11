@@ -8,6 +8,9 @@ import java.util.ArrayList;
 public class Map {
     private  ArrayList<Room> rooms;
     public String name;
+    int cellSize=10;
+    int width=1;//ilosc komórek w poziomie
+    int height=1;//ilsoc komórek w pionie
 
     public ArrayList<Room> getRooms() {
         return rooms;
