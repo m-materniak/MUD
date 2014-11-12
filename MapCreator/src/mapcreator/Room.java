@@ -152,6 +152,6 @@ public class Room {
         this.cordY = cordY;
     }
     public String getLine(){
-        return Integer.toString(id)+"|"+name;
+        return Integer.toString(id)+"|"+name+"("+cordX+";"+cordY+")";
     }
 }

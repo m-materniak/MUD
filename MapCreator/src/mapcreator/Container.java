@@ -1,5 +1,6 @@
 package mapcreator;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
 /**
@@ -9,7 +10,10 @@ public class Container {
     public int id;
     public String name;
     private ArrayList<Item> items;
-
+    private Color color;
+    public Container(){
+        items=new ArrayList<>();
+    };
     public int getId() {
         return id;
     }
@@ -36,4 +40,13 @@ public class Container {
     public String getLine(){
         return Integer.toString(id)+"|"+name;
     }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+    
 }

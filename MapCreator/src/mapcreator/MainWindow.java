@@ -51,6 +51,7 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         cobContainerParent = new javax.swing.JComboBox();
         lblNumContainer = new javax.swing.JLabel();
+        btnAddContainer = new javax.swing.JButton();
         pnlItem = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         txtItemName = new javax.swing.JTextField();
@@ -62,6 +63,7 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         cobItemParent = new javax.swing.JComboBox();
         lblNumItems = new javax.swing.JLabel();
+        btnAddItem = new javax.swing.JButton();
         pnlEnemy = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         lstEnemy = new javax.swing.JList();
@@ -73,6 +75,7 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         cobEnemyParent = new javax.swing.JComboBox();
         lblNumEnemies = new javax.swing.JLabel();
+        btnAddEnemy = new javax.swing.JButton();
         pnlRooms = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         lstRooms = new javax.swing.JList();
@@ -173,9 +176,14 @@ public class MainWindow extends javax.swing.JFrame {
 
         pnlSide.addTab("Mapa", pnlMap);
 
-        jLabel5.setText("Nazwa Wroga:");
+        jLabel5.setText("Nazwa Kontenera:");
 
         btnSaveContainer.setText("Zapisz");
+        btnSaveContainer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveContainerActionPerformed(evt);
+            }
+        });
 
         btnEditContainer.setText("Edytuj");
 
@@ -187,6 +195,13 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel9.setText("Rodzic:");
 
         lblNumContainer.setText("jLabel10");
+
+        btnAddContainer.setText("Dodaj");
+        btnAddContainer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddContainerActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlContainerLayout = new javax.swing.GroupLayout(pnlContainer);
         pnlContainer.setLayout(pnlContainerLayout);
@@ -201,7 +216,10 @@ public class MainWindow extends javax.swing.JFrame {
                         .addComponent(cobContainerParent, 0, 94, Short.MAX_VALUE))
                     .addGroup(pnlContainerLayout.createSequentialGroup()
                         .addComponent(lblNumContainer)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlContainerLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnAddContainer)))
                 .addContainerGap())
             .addGroup(pnlContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlContainerLayout.createSequentialGroup()
@@ -228,7 +246,9 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(pnlContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(cobContainerParent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(116, 116, 116)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAddContainer)
+                .addGap(87, 87, 87)
                 .addComponent(lblNumContainer)
                 .addContainerGap(229, Short.MAX_VALUE))
             .addGroup(pnlContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -265,6 +285,13 @@ public class MainWindow extends javax.swing.JFrame {
 
         lblNumItems.setText("jLabel10");
 
+        btnAddItem.setText("Dodaj");
+        btnAddItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddItemActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlItemLayout = new javax.swing.GroupLayout(pnlItem);
         pnlItem.setLayout(pnlItemLayout);
         pnlItemLayout.setHorizontalGroup(
@@ -278,7 +305,10 @@ public class MainWindow extends javax.swing.JFrame {
                         .addComponent(cobItemParent, 0, 94, Short.MAX_VALUE))
                     .addGroup(pnlItemLayout.createSequentialGroup()
                         .addComponent(lblNumItems)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlItemLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnAddItem)))
                 .addContainerGap())
             .addGroup(pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlItemLayout.createSequentialGroup()
@@ -305,7 +335,9 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(cobItemParent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(115, 115, 115)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAddItem)
+                .addGap(86, 86, 86)
                 .addComponent(lblNumItems)
                 .addContainerGap(232, Short.MAX_VALUE))
             .addGroup(pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -342,6 +374,13 @@ public class MainWindow extends javax.swing.JFrame {
 
         lblNumEnemies.setText("jLabel10");
 
+        btnAddEnemy.setText("Dodaj");
+        btnAddEnemy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddEnemyActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlEnemyLayout = new javax.swing.GroupLayout(pnlEnemy);
         pnlEnemy.setLayout(pnlEnemyLayout);
         pnlEnemyLayout.setHorizontalGroup(
@@ -355,7 +394,10 @@ public class MainWindow extends javax.swing.JFrame {
                         .addComponent(cobEnemyParent, 0, 94, Short.MAX_VALUE))
                     .addGroup(pnlEnemyLayout.createSequentialGroup()
                         .addComponent(lblNumEnemies)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEnemyLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnAddEnemy)))
                 .addContainerGap())
             .addGroup(pnlEnemyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlEnemyLayout.createSequentialGroup()
@@ -382,7 +424,9 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(pnlEnemyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(cobEnemyParent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(112, 112, 112)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAddEnemy)
+                .addGap(83, 83, 83)
                 .addComponent(lblNumEnemies)
                 .addContainerGap(232, Short.MAX_VALUE))
             .addGroup(pnlEnemyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -537,7 +581,7 @@ public class MainWindow extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlSide)
+                .addComponent(pnlSide, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -545,13 +589,13 @@ public class MainWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNewMapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewMapActionPerformed
-        rooms=new ArrayList<>();
-        enemies=new ArrayList<>();
-        items=new ArrayList<>();
-        containers=new ArrayList<>();
-        map=new Map();
+        rooms = new ArrayList<>();
+        enemies = new ArrayList<>();
+        items = new ArrayList<>();
+        containers = new ArrayList<>();
+        map = new Map();
         map.setName(this.txtMapName.getText());
-        Room firstRoom=new Room();
+        Room firstRoom = new Room();
         firstRoom.setId(idRoom++);
         firstRoom.setName("START");
         firstRoom.setCordX(15);
@@ -562,27 +606,27 @@ public class MainWindow extends javax.swing.JFrame {
         updateEnemiesList();
         updateContainerList();
         updateItemsList();
-        
-       repaint();
+
+        repaint();
     }//GEN-LAST:event_btnNewMapActionPerformed
 
     private void btnRemoveRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveRoomActionPerformed
-        int index=-1;
-        index=lstRooms.getSelectedIndex();
-        if(index>=0 ){
-            Room removeRoom=rooms.get(index);
+        int index = -1;
+        index = lstRooms.getSelectedIndex();
+        if (index >= 0) {
+            Room removeRoom = rooms.get(index);
             rooms.remove(removeRoom);
             map.removeRoom(removeRoom);
         }
-        inxRoom=-1;
+        inxRoom = -1;
         repaint();
         updateRoomsList();
     }//GEN-LAST:event_btnRemoveRoomActionPerformed
 
     private void btnEditRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditRoomActionPerformed
-        inxRoom=lstRooms.getSelectedIndex();
-        if(inxRoom>=0 ){
-            Room editRoom=rooms.get(inxRoom);
+        inxRoom = lstRooms.getSelectedIndex();
+        if (inxRoom >= 0) {
+            Room editRoom = rooms.get(inxRoom);
             txtRoomName.setText(editRoom.getName());
         }
         repaint();
@@ -590,17 +634,22 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditRoomActionPerformed
 
     private void btnNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNActionPerformed
-        if(inxRoom>=0){
-            Room baseRoom=rooms.get(inxRoom);
-            if(baseRoom.getCordX()>0 && map.isEmpty(baseRoom.getCordX(), baseRoom.getCordY())){
-                Room newRoom=new Room();
-                newRoom.setId(idRoom++);
-                newRoom.setName("-");
-                newRoom.setCordX(baseRoom.getCordX()-1);
-                newRoom.setCordY(baseRoom.getCordY());
-                map.addRoom(newRoom);
-                rooms.add(newRoom);
-                inxRoom=rooms.size()-1;
+        if (inxRoom >= 0) {
+            Room baseRoom = rooms.get(inxRoom);
+
+            if (baseRoom.getCordX() > 0) {
+                if (!map.isEmpty(baseRoom.getCordX() - 1, baseRoom.getCordY())) {
+                    inxRoom = getIndexOfRoomFromCord(baseRoom.getCordX() - 1, baseRoom.getCordY());
+                } else {
+                    Room newRoom = new Room();
+                    newRoom.setId(idRoom++);
+                    newRoom.setName(txtRoomName.getText());
+                    newRoom.setCordX(baseRoom.getCordX() - 1);
+                    newRoom.setCordY(baseRoom.getCordY());
+                    map.addRoom(newRoom);
+                    rooms.add(newRoom);
+                    inxRoom = rooms.size() - 1;
+                }
             }
         }
         repaint();
@@ -608,17 +657,21 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNActionPerformed
 
     private void btnSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSActionPerformed
-        if(inxRoom>=0){
-            Room baseRoom=rooms.get(inxRoom);
-            if(baseRoom.getCordX()<30 && map.isEmpty(baseRoom.getCordX(), baseRoom.getCordY())){
-                Room newRoom=new Room();
-                newRoom.setId(idRoom++);
-                newRoom.setName("-");
-                newRoom.setCordX(baseRoom.getCordX()+1);
-                newRoom.setCordY(baseRoom.getCordY());
-                map.addRoom(newRoom);
-                rooms.add(newRoom);
-                inxRoom=rooms.size()-1;
+        if (inxRoom >= 0) {
+            Room baseRoom = rooms.get(inxRoom);
+            if (baseRoom.getCordX() < 30) {
+                if (!map.isEmpty(baseRoom.getCordX() + 1, baseRoom.getCordY())) {
+                    inxRoom = getIndexOfRoomFromCord(baseRoom.getCordX() + 1, baseRoom.getCordY());
+                } else {
+                    Room newRoom = new Room();
+                    newRoom.setId(idRoom++);
+                    newRoom.setName(txtRoomName.getText());
+                    newRoom.setCordX(baseRoom.getCordX() + 1);
+                    newRoom.setCordY(baseRoom.getCordY());
+                    map.addRoom(newRoom);
+                    rooms.add(newRoom);
+                    inxRoom = rooms.size() - 1;
+                }
             }
         }
         repaint();
@@ -626,17 +679,21 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSActionPerformed
 
     private void btnWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWActionPerformed
-        if(inxRoom>=0){
-            Room baseRoom=rooms.get(inxRoom);
-            if(baseRoom.getCordY()>0 && map.isEmpty(baseRoom.getCordX(), baseRoom.getCordY())){
-                Room newRoom=new Room();
-                newRoom.setId(idRoom++);
-                newRoom.setName("-");
-                newRoom.setCordX(baseRoom.getCordX());
-                newRoom.setCordY(baseRoom.getCordY()-1);
-                map.addRoom(newRoom);
-                rooms.add(newRoom);
-                inxRoom=rooms.size()-1;
+        if (inxRoom >= 0) {
+            Room baseRoom = rooms.get(inxRoom);
+            if (baseRoom.getCordY() > 0) {
+                if (!map.isEmpty(baseRoom.getCordX(), baseRoom.getCordY() - 1)) {
+                    inxRoom = getIndexOfRoomFromCord(baseRoom.getCordX(), baseRoom.getCordY() - 1);
+                } else {
+                    Room newRoom = new Room();
+                    newRoom.setId(idRoom++);
+                    newRoom.setName(txtRoomName.getText());
+                    newRoom.setCordX(baseRoom.getCordX());
+                    newRoom.setCordY(baseRoom.getCordY() - 1);
+                    map.addRoom(newRoom);
+                    rooms.add(newRoom);
+                    inxRoom = rooms.size() - 1;
+                }
             }
         }
         repaint();
@@ -644,9 +701,9 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btnWActionPerformed
 
     private void btnSaveRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveRoomActionPerformed
-        if(inxRoom>=0){
-            Room saveRoom=rooms.get(inxRoom);
-            if(saveRoom!=null){
+        if (inxRoom >= 0) {
+            Room saveRoom = rooms.get(inxRoom);
+            if (saveRoom != null) {
                 saveRoom.setName(txtRoomName.getText());
             }
         }
@@ -654,22 +711,76 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSaveRoomActionPerformed
 
     private void btnEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEActionPerformed
-        if(inxRoom>=0){
-            Room baseRoom=rooms.get(inxRoom);
-            if(baseRoom.getCordY()<40 && map.isEmpty(baseRoom.getCordX(), baseRoom.getCordY())){
-                Room newRoom=new Room();
-                newRoom.setId(idRoom++);
-                newRoom.setName("-");
-                newRoom.setCordX(baseRoom.getCordX());
-                newRoom.setCordY(baseRoom.getCordY()+1);
-                map.addRoom(newRoom);
-                rooms.add(newRoom);
-                inxRoom=rooms.size()-1;
+        if (inxRoom >= 0) {
+            Room baseRoom = rooms.get(inxRoom);
+            if (baseRoom.getCordY() < 40) {
+                if (!map.isEmpty(baseRoom.getCordX(), baseRoom.getCordY() + 1)) {
+                    inxRoom = getIndexOfRoomFromCord(baseRoom.getCordX(), baseRoom.getCordY() + 1);
+                } else {
+                    Room newRoom = new Room();
+                    newRoom.setId(idRoom++);
+                    newRoom.setName(txtRoomName.getText());
+                    newRoom.setCordX(baseRoom.getCordX());
+                    newRoom.setCordY(baseRoom.getCordY() + 1);
+                    map.addRoom(newRoom);
+                    rooms.add(newRoom);
+                    inxRoom = rooms.size() - 1;
+                }
             }
         }
         repaint();
         updateRoomsList();
     }//GEN-LAST:event_btnEActionPerformed
+
+    private void btnSaveContainerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveContainerActionPerformed
+       
+    }//GEN-LAST:event_btnSaveContainerActionPerformed
+
+    private void btnAddContainerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddContainerActionPerformed
+       int indRoom=cobContainerParent.getSelectedIndex();
+       Container newContainer=new Container();
+       newContainer.setName(txtContainerName.getText());
+       newContainer.setId(idContainer++);
+       newContainer.setColor(Color.ORANGE);
+       containers.add(newContainer);
+       rooms.get(indRoom).addContainer(newContainer);
+       
+       updateContainerList();
+       repaint();
+    }//GEN-LAST:event_btnAddContainerActionPerformed
+
+    private void btnAddEnemyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEnemyActionPerformed
+        int indRoom=cobEnemyParent.getSelectedIndex();
+       Enemy newEnemy=new Enemy();
+       newEnemy.setName(txtEnemyName.getText());
+       newEnemy.setId(idEnemy++);
+       newEnemy.setColor(Color.MAGENTA);
+       enemies.add(newEnemy);
+       rooms.get(indRoom).addEnemy(newEnemy);
+       
+       updateEnemiesList();
+       repaint();
+    }//GEN-LAST:event_btnAddEnemyActionPerformed
+
+    private void btnAddItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddItemActionPerformed
+         int index=cobItemParent.getSelectedIndex();
+         
+       Item newItem=new Item();
+       newItem.setName(txtEnemyName.getText());
+       newItem.setId(idItem++);
+       newItem.setColor(Color.BLUE);
+       items.add(newItem);
+       
+       
+       if (index>=rooms.size()){
+             index-=rooms.size();
+             containers.get(index).getItems().add(newItem);
+       }else{
+           rooms.get(index).addItem(newItem);
+       }
+       updateItemsList();
+       repaint();
+    }//GEN-LAST:event_btnAddItemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -705,98 +816,160 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
     }
-    public void updateRoomsList(){
-        DefaultListModel  model = new DefaultListModel();
+
+    public void updateRoomsList() {
+        DefaultListModel model = new DefaultListModel();
         lstRooms.setModel(model);
-        this.lblNumRooms.setText("Liczba pokoi: "+rooms.size());
-        this.lblMapNumRooms.setText("Liczba pokoi: "+rooms.size());
-        for (int i=0;i< rooms.size();i++){
-            String s=Integer.toString(i)+rooms.get(i).getLine();
+        this.lblNumRooms.setText("Liczba pokoi: " + rooms.size());
+        this.lblMapNumRooms.setText("Liczba pokoi: " + rooms.size());
+        for (int i = 0; i < rooms.size(); i++) {
+            String s = Integer.toString(i)+"#" + rooms.get(i).getLine();
             model.addElement(s);
         }
+        updateParentContainerCombo();
+        updateParentEnemyCombo();
+        updateParentItemCombo();
     }
-    public void updateEnemiesList(){
-        DefaultListModel  model = new DefaultListModel();
+    public void updateParentContainerCombo(){
+        cobContainerParent.removeAllItems();
+        for(int i=0;i<rooms.size();i++){
+            cobContainerParent.addItem(rooms.get(i).getLine());
+        }
+    }
+    public void updateParentEnemyCombo(){
+        cobEnemyParent.removeAllItems();
+        for(int i=0;i<rooms.size();i++){
+            cobEnemyParent.addItem(rooms.get(i).getLine());
+        }
+    }
+    public void updateParentItemCombo(){
+        cobItemParent.removeAllItems();
+        for(int i=0;i<rooms.size();i++){
+            cobItemParent.addItem(rooms.get(i).getLine());
+        }
+        for(int i=0;i<containers.size();i++){
+            cobItemParent.addItem(containers.get(i).getLine());
+        }
+        
+    }
+
+    public void updateEnemiesList() {
+        DefaultListModel model = new DefaultListModel();
         lstEnemy.setModel(model);
-        this.lblNumEnemies.setText("Liczba wrogów: "+enemies.size());
-        this.lblMapNumEnemies.setText("Liczba wrogów: "+enemies.size());
-        for (int i=0;i< enemies.size();i++){
-            String s=Integer.toString(i)+enemies.get(i).getLine();
+        this.lblNumEnemies.setText("Liczba wrogów: " + enemies.size());
+        this.lblMapNumEnemies.setText("Liczba wrogów: " + enemies.size());
+        for (int i = 0; i < enemies.size(); i++) {
+            String s = Integer.toString(i)+"#" + enemies.get(i).getLine();
             model.addElement(s);
         }
     }
-    public void updateContainerList(){
-        DefaultListModel  model = new DefaultListModel();
+
+    public void updateContainerList() {
+        DefaultListModel model = new DefaultListModel();
         lstContainer.setModel(model);
-        this.lblNumContainer.setText("Liczba kontenerów: "+containers.size());
-        this.lblMapNumContainers.setText("Liczba kontenerów: "+containers.size());
-        for (int i=0;i< containers.size();i++){
-            String s=Integer.toString(i)+containers.get(i).getLine();
+        this.lblNumContainer.setText("Liczba kontenerów: " + containers.size());
+        this.lblMapNumContainers.setText("Liczba kontenerów: " + containers.size());
+        for (int i = 0; i < containers.size(); i++) {
+            String s = Integer.toString(i)+"#" + containers.get(i).getLine();
             model.addElement(s);
         }
+        updateParentItemCombo();
     }
-    public void updateItemsList(){
-        DefaultListModel  model = new DefaultListModel();
+
+    public void updateItemsList() {
+        DefaultListModel model = new DefaultListModel();
         lstItem.setModel(model);
-        this.lblNumItems.setText("Liczba Przedmiotów: "+items.size());
-        this.lblMapNumItems.setText("Liczba Przedmiotów: "+items.size());
-        for (int i=0;i< items.size();i++){
-            String s=Integer.toString(i)+items.get(i).getLine();
+        this.lblNumItems.setText("Liczba Przedmiotów: " + items.size());
+        this.lblMapNumItems.setText("Liczba Przedmiotów: " + items.size());
+        for (int i = 0; i < items.size(); i++) {
+            String s = Integer.toString(i)+"#" + items.get(i).getLine();
             model.addElement(s);
         }
     }
-    
+
+    public int getIndexOfRoom(Room roomToFind) {
+        for (int i = 0; i < rooms.size(); i++) {
+            if (roomToFind == rooms.get(i)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public int getIndexOfRoomFromCord(int x, int y) {
+        for (int i = 0; i < rooms.size(); i++) {
+            if (x == rooms.get(i).getCordX() && y == rooms.get(i).getCordY()) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     public void paint(Graphics arg0) {
-       super.paint(arg0);
-       int recSize=16;
-       int start=20;
-       //rysowanie planszy
-       for(int i=0;i<30;i++){
-           for(int j=0;j<40;j++){
-               arg0.setColor(Color.GRAY);
-               arg0.fillRect(start+recSize*j,2*start+ recSize*i,recSize-1, recSize-1);
-               arg0.setColor(Color.black);
-               arg0.drawRect(start+recSize*j,2*start+recSize*i,recSize-1, recSize-1);
-           }
-       }
-       //rysowanie pokoi
-       if(map!=null){
-           int i=0;
-           while(map.getRoom(i)!=null){
-               Room room=map.getRoom(i);
-               int x=room.getCordX();
-               int y=room.getCordY();
-               arg0.setColor(room.getColor());
-               if(inxRoom==i){
-                   arg0.setColor(Color.RED);
-               }
-               arg0.fillRect(start+recSize*y,2*start+ recSize*x,recSize-1, recSize-1);
-               arg0.setColor(Color.DARK_GRAY);
-               arg0.drawRect(start+recSize*y,2*start+ recSize*x,recSize-1, recSize-1);
-               i++;
-           }
-           
-       }
-       
-                    
+        super.paint(arg0);
+        int recSize = 16;
+        int start = 20;
+        //rysowanie planszy
+        for (int i = 0; i < 30; i++) {
+            for (int j = 0; j < 40; j++) {
+                arg0.setColor(Color.GRAY);
+                arg0.fillRect(start + recSize * j, 2 * start + recSize * i, recSize - 1, recSize - 1);
+                arg0.setColor(Color.black);
+                arg0.drawRect(start + recSize * j, 2 * start + recSize * i, recSize - 1, recSize - 1);
+            }
+        }
+        //rysowanie pokoi
+        if (map != null) {
+            int i = 0;
+            while (map.getRoom(i) != null) {
+                Room room = map.getRoom(i);
+                int x = room.getCordX();
+                int y = room.getCordY();
+                arg0.setColor(room.getColor());
+                if (inxRoom == i) {
+                    arg0.setColor(Color.RED);
+                }
+                arg0.fillRect(start + recSize * y, 2 * start + recSize * x, recSize - 1, recSize - 1);
+                arg0.setColor(Color.DARK_GRAY);
+                arg0.drawRect(start + recSize * y, 2 * start + recSize * x, recSize - 1, recSize - 1);
+                if(room.getContainers().size()>0){
+                    arg0.setColor(room.getContainers().get(0).getColor());
+                    arg0.fillRect(start + recSize * y+(int)recSize/4, 2 * start + recSize * x+(int)recSize/4, (int)recSize/4, (int)recSize/4);
+                }
+                if(room.getEnemies().size()>0){
+                    arg0.setColor(room.getEnemies().get(0).getColor());
+                    arg0.fillRect(start + recSize * y+(int)recSize/2, 2 * start + recSize * x+(int)recSize/4, (int)recSize/4, (int)recSize/4);
+                }
+                if(room.getItems().size()>0){
+                    arg0.setColor(room.getItems().get(0).getColor());
+                    arg0.fillRect(start + recSize * y+(int)recSize/4, 2 * start + recSize * x+(int)recSize/2, (int)recSize/4, (int)recSize/4);
+                }
+                i++;
+            }
+            
+        }
+
     }
     public Map map;
     public ArrayList<Room> rooms;
-    public ArrayList<Room> enemies;
-    public ArrayList<Room> items;
-    public ArrayList<Room> containers;
-    
-    public int inxRoom=-1;
-    public int inxContainer=-1;
-    public int inxItem=-1;
-    public int inxEnemy=-1;
-    
-    public int idRoom=0;
-    public int idItem=0;
-    public int idContainer=0;
-    public int idEnemy=0;
-    
+    public ArrayList<Enemy> enemies;
+    public ArrayList<Item> items;
+    public ArrayList<Container> containers;
+
+    public int inxRoom = -1;
+    public int inxContainer = -1;
+    public int inxItem = -1;
+    public int inxEnemy = -1;
+
+    public int idRoom = 0;
+    public int idItem = 0;
+    public int idContainer = 0;
+    public int idEnemy = 0;
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddContainer;
+    private javax.swing.JButton btnAddEnemy;
+    private javax.swing.JButton btnAddItem;
     private javax.swing.JButton btnE;
     private javax.swing.JButton btnEditContainer;
     private javax.swing.JButton btnEditEnemy;

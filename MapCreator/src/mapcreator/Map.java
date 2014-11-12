@@ -45,6 +45,11 @@ public class Map {
         }
     }
     public boolean isEmpty(int x,int y){
-        return true;
+       for(int i=0;i<rooms.size();i++){
+           if (rooms.get(i).getCordX()==x && rooms.get(i).getCordY()==y){
+               return false;
+           }
+       }
+       return true;
     }
 }

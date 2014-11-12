@@ -34,7 +34,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="pnlSide" max="32767" attributes="0"/>
+              <Component id="pnlSide" pref="458" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -204,6 +204,10 @@
                               <Component id="lblNumContainer" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="btnAddContainer" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -240,7 +244,9 @@
                           <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="cobContainerParent" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnAddContainer" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
                       <Component id="lblNumContainer" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="229" max="32767" attributes="0"/>
                   </Group>
@@ -269,7 +275,7 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabel5">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Nazwa Wroga:"/>
+                <Property name="text" type="java.lang.String" value="Nazwa Kontenera:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtContainerName">
@@ -278,6 +284,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Zapisz"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSaveContainerActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnEditContainer">
               <Properties>
@@ -323,6 +332,14 @@
                 <Property name="text" type="java.lang.String" value="jLabel10"/>
               </Properties>
             </Component>
+            <Component class="javax.swing.JButton" name="btnAddContainer">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Dodaj"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddContainerActionPerformed"/>
+              </Events>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="pnlItem">
@@ -348,6 +365,10 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="lblNumItems" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="btnAddItem" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -385,7 +406,9 @@
                           <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="cobItemParent" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnAddItem" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
                       <Component id="lblNumItems" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="232" max="32767" attributes="0"/>
                   </Group>
@@ -468,6 +491,14 @@
                 <Property name="text" type="java.lang.String" value="jLabel10"/>
               </Properties>
             </Component>
+            <Component class="javax.swing.JButton" name="btnAddItem">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Dodaj"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddItemActionPerformed"/>
+              </Events>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="pnlEnemy">
@@ -493,6 +524,10 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="lblNumEnemies" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="btnAddEnemy" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -530,7 +565,9 @@
                           <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="cobEnemyParent" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnAddEnemy" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
                       <Component id="lblNumEnemies" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="232" max="32767" attributes="0"/>
                   </Group>
@@ -612,6 +649,14 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel10"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnAddEnemy">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Dodaj"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddEnemyActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

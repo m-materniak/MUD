@@ -1,12 +1,17 @@
 package mapcreator;
 
+import java.awt.Color;
+
 /**
  * @author Tomek
  */
 public class Enemy {
     public int id;
     public String name;
-
+    public Color color;
+    public Enemy(){
+    
+    }
     public int getId() {
         return id;
     }
@@ -25,4 +30,13 @@ public class Enemy {
     public String getLine(){
         return Integer.toString(id)+"|"+name;
     }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+    
 }
