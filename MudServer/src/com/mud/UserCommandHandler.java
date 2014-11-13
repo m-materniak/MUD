@@ -1,16 +1,21 @@
 package com.mud;
 
+import com.mud.Entities.GameWorld;
 import com.mud.Entities.Item;
+import com.mud.Entities.Person;
+
+import java.util.List;
 
 /**
  * Created by krzysiek on 2014-11-08.
  */
 public class UserCommandHandler extends CommandHandler {
+    GameWorld gameWorld;
     CommandHandler nextCommandHandler;
-    private String restOfCommand;
 
-    public UserCommandHandler(CommandHandler commandHandler, ClientConnection clientConnection) {
+    public UserCommandHandler(CommandHandler commandHandler, ClientConnection clientConnection, GameWorld gameWorld) {
         nextCommandHandler = commandHandler;
+        this.gameWorld = gameWorld;
         this.clientConnection = clientConnection;
     }
 
@@ -39,10 +44,9 @@ public class UserCommandHandler extends CommandHandler {
         } else if (verb.equals("drop")) {
             Drop();
         } else if (verb.equals("say")) {
-            clientConnection.Send("This command is not yet implemented");
+            Say();
         } else if (verb.equals("shout")) {
-            clientConnection.Send("This command is not yet implemented");
-            Shout(command);
+            Shout();
         } else if (verb.equals("stats")) {
             clientConnection.Send("This command is not yet implemented");
         } else if (verb.equals("info")) {
@@ -60,7 +64,7 @@ public class UserCommandHandler extends CommandHandler {
     private void Drop() {
         Item item = clientConnection.player.TakeItem(restOfCommand);
         if (item != null) {
-            clientConnection.player.location.PutItem(item);
+            clientConnection.player.getLocation().PutItem(item);
         }
         else {
             clientConnection.Send("Item " + restOfCommand + " was not found.");
@@ -73,7 +77,7 @@ public class UserCommandHandler extends CommandHandler {
     }
 
     private void Take() {
-        Item item = clientConnection.player.location.TakeItem(restOfCommand);
+        Item item = clientConnection.player.getLocation().TakeItem(restOfCommand);
         if (item != null) {
             clientConnection.player.equipment.add(item);
         }
@@ -82,17 +86,19 @@ public class UserCommandHandler extends CommandHandler {
         }
     }
 
-    private String TakeNextWord() {
-        if (restOfCommand == null)
-            return null;
-        String[] parts = restOfCommand.split("\\s+", 2);
-        String nextWord = parts[0];
-        restOfCommand = parts.length > 1 ? parts[1] : null;
-        return nextWord;
+    private void Say() {
+        String name = TakeNextWord();
+        Person person = gameWorld.GetPerson(name);
+        if (person != null) {
+            person.EventSay(clientConnection.player, restOfCommand);
+        }
     }
 
-    private void Shout(String command) {
-
+    private void Shout() {
+        List<Person> people = gameWorld.GetPeople();
+        for (Person person : people) {
+            person.EventShout(clientConnection.player, restOfCommand);
+        }
     }
 
     private void MovePlayer(String direction) {
@@ -101,7 +107,7 @@ public class UserCommandHandler extends CommandHandler {
     }
 
     private void DescribeRoom() {
-        String roomDescription = clientConnection.player.location.Describe();
+        String roomDescription = clientConnection.player.getLocation().Describe();
         clientConnection.Send(roomDescription);
     }
 }

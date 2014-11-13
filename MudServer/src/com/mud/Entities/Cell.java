@@ -16,6 +16,7 @@ public class Cell extends GameElement implements IItemContainer {
     public String Describe() {
         return Name + "\r\n"
                 + CollectionHelper.DescribeCollection("Items", items)
+                + CollectionHelper.DescribeCollection("People", people)
                 + DescribeExits();
     }
 

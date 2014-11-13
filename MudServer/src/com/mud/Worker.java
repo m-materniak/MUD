@@ -1,5 +1,7 @@
 package com.mud;
 
+import com.mud.Entities.GameWorld;
+
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
@@ -10,6 +12,7 @@ public class Worker extends Thread {
     public BlockingQueue<Command> queue = new ArrayBlockingQueue<Command>(1024);
     public MapGenerator map = new MapGenerator();
     public UserRepository userRepository = new UserRepository();
+    public GameWorld gameWorld = new GameWorld();
 
     public Worker(){
         map.GenerateMap(userRepository);

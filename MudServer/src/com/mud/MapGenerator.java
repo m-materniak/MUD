@@ -39,7 +39,7 @@ public class MapGenerator {
         UserAccount account = userRepository.Register(name, password);
         Player player = new Player();
         player.Name = name;
-        player.location = cell;
+        player.setLocation(cell);
         account.player = player;
     }
 

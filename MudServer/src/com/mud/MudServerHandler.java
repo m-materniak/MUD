@@ -22,7 +22,7 @@ public class MudServerHandler extends SimpleChannelInboundHandler<String> {
     {
         Channel channel = ctx.channel();
         ClientConnection clientConnection = new ClientConnection(channel);
-        clientConnection.commandHandler = new SystemCommandHandler(clientConnection, worker.userRepository);
+        clientConnection.commandHandler = new SystemCommandHandler(clientConnection, worker.userRepository, worker.gameWorld);
         connections.put(channel, clientConnection);
         worker.queue.add(new Command(null, clientConnection));
     }
@@ -30,7 +30,10 @@ public class MudServerHandler extends SimpleChannelInboundHandler<String> {
     @Override
     public void handlerRemoved(ChannelHandlerContext ctx)
     {
-
+        ClientConnection connection = connections.get(ctx.channel());
+        if (connection.player != null) {
+            connection.player.connection = null;
+        }
     }
 
     @Override
