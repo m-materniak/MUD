@@ -11,8 +11,12 @@ import java.util.List;
  */
 public class CollectionHelper {
     public static String DescribeCollection(String collectionName, Collection<? extends GameElement> collection) {
+        return DescribeCollection(collectionName, collection, "");
+    }
+
+    public static String DescribeCollection(String collectionName, Collection<? extends GameElement> collection, String emptyText) {
         if (collection.isEmpty())
-            return "";
+            return emptyText + "\r\n";
         String description = collectionName + ": \r\n";
         for (GameElement element : collection) {
             description += element.Name + "\r\n";

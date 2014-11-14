@@ -9,11 +9,21 @@ import java.util.List;
 public class GameWorld {
     private List<Person> peopleInGame = new ArrayList<Person>();
 
+    public Cell getStartingCell() {
+        return startingCell;
+    }
+
+    public void setStartingCell(Cell startingCell) {
+        this.startingCell = startingCell;
+    }
+
+    private Cell startingCell;
+
     public void AddPerson(Person person){
         peopleInGame.add(person);
     }
 
-   public void RemovePerson(Person person) {
+    public void RemovePerson(Person person) {
        peopleInGame.remove(person);
    }
 

@@ -10,12 +10,12 @@ import java.util.concurrent.BlockingQueue;
  */
 public class Worker extends Thread {
     public BlockingQueue<Command> queue = new ArrayBlockingQueue<Command>(1024);
-    public MapGenerator map = new MapGenerator();
+    public GameWorld gameWorld;
     public UserRepository userRepository = new UserRepository();
-    public GameWorld gameWorld = new GameWorld();
 
     public Worker(){
-        map.GenerateMap(userRepository);
+        MapGenerator mapGenerator = new MapGenerator();
+        gameWorld = mapGenerator.GenerateMap(userRepository);
     }
 
     @Override

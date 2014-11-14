@@ -18,8 +18,9 @@ public class MapGenerator {
     public Cell[][] cells = new Cell[width][height];
     private UserRepository userRepository;
 
-    public void GenerateMap(UserRepository userRepository)
+    public GameWorld GenerateMap(UserRepository userRepository)
     {
+        GameWorld gameWorld = new GameWorld();
         this.userRepository = userRepository;
         for (int x = 0; x < width; x++){
             for (int y = 0; y < height; y++){
@@ -28,19 +29,13 @@ public class MapGenerator {
         }
         ConnectAllCells();
         CreateUsers();
+        gameWorld.setStartingCell(cells[0][0]);
+        return gameWorld;
     }
 
     private void CreateUsers() {
-        CreateUser("alice", "qwe", cells[0][0]);
-        CreateUser("bob", "qwe", cells[0][0]);
-    }
-
-    private void CreateUser(String name, String password, Cell cell) {
-        UserAccount account = userRepository.Register(name, password);
-        Player player = new Player();
-        player.Name = name;
-        player.setLocation(cell);
-        account.player = player;
+        userRepository.CreateUser("alice", "qwe", cells[0][0]);
+        userRepository.CreateUser("bob", "qwe", cells[0][0]);
     }
 
     private Cell GenerateCell()
