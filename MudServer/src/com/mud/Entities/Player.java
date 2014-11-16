@@ -8,22 +8,26 @@ import com.mud.ClientConnection;
 public class Player extends Person{
     public ClientConnection connection;
 
+    public Player(GameWorld gameWorld) {
+        super(gameWorld);
+    }
+
     @Override
     public String Describe() {
         return "It's a player";
     }
 
     @Override
-    public void EventShout(Player player, String text) {
-        if (connection != null && player != this) {
-            connection.Send(player.Name + " shouts: " + text);
+    public void EventShout(Person person, String text) {
+        if (connection != null && person != this) {
+            connection.Send(person.Name + " shouts: " + text);
         }
     }
 
     @Override
-    public void EventSay(Player player, String text) {
-        if (connection != null && player != this) {
-            connection.Send(player.Name + " says to you: " + text);
+    public void EventSay(Person person, String text) {
+        if (connection != null && person != this) {
+            connection.Send(person.Name + " says to you: " + text);
         }
     }
 }

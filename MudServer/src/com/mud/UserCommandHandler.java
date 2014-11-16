@@ -62,12 +62,13 @@ public class UserCommandHandler extends CommandHandler {
     }
 
     private void Drop() {
-        Item item = clientConnection.player.TakeItem(restOfCommand);
+        String itemName = restOfCommand;
+        Item item = clientConnection.player.Drop(itemName);
         if (item != null) {
-            clientConnection.player.getLocation().PutItem(item);
+            clientConnection.Send("You dropped " + item.Name + ".");
         }
         else {
-            clientConnection.Send("Item " + restOfCommand + " was not found.");
+            clientConnection.Send("Item " + itemName + " was not found.");
         }
     }
 
@@ -76,10 +77,11 @@ public class UserCommandHandler extends CommandHandler {
         clientConnection.Send(inventoryDescription);
     }
 
+
     private void Take() {
-        Item item = clientConnection.player.getLocation().TakeItem(restOfCommand);
+        Item item = clientConnection.player.Take(restOfCommand);
         if (item != null) {
-            clientConnection.player.equipment.add(item);
+            clientConnection.Send("You picked up " + item.Name + ".");
         }
         else {
             clientConnection.Send("Item " + restOfCommand + " was not found.");
@@ -88,10 +90,8 @@ public class UserCommandHandler extends CommandHandler {
 
     private void Say() {
         String name = TakeNextWord();
-        Person person = gameWorld.GetPerson(name);
-        if (person != null) {
-            person.EventSay(clientConnection.player, restOfCommand);
-        }
+        String text = restOfCommand;
+        clientConnection.player.Say(name, text);
     }
 
     private void Shout() {

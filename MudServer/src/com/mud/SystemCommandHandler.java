@@ -47,7 +47,7 @@ public class SystemCommandHandler extends CommandHandler {
     protected void Register() {
         String login = TakeNextWord();
         String password = TakeNextWord();
-        if (userRepository.CreateUser(login, password, gameWorld.getStartingCell()) != null){
+        if (userRepository.CreateUser(login, password, gameWorld) != null){
             clientConnection.Send("Account " + login + " was successfully created.");
         } else {
             clientConnection.Send("Couldn't create account " + login + ".");

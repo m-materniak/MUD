@@ -11,6 +11,11 @@ public abstract class Person extends GameElement implements IItemContainer{
     private int attack;
     private int defence;
     public List<Item> equipment = new ArrayList<Item>();
+    private GameWorld gameWorld;
+
+    public Person(GameWorld gameWorld) {
+        this.gameWorld = gameWorld;
+    }
 
     public Cell getLocation() {
         return location;
@@ -67,7 +72,31 @@ public abstract class Person extends GameElement implements IItemContainer{
         equipment.add(item);
     }
 
-    public abstract void EventShout(Player player, String text);
+    public abstract void EventShout(Person person, String text);
 
-    public abstract void EventSay(Player player, String text);
+    public abstract void EventSay(Person person, String text);
+
+    public Item Take(String itemName) {
+        Item item = location.TakeItem(itemName);
+        if (item != null) {
+            equipment.add(item);
+        }
+        return item;
+    }
+
+    public Item Drop(String itemName) {
+        Item item = TakeItem(itemName);
+        if (item != null) {
+            location.PutItem(item);
+        }
+        return item;
+    }
+
+    public void Say(String name, String text) {
+        Person person = gameWorld.GetPerson(name);
+        if (person != null) {
+            person.EventSay(this, text);
+        }
+    }
+
 }

@@ -17,25 +17,25 @@ public class MapGenerator {
     Random generator = new Random();
     public Cell[][] cells = new Cell[width][height];
     private UserRepository userRepository;
+    GameWorld gameWorld = new GameWorld();
 
     public GameWorld GenerateMap(UserRepository userRepository)
     {
-        GameWorld gameWorld = new GameWorld();
         this.userRepository = userRepository;
         for (int x = 0; x < width; x++){
             for (int y = 0; y < height; y++){
                 cells[x][y] = GenerateCell();
             }
         }
+        gameWorld.setStartingCell(cells[0][0]);
         ConnectAllCells();
         CreateUsers();
-        gameWorld.setStartingCell(cells[0][0]);
         return gameWorld;
     }
 
     private void CreateUsers() {
-        userRepository.CreateUser("alice", "qwe", cells[0][0]);
-        userRepository.CreateUser("bob", "qwe", cells[0][0]);
+        userRepository.CreateUser("alice", "qwe", gameWorld);
+        userRepository.CreateUser("bob", "qwe", gameWorld);
     }
 
     private Cell GenerateCell()
@@ -51,9 +51,9 @@ public class MapGenerator {
         cell.people = new ArrayList<Person>();
         final double personProbability = 0.3;
         while (generator.nextDouble() < personProbability) {
-            Player person = new Player();
-            person.Name = "Zdzisiek";
-            cell.people.add(person);
+            NonPlayerCharacter npc = new NonPlayerCharacter(gameWorld);
+            npc.Name = "Zdzisiek";
+            npc.setLocation(cell);
         }
     }
 
@@ -105,7 +105,7 @@ public class MapGenerator {
 
     private void ConnectAllCells()
     {
-        final double connectionProbability = 0.8;
+        final double connectionProbability = 1.0;
         for (int x = 0; x < width - 1; x++){
             for (int y = 0; y < height - 1; y++){
                 ConnectCellsWithProbability(connectionProbability, cells[x][y], cells[x+1][y], 1);

@@ -1,6 +1,7 @@
 package com.mud;
 
 import com.mud.Entities.Cell;
+import com.mud.Entities.GameWorld;
 import com.mud.Entities.Player;
 import com.mud.Entities.UserAccount;
 import io.netty.channel.Channel;
@@ -41,11 +42,11 @@ public class UserRepository {
         }
     }
 
-    public UserAccount CreateUser(String name, String password, Cell cell) {
+    public UserAccount CreateUser(String name, String password, GameWorld gameWorld) {
         UserAccount account = Register(name, password);
-        Player player = new Player();
+        Player player = new Player(gameWorld);
         player.Name = name;
-        player.setLocation(cell);
+        player.setLocation(gameWorld.getStartingCell());
         account.player = player;
         return account;
     }

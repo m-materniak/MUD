@@ -5,7 +5,7 @@ import com.mud.ClientConnection;
 /**
  * Created by krzysiek on 2014-11-09.
  */
-public class UserAccount extends Player {
+public class UserAccount {
     public String login;
     public String password;
     public Player player;
