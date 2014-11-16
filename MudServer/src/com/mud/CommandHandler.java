@@ -8,6 +8,11 @@ public abstract class CommandHandler {
     protected String restOfCommand;
 
     public abstract void ExecuteCommand(String command);
+    public abstract String GetHelpString();
+
+    public void Help() {
+        clientConnection.Send(GetHelpString());
+    }
 
     protected String TakeNextWord() {
         if (restOfCommand == null)

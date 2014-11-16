@@ -11,6 +11,12 @@ public class SystemCommandHandler extends CommandHandler {
     private UserRepository userRepository;
     private GameWorld gameWorld;
 
+    private String helpString = "Available commands:\r\n" +
+                    "\tregister new_login new_password\r\n" +
+                    "\tlogin your_login your_password\r\n" +
+                    "\tlogout\r\n" +
+                    "\thelp\r\n";
+
     public SystemCommandHandler(ClientConnection clientConnection, UserRepository userRepository, GameWorld gameWorld){
         this.clientConnection = clientConnection;
         this.userRepository = userRepository;
@@ -33,11 +39,20 @@ public class SystemCommandHandler extends CommandHandler {
             Register();
         } else if(verb.equals("logout")){
             Logout();
+        } else if(verb.equals("help")){
+            Help();
         }
     }
 
+    @Override
+    public String GetHelpString() {
+        return helpString;
+    }
+
     private void Welcome() {
-        clientConnection.Send("Welcome.");
+        clientConnection.Send("Welcome to the OpenMud.\r\n" +
+                "\r\n"
+                + GetHelpString());
     }
 
     protected void Logout() {

@@ -12,6 +12,19 @@ import java.util.List;
 public class UserCommandHandler extends CommandHandler {
     GameWorld gameWorld;
     CommandHandler nextCommandHandler;
+    private String helpString = "AvailableCommands:"
+            + "\tnorth - go north\r\n"
+            + "\teast - go east\r\n"
+            + "\twest - go west\r\n"
+            + "\tsouth - go south\r\n"
+            + "\tlook - look at current location\r\n"
+            + "\ttake ITEM - take one of items in the room\r\n"
+            + "\tdrop ITEM - drop one of items in your inventory\r\n"
+            + "\tsay PERSON TEXT - say something to a particular person\r\n"
+            + "\tshout TEXT - say something to everyone\r\n"
+            + "\tinventory - show all items currently in your backpack\r\n"
+            + "\thelp - display this menu\r\n"
+            + "\t\r\n";
 
     public UserCommandHandler(CommandHandler commandHandler, ClientConnection clientConnection, GameWorld gameWorld) {
         nextCommandHandler = commandHandler;
@@ -55,10 +68,17 @@ public class UserCommandHandler extends CommandHandler {
             clientConnection.Send("This command is not yet implemented");
         } else if (verb.equals("inventory")) {
             DescribeInventory();
+        } else if (verb.equals("help")) {
+            Help();
         }
         else if (nextCommandHandler != null) {
             nextCommandHandler.ExecuteCommand(command);
         }
+    }
+
+    @Override
+    public String GetHelpString() {
+        return helpString;
     }
 
     private void Drop() {
