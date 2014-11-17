@@ -23,7 +23,7 @@ public abstract class Person extends GameElement implements ItemContainer{
     private boolean TryMove(String direction, String testedDirection, Cell newCell) {
         if (direction.equals(testedDirection) && newCell != null){
             location.RemovePerson(this);
-            newCell.AddPerson(this);
+            newCell.addPerson(this);
             location = newCell;
             return true;
         }
@@ -76,6 +76,24 @@ public abstract class Person extends GameElement implements ItemContainer{
 
     public void setDefence(int defence) {
         this.defence = defence;
+    }
+    
+    public Cell getLocation() {
+        return location;
+    }
+
+    public void setLocation(Cell location) {
+        this.location = location;
+    }
+    public com.mud.Entities.Person toServerPerson(){
+        com.mud.Entities.Person newPerson = new com.mud.Entities.NonPlayerCharacter();
+        newPerson.setLocation(this.location.toServerCell());
+        newPerson.setAttack(attack);
+        newPerson.setDefence(defence);
+        newPerson.setHealth(health);
+        
+        return newPerson;
+        
     }
     
 }

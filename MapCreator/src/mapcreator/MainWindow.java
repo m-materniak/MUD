@@ -10,6 +10,15 @@ import Entities2.Cell;
 import Entities2.ItemContainer;
 import Entities2.NPC;
 import Entities2.Person;
+import com.mud.Entities.GameWorld;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.util.HashMap;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 /**
  * @author Tomek
  */
@@ -100,9 +109,16 @@ public class MainWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        pnlSide.setEnabled(false);
+
         jLabel1.setText("Nazwa mapy:");
 
         btnSaveToFile.setText("Zapisz");
+        btnSaveToFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveToFileActionPerformed(evt);
+            }
+        });
 
         txtFileName.setText("map.mm");
 
@@ -183,6 +199,8 @@ public class MainWindow extends javax.swing.JFrame {
         );
 
         pnlSide.addTab("Mapa", pnlMap);
+
+        pnlContainer.setBackground(new java.awt.Color(255, 153, 255));
 
         jLabel5.setText("Nazwa Skrzyni:");
 
@@ -272,6 +290,8 @@ public class MainWindow extends javax.swing.JFrame {
         );
 
         pnlSide.addTab("Skrzynie", pnlContainer);
+
+        pnlItem.setBackground(new java.awt.Color(204, 255, 255));
 
         jLabel4.setText("Nazwa:");
 
@@ -372,6 +392,8 @@ public class MainWindow extends javax.swing.JFrame {
 
         pnlSide.addTab("Przedmioty", pnlItem);
 
+        pnlEnemy.setBackground(new java.awt.Color(255, 231, 122));
+
         lstEnemy.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(lstEnemy);
 
@@ -408,30 +430,29 @@ public class MainWindow extends javax.swing.JFrame {
         pnlEnemyLayout.setHorizontalGroup(
             pnlEnemyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEnemyLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlEnemyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlEnemyLayout.createSequentialGroup()
-                        .addComponent(lblNumEnemies)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(pnlEnemyLayout.createSequentialGroup()
-                        .addGroup(pnlEnemyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel7))
-                        .addGap(18, 18, 18)
-                        .addGroup(pnlEnemyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSpinnerHealth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSpinnerAttack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(58, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEnemyLayout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(jLabel11)
-                .addGap(18, 18, 18)
-                .addComponent(jSpinnerDefence, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEnemyLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnAddEnemy)
                 .addContainerGap())
+            .addGroup(pnlEnemyLayout.createSequentialGroup()
+                .addGroup(pnlEnemyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlEnemyLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(pnlEnemyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblNumEnemies)
+                            .addGroup(pnlEnemyLayout.createSequentialGroup()
+                                .addGroup(pnlEnemyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel7))
+                                .addGap(18, 18, 18)
+                                .addGroup(pnlEnemyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jSpinnerHealth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jSpinnerAttack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(pnlEnemyLayout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(jLabel11)
+                        .addGap(18, 18, 18)
+                        .addComponent(jSpinnerDefence, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(pnlEnemyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlEnemyLayout.createSequentialGroup()
                     .addContainerGap()
@@ -643,7 +664,7 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)
+                    .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlSide))
                 .addContainerGap())
         );
@@ -672,6 +693,7 @@ public class MainWindow extends javax.swing.JFrame {
         updateContainers();
         updateItemsList();
 
+        pnlSide.setEnabled(true);
         repaint();
     }//GEN-LAST:event_btnNewMapActionPerformed
 
@@ -683,7 +705,7 @@ public class MainWindow extends javax.swing.JFrame {
             rooms.remove(removeRoom);
             map.removeRoom(removeRoom);
         }
-        inxRoom = -1;
+        inxRoom = Integer.MIN_VALUE;
         repaint();
         updateRoomsList();
     }//GEN-LAST:event_btnRemoveRoomActionPerformed
@@ -713,6 +735,8 @@ public class MainWindow extends javax.swing.JFrame {
                     newRoom.setName(txtRoomName.getText());
                     newRoom.setCordX(baseRoom.getCordX() - 1);
                     newRoom.setCordY(baseRoom.getCordY());
+                    
+                    updateNeighbours(newRoom);
                     map.addRoom(newRoom);
                     rooms.add(newRoom);
                     activeCell = newRoom;
@@ -740,6 +764,8 @@ public class MainWindow extends javax.swing.JFrame {
                     newRoom.setName(txtRoomName.getText());
                     newRoom.setCordX(baseRoom.getCordX() + 1);
                     newRoom.setCordY(baseRoom.getCordY());
+                    
+                    updateNeighbours(newRoom);
                     map.addRoom(newRoom);
                     rooms.add(newRoom);
                     activeCell = newRoom;
@@ -767,6 +793,8 @@ public class MainWindow extends javax.swing.JFrame {
                     newRoom.setName(txtRoomName.getText());
                     newRoom.setCordX(baseRoom.getCordX());
                     newRoom.setCordY(baseRoom.getCordY() - 1);
+                    
+                    updateNeighbours(newRoom);
                     map.addRoom(newRoom);
                     rooms.add(newRoom);
                     activeCell = newRoom;
@@ -807,6 +835,8 @@ public class MainWindow extends javax.swing.JFrame {
                     newRoom.setName(txtRoomName.getText());
                     newRoom.setCordX(baseRoom.getCordX());
                     newRoom.setCordY(baseRoom.getCordY() + 1);
+                    
+                    updateNeighbours(newRoom);
                     map.addRoom(newRoom);
                     rooms.add(newRoom);
                     activeCell = newRoom;
@@ -930,6 +960,7 @@ public class MainWindow extends javax.swing.JFrame {
                 newRoom.setName(txtRoomName.getText());
                 newRoom.setCordX(evt.getY() / 16);
                 newRoom.setCordY(evt.getX() / 16);
+                updateNeighbours(newRoom);
                 map.addRoom(newRoom);
                 rooms.add(newRoom);
                 activeCell = newRoom;
@@ -943,6 +974,49 @@ public class MainWindow extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_panelMouseClicked
+
+    private void btnSaveToFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveToFileActionPerformed
+        JFrame parentFrame = new JFrame();
+
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Wybierz gdzie zapisać");
+        //fileChooser.setName("twojastara");
+        fileChooser.setSelectedFile(new File(txtFileName.getText()));
+        //fileChooser.getUI().setFileName( name )
+
+        int userSelection = fileChooser.showSaveDialog(parentFrame);
+
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File fileToSave = fileChooser.getSelectedFile();
+            System.out.println("Save as file: " + fileToSave.getAbsolutePath());
+            FileOutputStream fos = null;
+            ObjectOutputStream oos = null;
+            try {
+                fos = new FileOutputStream(fileToSave); //utworzenie strumienia wyjściowego
+                oos = new ObjectOutputStream(fos);  //utworzenie obiektu zapisującego do strumienia
+
+                oos.writeObject(toGameWorld()); //serializacja obiektu
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                // zamykamy strumienie w finally
+                try {
+                    if (oos != null) {
+                        oos.close();
+                    }
+                } catch (IOException e) {
+                }
+                try {
+                    if (fos != null) {
+                        fos.close();
+                    }
+                } catch (IOException e) {
+                }
+            }
+        }
+    }//GEN-LAST:event_btnSaveToFileActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1074,6 +1148,75 @@ public class MainWindow extends javax.swing.JFrame {
         }
         return -1;
     }
+    public Cell getRoomFromCord(int x, int y) {
+        for (int i = 0; i < rooms.size(); i++) {
+            if (x == rooms.get(i).getCordX() && y == rooms.get(i).getCordY()) {
+                return rooms.get(i);
+            }
+        }
+        return null;
+    }
+    public void updateNeighbours(Cell newCell){
+        if (!map.isEmpty(newCell.getCordX()-1, newCell.getCordY())){
+            Cell northCell = getRoomFromCord(newCell.getCordX()-1, newCell.getCordY());
+            newCell.cellNorth = northCell;
+            northCell.cellSouth = newCell;
+        } else newCell.cellNorth=null;
+        if (!map.isEmpty(newCell.getCordX()+1, newCell.getCordY())){
+            Cell southCell = getRoomFromCord(newCell.getCordX()+1, newCell.getCordY());
+            newCell.cellSouth = southCell;
+            southCell.cellNorth = newCell;
+        } else newCell.cellSouth=null;
+        if (!map.isEmpty(newCell.getCordX(), newCell.getCordY()+1)){
+            Cell eastCell = getRoomFromCord(newCell.getCordX(), newCell.getCordY()+1);
+            newCell.cellEast = eastCell;
+            eastCell.cellWest = newCell;
+        } else newCell.cellEast=null;
+        if (!map.isEmpty(newCell.getCordX(), newCell.getCordY()-1)){
+            Cell westCell = getRoomFromCord(newCell.getCordX(), newCell.getCordY()-1);
+            newCell.cellWest = westCell;
+            westCell.cellEast = newCell;
+        } else newCell.cellWest=null;
+    }
+    public GameWorld toGameWorld(){
+        System.out.println(rooms.size());
+        HashMap<Cell, com.mud.Entities.Cell> map = new HashMap<Cell, com.mud.Entities.Cell>();
+        for (Cell cell : rooms){
+            if (!map.containsKey(cell)){
+                com.mud.Entities.Cell newCell = new com.mud.Entities.Cell();
+                newCell.Name=cell.getName();
+                for (Person person : cell.getPeople()){
+                    com.mud.Entities.Person newPerson = new com.mud.Entities.NonPlayerCharacter();
+                    newPerson.setLocation(newCell);
+                    newPerson.setAttack(person.getAttack());
+                    newPerson.setDefence(person.getDefence());
+                    newPerson.setHealth(person.getHealth());
+                    newCell.AddPerson(newPerson);
+                    for (Item item : person.equipment){
+                        com.mud.Entities.Item newItem = new com.mud.Entities.Item();
+                        newItem.Name = item.getName();
+                        newPerson.PutItem(newItem);
+                    }
+                }
+                for (Item item : cell.getItems()){
+                    com.mud.Entities.Item newItem = new com.mud.Entities.Item();
+                    newItem.Name = item.getName();
+                    newCell.PutItem(newItem);
+                }
+                map.put(cell, newCell);
+            }
+        }
+        for (Cell cell : rooms){
+            com.mud.Entities.Cell newCell = map.get(cell);
+            newCell.cellEast = map.get(cell.cellEast);
+            newCell.cellWest = map.get(cell.cellWest);
+            newCell.cellNorth = map.get(cell.cellNorth);
+            newCell.cellSouth = map.get(cell.cellSouth);
+        }
+        GameWorld swiat = new GameWorld();
+        swiat.setStartingCell(map.get(rooms.get(0)));
+        return swiat;
+    }
 
     public void paint(Graphics arg0) {
         super.paint(arg0);
@@ -1095,7 +1238,7 @@ public class MainWindow extends javax.swing.JFrame {
                 Cell room = map.getRoom(i);
                 int x = room.getCordX();
                 int y = room.getCordY();
-                //arg0.setColor(room.getColor());
+                arg0.setColor(Color.DARK_GRAY);
                 if (inxRoom == i) {
                     arg0.setColor(Color.RED);
                 }
@@ -1104,14 +1247,17 @@ public class MainWindow extends javax.swing.JFrame {
                 arg0.drawRect(start + recSize * y, 2 * start + recSize * x, recSize - 1, recSize - 1);
                 if(room.getBoxes().size()>0){
                     //arg0.setColor(room.getContainers().get(0).getColor());
+                    arg0.setColor(Color.MAGENTA);
                     arg0.fillRect(start + recSize * y+(int)recSize/4, 2 * start + recSize * x+(int)recSize/4, (int)recSize/4, (int)recSize/4);
                 }
                 if(room.getPeople().size()>0){
                     //arg0.setColor(room.getEnemies().get(0).getColor());
+                    arg0.setColor(Color.ORANGE);
                     arg0.fillRect(start + recSize * y+(int)recSize/2, 2 * start + recSize * x+(int)recSize/4, (int)recSize/4, (int)recSize/4);
                 }
                 if(room.getItems().size()>0){
                     //arg0.setColor(room.getItems().get(0).getColor());
+                    arg0.setColor(Color.CYAN);
                     arg0.fillRect(start + recSize * y+(int)recSize/4, 2 * start + recSize * x+(int)recSize/2, (int)recSize/4, (int)recSize/4);
                 }
                 i++;

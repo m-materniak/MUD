@@ -146,12 +146,9 @@ public class Cell extends GameElement implements ItemContainer {
         people.remove(person);
     }
 
-    public void AddPerson(Person person) {
+    public void addPerson(Person person) {
         people.add(person);
-    }
-
-    public void addPerson(Person newEnemy) {
-        people.add(newEnemy);
+        person.setLocation(this);
     }
 
     public void removePerson(Person toRemoveEnemy) {
@@ -188,5 +185,20 @@ public class Cell extends GameElement implements ItemContainer {
 
     public void setCordY(int cordY) {
         this.cordY = cordY;
+    }
+    public com.mud.Entities.Cell toServerCell(){
+        com.mud.Entities.Cell newCell = new com.mud.Entities.Cell();
+        for (Person person : people){
+            newCell.AddPerson(person.toServerPerson());
+        }
+        for (Item item : items){
+            newCell.PutItem(item.toServerItem());
+        }
+        //skoro nie ma box to wypada też itemy z edytorowych boxów powrzucać
+        newCell.cellEast = this.cellEast==null ? null : this.cellEast.toServerCell();
+        newCell.cellWest = this.cellWest==null ? null : this.cellWest.toServerCell();
+        newCell.cellNorth = this.cellNorth==null ? null : this.cellNorth.toServerCell();
+        newCell.cellSouth = this.cellSouth==null ? null : this.cellSouth.toServerCell();
+        return newCell;
     }
 }

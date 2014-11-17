@@ -8,5 +8,11 @@ public class Item extends GameElement{
     public String Describe() {
         return "An item";
     }
+
+    com.mud.Entities.Item toServerItem() {
+        com.mud.Entities.Item newItem = null;
+        newItem.Name = this.Name;
+        return newItem;
+    }
     
 }

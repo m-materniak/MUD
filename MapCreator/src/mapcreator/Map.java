@@ -1,6 +1,7 @@
 package mapcreator;
 
 import Entities2.Cell;
+import com.mud.Entities.GameWorld;
 import java.util.ArrayList;
 
 /**
@@ -12,6 +13,8 @@ public class Map {
     int cellSize=16;
     int width=1;//ilosc komórek w poziomie
     int height=1;//ilsoc komórek w pionie
+    int leftUpperCornerX = Integer.MIN_VALUE;
+    int leftUpperCornerY = Integer.MIN_VALUE;
 
     
     public Map(){
@@ -34,6 +37,8 @@ public class Map {
     }
     public void addRoom(Cell newRoom){
         cells.add(newRoom);
+        updateMapSize();
+        printMapSize();
     }
     public void removeRoom(Cell toRemoveRoom){
         cells.remove(toRemoveRoom);
@@ -52,5 +57,34 @@ public class Map {
            }
        }
        return true;
+    }
+
+    public void updateMapSize(){
+        int minX = Integer.MAX_VALUE;
+        int minY = Integer.MAX_VALUE;
+        int maxX = Integer.MIN_VALUE;
+        int maxY = Integer.MIN_VALUE;
+        for (Cell room : cells) {
+            minX = room.getCordX()<minX ? room.getCordX() : minX;
+            maxX = maxX<room.getCordX() ? room.getCordX() : maxX;
+            minY = room.getCordY()<minY ? room.getCordY() : minY;
+            maxY = maxY<room.getCordY() ? room.getCordY() : maxY;
+        }
+        width = maxY-minY+1;
+        height = maxX-minX+1;//
+        leftUpperCornerX = minX;
+        leftUpperCornerY = minY;
+    }
+    public void printMapSize(){
+        System.out.println("Width:              " + width);
+        System.out.println("Height:             " + height);
+        System.out.println("leftUpperCornerX:   " + leftUpperCornerX);
+        System.out.println("leftUpperCornerY:   " + leftUpperCornerY);
+        
+    }
+    public GameWorld toGameWorld(){
+        GameWorld gw = null;
+        gw.setStartingCell(cells.get(0).toServerCell());
+        return gw;
     }
 }
