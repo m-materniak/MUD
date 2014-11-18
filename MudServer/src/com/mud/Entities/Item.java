@@ -10,4 +10,7 @@ public class Item extends GameElement implements Serializable{
     public String Describe() {
         return "An item";
     }
+
+    @Override
+    public String toString() { return Name; }
 }

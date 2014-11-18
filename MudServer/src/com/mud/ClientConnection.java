@@ -24,4 +24,14 @@ public class ClientConnection {
         Send("You were disconnected");
         channel.disconnect();
     }
+
+    public void SetCommandHandler(CommandHandler newCommandHandler) {
+        commandHandler = newCommandHandler;
+        newCommandHandler.Initialize();
+    }
+
+    public void RestoreCommandHandler() {
+        commandHandler = commandHandler.previousCommandHandler;
+        commandHandler.Initialize();
+    }
 }

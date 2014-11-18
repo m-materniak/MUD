@@ -56,7 +56,9 @@ public class Worker extends Thread {
         System.out.println("Handling command " + command.text);
 
         try {
-            command.clientConnection.commandHandler.ExecuteCommand(command.text);
+            if (command.text != null) {
+                command.clientConnection.commandHandler.ExecuteCommand(command.text);
+            }
         }
         catch(Exception e){
             command.clientConnection.channel.writeAndFlush("Unsupported command");
