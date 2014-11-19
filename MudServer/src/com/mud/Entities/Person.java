@@ -8,17 +8,36 @@ import java.util.List;
  * Created by krzysiek on 2014-11-08.
  */
 public abstract class Person extends GameElement implements IItemContainer, Serializable{
+
+    private static int initialHealth = 100;
+    private static int initialAttack = 10;
+    private static int initialDefence = 10;
+
     private int health;
     private int attack;
     private int defence;
     public List<Item> equipment = new ArrayList<Item>();
+    private Item weapon;
+    private Item wear;
+
     private GameWorld gameWorld;
     protected Cell location;
 
     public Person(GameWorld gameWorld) {
+
         this.gameWorld = gameWorld;
+        this.health = initialHealth;
+        this.attack = initialAttack;
+        this.defence = initialDefence;
     }
+
+
     public Person() {
+
+        this.health = initialHealth;
+        this.attack = initialAttack;
+        this.defence = initialDefence;
+
     }
 
     public Cell getLocation() {
@@ -71,7 +90,74 @@ public abstract class Person extends GameElement implements IItemContainer, Seri
 
     @Override
     public void PutItem(Item item) {
+
         equipment.add(item);
+    }
+
+
+    public boolean EquipItem(String itemName) {
+
+        Item item = TakeItem(itemName);
+        if (item == null) {
+            return false;
+        }
+
+        if (item.isWeapon()) {
+
+            if (this.weapon != null) {
+                equipment.add(this.weapon);
+            }
+            this.weapon = item;
+            return true;
+
+        }
+
+        if (item.isWear()) {
+
+            if (this.wear != null) {
+                equipment.add(this.wear);
+            }
+            this.wear = item;
+            return true;
+
+        }
+
+        return false;
+
+    }
+
+    public boolean UnequipItem(String itemName) {
+
+        if (this.weapon != null && this.weapon.Name.equals(itemName)) {
+            equipment.add(this.weapon);
+            this.weapon = null;
+            return true;
+        }
+
+        if (this.wear != null && this.wear.Name.equals(itemName)) {
+            equipment.add(this.wear);
+            this.wear = null;
+            return true;
+        }
+
+        return false;
+
+    }
+
+    public String getEquipmentDescription() {
+
+        String description = "";
+
+        if (this.weapon != null) {
+            description += this.weapon.Name + " - " + this.weapon.Describe();
+        }
+        if (this.wear != null) {
+            if (!description.isEmpty())
+                description += "\r\n";
+            description += this.wear.Name + " - " + this.wear.Describe();
+        }
+        return description;
+
     }
 
     public abstract void EventShout(Person person, String text);

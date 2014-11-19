@@ -66,8 +66,8 @@ public class MapGenerator {
     }
 
     private Item GenerateItem() {
-        Item item = new Item();
-        item.Name = GenerateItemName();
+        String newName = GenerateItemName();
+        Item item = new Item(newName);
         return item;
     }
 

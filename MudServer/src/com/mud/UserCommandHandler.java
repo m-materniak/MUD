@@ -34,7 +34,7 @@ public class UserCommandHandler extends CommandHandler {
 
     @Override
     public void ExecuteCommand(String command) {
-        if(command == null) {
+        if (command == null) {
             DescribeRoom();
             return;
         }
@@ -65,10 +65,15 @@ public class UserCommandHandler extends CommandHandler {
         } else if (verb.equals("info")) {
             clientConnection.Send("This command is not yet implemented");
         } else if (verb.equals("equipment")) {
-            clientConnection.Send("This command is not yet implemented");
+            DescribeEquipment();
         } else if (verb.equals("inventory")) {
             DescribeInventory();
-        } else if (verb.equals("help")) {
+        } else if (verb.equals("equip")) {
+            EquipItem();
+        } else if (verb.equals("unequip")) {
+            UnequipItem();
+        }
+          else if (verb.equals("help")) {
             Help();
         }
         else if (nextCommandHandler != null) {
@@ -97,6 +102,9 @@ public class UserCommandHandler extends CommandHandler {
         clientConnection.Send(inventoryDescription);
     }
 
+    private void DescribeEquipment() {
+        clientConnection.Send(clientConnection.player.getEquipmentDescription());
+    }
 
     private void Take() {
         Item item = clientConnection.player.Take(restOfCommand);
@@ -124,6 +132,28 @@ public class UserCommandHandler extends CommandHandler {
     private void MovePlayer(String direction) {
         clientConnection.player.Move(direction);
         DescribeRoom();
+    }
+
+    private void EquipItem() {
+        String itemName = restOfCommand;
+        if (clientConnection.player.EquipItem(itemName)) {
+            clientConnection.Send(itemName + " equipped");
+        }
+        else {
+            clientConnection.Send("You can't equip " + itemName);
+        }
+    }
+
+    private void UnequipItem() {
+
+        String itemName = restOfCommand;
+        if (clientConnection.player.UnequipItem(itemName)) {
+            clientConnection.Send(itemName + " unequipped");
+        }
+        else {
+            clientConnection.Send("You can't unequip " + itemName);
+        }
+
     }
 
     private void DescribeRoom() {
