@@ -1,6 +1,9 @@
 package com.mud.Entities;
 
 import java.io.Serializable;
+import com.mud.ITradeCommandHandler;
+import com.mud.TradeCommandHandler;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -210,4 +213,7 @@ public abstract class Person extends GameElement implements IItemContainer, Seri
         this.defence = defence;
     }
 
+    public abstract ITradeCommandHandler StartTransaction(Player player, ITradeCommandHandler tradeCommandHandler);
+
+    public abstract void EventBuy(boolean b, Player player, Item item, int price);
 }

@@ -1,6 +1,7 @@
 package com.mud.Entities;
 
 import java.io.Serializable;
+import com.mud.ITradeCommandHandler;
 
 /**
  * Created by krzysiek on 2014-11-14.
@@ -29,6 +30,16 @@ public class NonPlayerCharacter extends Person implements Serializable{
                 Say(person.Name, "No siema, Sandra!");
             }
         }
+    }
+
+    @Override
+    public ITradeCommandHandler StartTransaction(Player player, ITradeCommandHandler tradeCommandHandler) {
+        return null;
+    }
+
+    @Override
+    public void EventBuy(boolean b, Player player, Item item, int price) {
+
     }
 
     @Override

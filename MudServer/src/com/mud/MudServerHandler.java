@@ -22,7 +22,7 @@ public class MudServerHandler extends SimpleChannelInboundHandler<String> {
     {
         Channel channel = ctx.channel();
         ClientConnection clientConnection = new ClientConnection(channel);
-        clientConnection.commandHandler = new SystemCommandHandler(clientConnection, worker.userRepository, worker.gameWorld);
+        clientConnection.SetCommandHandler(new SystemCommandHandler(clientConnection, worker.userRepository, worker.gameWorld));
         connections.put(channel, clientConnection);
         worker.queue.add(new Command(null, clientConnection));
     }

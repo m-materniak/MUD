@@ -75,4 +75,7 @@ public class Item extends GameElement implements Serializable{
     public String Describe() {
         return type.toString();
     }
+
+    @Override
+    public String toString() { return Name; }
 }

@@ -18,18 +18,19 @@ public class SystemCommandHandler extends CommandHandler {
                     "\thelp\r\n";
 
     public SystemCommandHandler(ClientConnection clientConnection, UserRepository userRepository, GameWorld gameWorld){
+        super(clientConnection);
         this.clientConnection = clientConnection;
         this.userRepository = userRepository;
         this.gameWorld = gameWorld;
     }
 
     @Override
-    public void ExecuteCommand(String command) {
-        if (command == null) {
-            Welcome();
-            return;
-        }
+    public void Initialize() {
+        Welcome();
+    }
 
+    @Override
+    public void ExecuteCommand(String command) {
         restOfCommand = command;
         String verb = TakeNextWord();
 
@@ -78,9 +79,8 @@ public class SystemCommandHandler extends CommandHandler {
             account.player.connection = clientConnection;
             clientConnection.Send("You are logged in as " + account.player.Name);
             gameWorld.AddPerson(account.player);
-            UserCommandHandler userCommandHandler = new UserCommandHandler(this, clientConnection, gameWorld);
-            clientConnection.commandHandler = userCommandHandler;
-            userCommandHandler.ExecuteCommand(null);
+            UserCommandHandler userCommandHandler = new UserCommandHandler(this, gameWorld);
+            clientConnection.SetCommandHandler(userCommandHandler);
         }
         else{
             clientConnection.Send("Wrong login or password");

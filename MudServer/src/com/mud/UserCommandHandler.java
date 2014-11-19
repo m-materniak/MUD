@@ -11,7 +11,6 @@ import java.util.List;
  */
 public class UserCommandHandler extends CommandHandler {
     GameWorld gameWorld;
-    CommandHandler nextCommandHandler;
     private String helpString = "AvailableCommands:"
             + "\tnorth - go north\r\n"
             + "\teast - go east\r\n"
@@ -26,19 +25,18 @@ public class UserCommandHandler extends CommandHandler {
             + "\thelp - display this menu\r\n"
             + "\t\r\n";
 
-    public UserCommandHandler(CommandHandler commandHandler, ClientConnection clientConnection, GameWorld gameWorld) {
-        nextCommandHandler = commandHandler;
+    public UserCommandHandler(CommandHandler commandHandler, GameWorld gameWorld) {
+        super(commandHandler);
         this.gameWorld = gameWorld;
-        this.clientConnection = clientConnection;
+    }
+
+    @Override
+    public void Initialize() {
+        DescribeRoom();
     }
 
     @Override
     public void ExecuteCommand(String command) {
-        if (command == null) {
-            DescribeRoom();
-            return;
-        }
-
         restOfCommand = command;
         String verb = TakeNextWord();
 
@@ -60,6 +58,8 @@ public class UserCommandHandler extends CommandHandler {
             Say();
         } else if (verb.equals("shout")) {
             Shout();
+        } else if (verb.equals("trade")) {
+            Trade();
         } else if (verb.equals("stats")) {
             clientConnection.Send("This command is not yet implemented");
         } else if (verb.equals("info")) {
@@ -76,9 +76,16 @@ public class UserCommandHandler extends CommandHandler {
           else if (verb.equals("help")) {
             Help();
         }
-        else if (nextCommandHandler != null) {
-            nextCommandHandler.ExecuteCommand(command);
+        else if (previousCommandHandler != null) {
+            previousCommandHandler.ExecuteCommand(command);
         }
+    }
+
+    private void Trade() {
+        String name = TakeNextWord();
+        Person tradingPartner = gameWorld.GetPerson(name);
+        TradeCommandHandler tradeCommandHandler = new TradeCommandHandler(this, true, tradingPartner);
+        clientConnection.SetCommandHandler(tradeCommandHandler);
     }
 
     @Override

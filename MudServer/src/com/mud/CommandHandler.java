@@ -6,7 +6,20 @@ package com.mud;
 public abstract class CommandHandler {
     public ClientConnection clientConnection;
     protected String restOfCommand;
+    protected CommandHandler previousCommandHandler;
 
+    protected CommandHandler(CommandHandler previousCommandHandler) {
+        this.clientConnection = previousCommandHandler.clientConnection;
+        this.previousCommandHandler = previousCommandHandler;
+    }
+
+
+    public CommandHandler(ClientConnection clientConnection) {
+
+        this.clientConnection = clientConnection;
+    }
+
+    public abstract void Initialize();
     public abstract void ExecuteCommand(String command);
     public abstract String GetHelpString();
 
