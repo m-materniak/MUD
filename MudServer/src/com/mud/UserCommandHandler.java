@@ -21,7 +21,12 @@ public class UserCommandHandler extends CommandHandler {
             + "\tdrop ITEM - drop one of items in your inventory\r\n"
             + "\tsay PERSON TEXT - say something to a particular person\r\n"
             + "\tshout TEXT - say something to everyone\r\n"
+            + "\tattack PERSON - attack selected target\r\n"
             + "\tinventory - show all items currently in your backpack\r\n"
+            + "\tequipment - show currently equipped weapon and wear\r\n"
+            + "\tequip ITEM - equip weapon or wear\r\n"
+            + "\tunequip ITEM - unequip item and put in your backpack\r\n"
+            + "\tstats - show your personal stats\r\n"
             + "\thelp - display this menu\r\n"
             + "\t\r\n";
 
@@ -60,8 +65,6 @@ public class UserCommandHandler extends CommandHandler {
             Shout();
         } else if (verb.equals("trade")) {
             Trade();
-        } else if (verb.equals("stats")) {
-            clientConnection.Send("This command is not yet implemented");
         } else if (verb.equals("info")) {
             clientConnection.Send("This command is not yet implemented");
         } else if (verb.equals("equipment")) {
@@ -72,8 +75,11 @@ public class UserCommandHandler extends CommandHandler {
             EquipItem();
         } else if (verb.equals("unequip")) {
             UnequipItem();
-        }
-          else if (verb.equals("help")) {
+        } else if (verb.equals("attack")) {
+            Attack();
+        } else if (verb.equals("stats")) {
+            ShowStats();
+        } else if (verb.equals("help")) {
             Help();
         }
         else if (previousCommandHandler != null) {
@@ -160,6 +166,45 @@ public class UserCommandHandler extends CommandHandler {
         else {
             clientConnection.Send("You can't unequip " + itemName);
         }
+
+    }
+
+    private void Attack() {
+
+        String targetName = restOfCommand;
+
+        List<Person> inRoom = clientConnection.player.getLocation().people;
+        Person target = null;
+        for (Person nextPerson : inRoom ) {
+            if (nextPerson.Name.equals(targetName)) {
+                target = nextPerson;
+                break;
+            }
+        }
+
+        if (target != null) {
+
+            int attackEffect = clientConnection.player.Attack(target);
+
+            if (attackEffect >= 0) {
+                clientConnection.Send("Inflicted damage " + attackEffect + ", opponent " + targetName + " has " + gameWorld.GetPerson(targetName).getHealth() + " hit points left");
+                if (target.getHealth() == 0) {
+                    clientConnection.Send("You killed " + targetName + " and earned " + target.getExperienceValue() + " experience points!");
+                }
+
+            }
+        }
+        else {
+            clientConnection.Send("Target isn't present in your location");
+        }
+    }
+
+
+    private void ShowStats() {
+        clientConnection.Send("Your personal stats:\r\nLevel: " + clientConnection.player.getLevel() +
+                                                  "\r\nAttack :" + clientConnection.player.getAttack() +
+                                                  "\r\nDefence: " + clientConnection.player.getDefence() +
+                                                  "\r\nExperience: " + clientConnection.player.getExperience() + "/" + clientConnection.player.levels[clientConnection.player.getLevel()-1]);
 
     }
 

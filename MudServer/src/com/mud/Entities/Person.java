@@ -5,7 +5,9 @@ import com.mud.ITradeCommandHandler;
 import com.mud.TradeCommandHandler;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by krzysiek on 2014-11-08.
@@ -13,33 +15,48 @@ import java.util.List;
 public abstract class Person extends GameElement implements IItemContainer, Serializable{
 
     private static int initialHealth = 100;
-    private static int initialAttack = 10;
-    private static int initialDefence = 10;
 
-    private int health;
-    private int attack;
-    private int defence;
+    protected int health;
+    protected int maxHealth;
+    protected int attack;
+    protected int defence;
+    protected int level;
+    protected Item weapon;
+    protected Item wear;
+
+    public int getLevel() {
+        return level;
+    }
+
+
     public List<Item> equipment = new ArrayList<Item>();
-    private Item weapon;
-    private Item wear;
 
     private GameWorld gameWorld;
     protected Cell location;
 
+    protected static int getRandom(int min, int max) {
+
+        Random generator = new Random();
+
+        return generator.nextInt(max - min + 1) + min;
+
+    }
+
     public Person(GameWorld gameWorld) {
 
+        this();
         this.gameWorld = gameWorld;
-        this.health = initialHealth;
-        this.attack = initialAttack;
-        this.defence = initialDefence;
+
     }
 
 
     public Person() {
 
         this.health = initialHealth;
-        this.attack = initialAttack;
-        this.defence = initialDefence;
+        this.maxHealth = initialHealth;
+        this.attack = getRandom(6,14);
+        this.defence = getRandom(6,14);
+        this.level = 1;
 
     }
 
@@ -167,6 +184,16 @@ public abstract class Person extends GameElement implements IItemContainer, Seri
 
     public abstract void EventSay(Person person, String text);
 
+    public abstract void EventAttacked(Person person, int damage);
+
+    public void EventDied(Person person) {
+
+        for (Item nextItem : equipment) {
+            Drop(nextItem.Name);
+        }
+
+    }
+
     public Item Take(String itemName) {
         Item item = location.TakeItem(itemName);
         if (item != null) {
@@ -189,28 +216,58 @@ public abstract class Person extends GameElement implements IItemContainer, Seri
             person.EventSay(this, text);
         }
     }
-    public int getHealth() {
-        return health;
+
+    void Hurt(Person attacker, int damage) {
+
+        this.health -= damage;
+        if (this.health <= 0) {
+            this.health = 0;
+            EventDied(attacker);
+        }
+
     }
 
-    public void setHealth(int health) {
-        this.health = health;
+    public int getExperienceValue() {
+        return this.attack + this.defence + this.health + level*100;
+    }
+
+    public int Attack(Person target) {
+
+        if (target != null) {
+
+            int damage = attack + getRandom(-5 + level, level);
+
+            if (this.weapon != null) {
+                damage += weapon.getAttackModifier() + getRandom(-5, 5);
+            } else {
+                damage -= 2;
+            }
+            if (this.wear != null) {
+                damage += wear.getAttackModifier() + getRandom(-2, 2);
+            }
+
+            damage -= (target.wear == null ? 0 : target.wear.getDefenceModifier()) + defence + getRandom(-10 + level, level);
+            damage = (damage > 0) ? damage : 0;
+            target.EventAttacked(this, damage);
+            target.Hurt(this, damage);
+            return damage;
+
+        }
+
+        return -1;
+
+    }
+
+    public int getHealth() {
+        return health;
     }
 
     public int getAttack() {
         return attack;
     }
 
-    public void setAttack(int attack) {
-        this.attack = attack;
-    }
-
     public int getDefence() {
         return defence;
-    }
-
-    public void setDefence(int defence) {
-        this.defence = defence;
     }
 
     public abstract ITradeCommandHandler StartTransaction(Player player, ITradeCommandHandler tradeCommandHandler);

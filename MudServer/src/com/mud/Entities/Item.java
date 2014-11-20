@@ -3,6 +3,7 @@ package com.mud.Entities;
 import jdk.nashorn.internal.ir.LiteralNode;
 
 import java.io.Serializable;
+import java.util.Random;
 
 /**
  * Created by krzysiek on 2014-11-08.
@@ -47,15 +48,62 @@ public class Item extends GameElement implements Serializable{
     };
 
     private itemType type;
+    private int attackModifier;
+
+    public int getDefenceModifier() {
+        return defenceModifier;
+    }
+
+    public int getAttackModifier() {
+        return attackModifier;
+    }
+
+    private int defenceModifier;
+
+    private static int getRandom(int min, int max) {
+
+        Random generator = new Random();
+
+        return generator.nextInt(max - min + 1) + min;
+
+    }
+
+    private void generateModifiers() {
+
+        if (this.type == itemType.WEAPON) {
+            this.attackModifier = getRandom(3,8);
+            this.defenceModifier = getRandom(1,3);
+        }
+        else if (this.type == itemType.WEAR) {
+            this.attackModifier = 0;
+            this.defenceModifier = getRandom(3,8);
+        }
+        else {
+            this.defenceModifier = 0;
+            this.attackModifier = 0;
+        }
+
+
+    }
+
+
+    public Item(String name, itemType type, int attackModifier, int defenceModifier) {
+
+        this(name, type);
+        this.attackModifier = attackModifier;
+        this.defenceModifier = defenceModifier;
+
+    }
 
     public Item(String name, itemType type) {
         this.type = type;
         this.Name = name;
+        generateModifiers();
     }
 
     public Item(String name) {
-        this.Name = name;
-        this.type = itemType.typeFromName(name);
+
+        this(name, itemType.typeFromName(name));
 
     }
 

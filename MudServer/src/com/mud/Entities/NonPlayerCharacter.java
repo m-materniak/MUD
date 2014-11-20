@@ -22,6 +22,11 @@ public class NonPlayerCharacter extends Person implements Serializable{
     }
 
     @Override
+    public void EventAttacked(Person attacker, int damage) {
+        // ignore
+    }
+
+    @Override
     public void EventSay(Person person, String text) {
         String simpleText = text.toLowerCase();
         //if (person.location == location)
@@ -44,6 +49,6 @@ public class NonPlayerCharacter extends Person implements Serializable{
 
     @Override
     public String Describe() {
-        return "Is a NPC";
+        return "NPC level " + this.getLevel();
     }
 }
