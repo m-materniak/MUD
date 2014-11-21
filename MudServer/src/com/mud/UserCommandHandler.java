@@ -79,7 +79,9 @@ public class UserCommandHandler extends CommandHandler {
             Attack();
         } else if (verb.equals("stats")) {
             ShowStats();
-        } else if (verb.equals("help")) {
+        } else if (verb.equals("use")) {
+            Use();
+        }else if (verb.equals("help")) {
             Help();
         }
         else if (previousCommandHandler != null) {
@@ -169,6 +171,19 @@ public class UserCommandHandler extends CommandHandler {
 
     }
 
+    private  void Use() {
+
+        String itemName = restOfCommand;
+        String result = clientConnection.player.Use(itemName);
+        if (!result.isEmpty()) {
+            clientConnection.Send("You used " + itemName +", which result in " + result + " gain");
+        }
+        else {
+            clientConnection.Send("You can't use " + itemName);
+        }
+
+    }
+
     private void Attack() {
 
         String targetName = restOfCommand;
@@ -202,6 +217,7 @@ public class UserCommandHandler extends CommandHandler {
 
     private void ShowStats() {
         clientConnection.Send("Your personal stats:\r\nLevel: " + clientConnection.player.getLevel() +
+                                                  "\r\nHealth :" + clientConnection.player.getHealth() +"/" + clientConnection.player.getMaxHealth() +
                                                   "\r\nAttack :" + clientConnection.player.getAttack() +
                                                   "\r\nDefence: " + clientConnection.player.getDefence() +
                                                   "\r\nExperience: " + clientConnection.player.getExperience() + "/" + clientConnection.player.levels[clientConnection.player.getLevel()-1]);

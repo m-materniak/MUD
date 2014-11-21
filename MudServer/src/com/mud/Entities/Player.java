@@ -80,6 +80,31 @@ public class Player extends Person{
         connection.Send(text);
     }
 
+    @Override
+    public String Use(String itemName) {
+
+        String result = super.Use(itemName);
+
+        if (!result.isEmpty()) {
+            return result;
+        }
+
+        Item item = TakeItem(itemName);
+
+        if (item == null) {
+            return "";
+        }
+
+        if (item.isArtifact()) {
+
+            this.experience += item.getExperienceModifier();
+            return item.getExperienceModifier() + " experience";
+
+        }
+
+        return "";
+    }
+
     private void earnExperience(int experience) {
 
         this.experience += experience;

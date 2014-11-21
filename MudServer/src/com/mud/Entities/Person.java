@@ -23,6 +23,7 @@ public abstract class Person extends GameElement implements IItemContainer, Seri
     protected int level;
     protected Item weapon;
     protected Item wear;
+    protected Item jewelry;
 
     public int getLevel() {
         return level;
@@ -49,10 +50,22 @@ public abstract class Person extends GameElement implements IItemContainer, Seri
 
     }
 
+    public Person(int health, int attack, int defence, int level) {
+        this.health = health;
+        this.maxHealth = health;
+        this.attack = attack;
+        this.defence = defence;
+        this.level = level;
+    }
+
+    public Person(GameWorld gameWorld, int health, int attack, int defence, int level) {
+        this(health, attack, defence, level);
+        this.gameWorld = gameWorld;
+    }
 
     public Person() {
 
-        this.health = initialHealth;
+        this.health = 100;
         this.maxHealth = initialHealth;
         this.attack = getRandom(6,14);
         this.defence = getRandom(6,14);
@@ -142,6 +155,22 @@ public abstract class Person extends GameElement implements IItemContainer, Seri
 
         }
 
+        if (item.isJewelry()) {
+
+            if (this.jewelry != null) {
+                equipment.add(this.wear);
+            }
+            this.jewelry = item;
+            this.attack += this.jewelry.getAttackModifier();
+            this.defence += this.jewelry.getDefenceModifier();
+
+            this.health += this.jewelry.getHealthModifier();
+            this.maxHealth += this.jewelry.getHealthModifier();
+
+            return true;
+
+        }
+
         return false;
 
     }
@@ -159,6 +188,22 @@ public abstract class Person extends GameElement implements IItemContainer, Seri
             this.wear = null;
             return true;
         }
+        if (this.jewelry != null && this.jewelry.Name.equals(itemName)) {
+            equipment.add(this.jewelry);
+
+            this.attack -= this.jewelry.getAttackModifier();
+            this.defence -= this.jewelry.getDefenceModifier();
+
+            if (this.health - this.jewelry.getHealthModifier() <= 0)
+                return false;
+
+            this.health -= this.jewelry.getHealthModifier();
+            this.maxHealth -= this.jewelry.getHealthModifier();
+
+            this.jewelry = null;
+
+            return true;
+        }
 
         return false;
 
@@ -169,12 +214,19 @@ public abstract class Person extends GameElement implements IItemContainer, Seri
         String description = "";
 
         if (this.weapon != null) {
+            if (!description.isEmpty())
+                description += "\r\n";
             description += this.weapon.Name + " - " + this.weapon.Describe();
         }
         if (this.wear != null) {
             if (!description.isEmpty())
                 description += "\r\n";
             description += this.wear.Name + " - " + this.wear.Describe();
+        }
+        if (this.jewelry != null) {
+            if (!description.isEmpty())
+                description += "\r\n";
+            description += this.jewelry.Name + " - " + this.jewelry.Describe();
         }
         return description;
 
@@ -217,7 +269,7 @@ public abstract class Person extends GameElement implements IItemContainer, Seri
         }
     }
 
-    void Hurt(Person attacker, int damage) {
+    public void Hurt(Person attacker, int damage) {
 
         this.health -= damage;
         if (this.health <= 0) {
@@ -225,6 +277,29 @@ public abstract class Person extends GameElement implements IItemContainer, Seri
             EventDied(attacker);
         }
 
+    }
+
+    public String Use(String itemName) {
+        Item item = TakeItem(itemName);
+
+        if (item == null) {
+            return "";
+        }
+
+        if (item.isFood()) {
+
+            this.health += item.getHealthModifier();
+            if (this.health > this.maxHealth) {
+                int healthGained = item.getHealthModifier() - (this.health - this.maxHealth);
+                this.health = this.maxHealth;
+                return healthGained + " health";
+            }
+            return item.getHealthModifier() + " health";
+
+        }
+
+        equipment.add(item);
+        return "";
     }
 
     public int getExperienceValue() {
@@ -268,6 +343,10 @@ public abstract class Person extends GameElement implements IItemContainer, Seri
 
     public int getDefence() {
         return defence;
+    }
+
+    public int getMaxHealth() {
+        return maxHealth;
     }
 
     public abstract ITradeCommandHandler StartTransaction(Player player, ITradeCommandHandler tradeCommandHandler);
