@@ -97,10 +97,28 @@ public class Player extends Person{
 
         if (item.isArtifact()) {
 
-            this.experience += item.getExperienceModifier();
-            return item.getExperienceModifier() + " experience";
-
+            int gain = item.getExperienceModifier();
+            if (gain > 0) {
+                this.experience += gain;
+                return item.getExperienceModifier() + " experience";
+            }
+            gain = item.getAttackModifier();
+            if (gain > 0) {
+                this.attack += gain;
+                return item.getAttackModifier() + " attack";
+            }
+            gain = item.getDefenceModifier();
+            if (gain > 0) {
+                this.defence += gain;
+                return item.getAttackModifier() + " defence";
+            }
+            gain = item.getHealthModifier();
+            if (gain > 0) {
+                this.health += gain;
+                return  item.getHealthModifier() + " health";
+            }
         }
+
 
         return "";
     }
@@ -119,6 +137,37 @@ public class Player extends Person{
             earnExperience(target.getExperienceValue());
         }
         return attackEffect;
+    }
+
+    public int Promote(Attribute attribute) {
+
+        int gain = 0;
+
+        switch (attribute) {
+            case ATTACK:
+                gain = getRandom(1*level, 4*level);
+                this.attack += gain;
+                break;
+            case DEFENCE:
+                gain = getRandom(1*level, 4*level);
+                this.defence += gain;
+                break;
+            case HEALTH:
+                gain = getRandom(5*level, 20*level);
+                this.health += gain;
+                break;
+        }
+        this.level++;
+
+        return gain;
+
+    }
+
+    public boolean canPromote() {
+        if (this.experience >= levels[level - 1] && this.level < maxLevel)
+            return true;
+        else
+            return false;
     }
 
 }

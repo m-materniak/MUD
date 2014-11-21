@@ -3,6 +3,7 @@ package com.mud;
 import com.mud.Entities.GameWorld;
 import com.mud.Entities.Item;
 import com.mud.Entities.Person;
+import com.mud.Entities.Player;
 
 import java.util.List;
 
@@ -26,6 +27,8 @@ public class UserCommandHandler extends CommandHandler {
             + "\tequipment - show currently equipped weapon and wear\r\n"
             + "\tequip ITEM - equip weapon or wear\r\n"
             + "\tunequip ITEM - unequip item and put in your backpack\r\n"
+            + "\tuse ITEM - use an item from your backpack\r\n"
+            + "\tpromote ATTRIBUTE - promote to next level and upgrade your attack, defence or health"
             + "\tstats - show your personal stats\r\n"
             + "\thelp - display this menu\r\n"
             + "\t\r\n";
@@ -81,7 +84,9 @@ public class UserCommandHandler extends CommandHandler {
             ShowStats();
         } else if (verb.equals("use")) {
             Use();
-        }else if (verb.equals("help")) {
+        } else if (verb.equals("promote")) {
+            Promote();
+        } else if (verb.equals("help")) {
             Help();
         }
         else if (previousCommandHandler != null) {
@@ -171,17 +176,50 @@ public class UserCommandHandler extends CommandHandler {
 
     }
 
-    private  void Use() {
+    private void Use() {
 
         String itemName = restOfCommand;
         String result = clientConnection.player.Use(itemName);
         if (!result.isEmpty()) {
             clientConnection.Send("You used " + itemName +", which result in " + result + " gain");
+            if (clientConnection.player.canPromote())
+                clientConnection.Send("You can promote now!");
         }
         else {
             clientConnection.Send("You can't use " + itemName);
         }
 
+    }
+
+    private void Promote() {
+
+        String itemName = restOfCommand;
+        if (clientConnection.player.canPromote()) {
+            if (restOfCommand.equals("attack")) {
+                int gain = clientConnection.player.Promote(Person.Attribute.ATTACK);
+                clientConnection.Send("You promoted to level " + clientConnection.player.getLevel() + " and gain " + gain + " attack");
+                if (clientConnection.player.canPromote())
+                    clientConnection.Send("You can promote now!");
+            }
+            else if (restOfCommand.equals("defence")) {
+                int gain = clientConnection.player.Promote(Person.Attribute.DEFENCE);
+                clientConnection.Send("You promoted to level " + clientConnection.player.getLevel() + " and gain " + gain + " defence");
+                if (clientConnection.player.canPromote())
+                    clientConnection.Send("You can promote now!");
+            }
+            else if (restOfCommand.equals("health")) {
+                int gain = clientConnection.player.Promote(Person.Attribute.HEALTH);
+                clientConnection.Send("You promoted to level " + clientConnection.player.getLevel() + " and gain " + gain + " health");
+                if (clientConnection.player.canPromote())
+                    clientConnection.Send("You can promote now!");
+            }
+            else {
+                clientConnection.Send("You chose incorrect attribute");
+            }
+        }
+        else {
+            clientConnection.Send("You can't promote now");
+        }
     }
 
     private void Attack() {
@@ -202,9 +240,11 @@ public class UserCommandHandler extends CommandHandler {
             int attackEffect = clientConnection.player.Attack(target);
 
             if (attackEffect >= 0) {
-                clientConnection.Send("Inflicted damage " + attackEffect + ", opponent " + targetName + " has " + gameWorld.GetPerson(targetName).getHealth() + " hit points left");
+                clientConnection.Send("Inflicted damage " + attackEffect + ", opponent " + targetName + " has " + target.getHealth() + " hit points left");
                 if (target.getHealth() == 0) {
                     clientConnection.Send("You killed " + targetName + " and earned " + target.getExperienceValue() + " experience points!");
+                    if (clientConnection.player.canPromote())
+                        clientConnection.Send("You can promote now!");
                 }
 
             }
@@ -216,6 +256,8 @@ public class UserCommandHandler extends CommandHandler {
 
 
     private void ShowStats() {
+        if (clientConnection.player.canPromote())
+            clientConnection.Send("You can promote now!");
         clientConnection.Send("Your personal stats:\r\nLevel: " + clientConnection.player.getLevel() +
                                                   "\r\nHealth :" + clientConnection.player.getHealth() +"/" + clientConnection.player.getMaxHealth() +
                                                   "\r\nAttack :" + clientConnection.player.getAttack() +

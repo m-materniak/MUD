@@ -14,6 +14,11 @@ import java.util.Random;
  */
 public abstract class Person extends GameElement implements IItemContainer, Serializable{
 
+    public enum Attribute {
+        HEALTH, ATTACK, DEFENCE
+    };
+
+
     private static int initialHealth = 100;
 
     protected int health;

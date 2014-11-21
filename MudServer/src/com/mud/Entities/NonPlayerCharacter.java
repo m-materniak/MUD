@@ -49,6 +49,6 @@ public class NonPlayerCharacter extends Person implements Serializable{
 
     @Override
     public String Describe() {
-        return "NPC level " + this.getLevel();
+        return "NPC level " + this.getLevel() + ", health " + this.getHealth() + "/" + this.getMaxHealth();
     }
 }
