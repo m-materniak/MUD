@@ -74,7 +74,7 @@ public class MapGenerator {
     private String GenerateItemName() {
         String[] adjectives = new String[] {"Old", "New", "Small", "Scary", "Big", "Rusty", "Wooden"};
         String[] nouns = new String[] {"Sword", "Armor", "Glass", "Brick", "Bucket", "Stick", "Table", "Chair",
-        "Bottle", "Vase", "Meat", "Potion", "Apple", "Ring", "Necklace", "Book", "Scroll"};
+        "Bottle", "Vase", "Meat", "Potion", "Apple", "Ring", "Necklace", "Book", "Scroll", "Spear", "Axe", "Gold"};
 
         String name = ConstructName(adjectives, nouns);
         return name;

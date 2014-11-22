@@ -29,6 +29,7 @@ public abstract class Person extends GameElement implements IItemContainer, Seri
     protected Item weapon;
     protected Item wear;
     protected Item jewelry;
+    protected int gold;
 
     public int getLevel() {
         return level;
@@ -55,16 +56,17 @@ public abstract class Person extends GameElement implements IItemContainer, Seri
 
     }
 
-    public Person(int health, int attack, int defence, int level) {
+    public Person(int health, int attack, int defence, int level, int gold) {
         this.health = health;
         this.maxHealth = health;
         this.attack = attack;
         this.defence = defence;
         this.level = level;
+        this.gold = gold;
     }
 
-    public Person(GameWorld gameWorld, int health, int attack, int defence, int level) {
-        this(health, attack, defence, level);
+    public Person(GameWorld gameWorld, int health, int attack, int defence, int level, int gold) {
+        this(health, attack, defence, level, gold);
         this.gameWorld = gameWorld;
     }
 
@@ -75,7 +77,7 @@ public abstract class Person extends GameElement implements IItemContainer, Seri
         this.attack = getRandom(6,14);
         this.defence = getRandom(6,14);
         this.level = 1;
-
+        this.gold = 0;
     }
 
     public Cell getLocation() {
@@ -128,8 +130,10 @@ public abstract class Person extends GameElement implements IItemContainer, Seri
 
     @Override
     public void PutItem(Item item) {
-
-        equipment.add(item);
+        if (item.getType() == Item.itemType.GOLD)
+            gold += item.getValue();
+        else
+            equipment.add(item);
     }
 
 
@@ -245,16 +249,21 @@ public abstract class Person extends GameElement implements IItemContainer, Seri
 
     public void EventDied(Person person) {
 
+        // Drop all equipment and gold to current location
         for (Item nextItem : equipment) {
             Drop(nextItem.Name);
         }
+        this.location.PutItem(new Item("Gold", Item.itemType.GOLD, 0, 0, 0, 0, this.gold));
 
     }
 
     public Item Take(String itemName) {
         Item item = location.TakeItem(itemName);
         if (item != null) {
-            equipment.add(item);
+            if (item.getType() == Item.itemType.GOLD)
+                this.gold += item.getValue();
+            else
+                equipment.add(item);
         }
         return item;
     }
@@ -352,6 +361,10 @@ public abstract class Person extends GameElement implements IItemContainer, Seri
 
     public int getMaxHealth() {
         return maxHealth;
+    }
+
+    public int getGold() {
+        return gold;
     }
 
     public abstract ITradeCommandHandler StartTransaction(Player player, ITradeCommandHandler tradeCommandHandler);

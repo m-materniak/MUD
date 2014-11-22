@@ -9,6 +9,7 @@ import com.mud.ITradeCommandHandler;
 public class NonPlayerCharacter extends Person implements Serializable{
     public NonPlayerCharacter(GameWorld gameWorld) {
         super(gameWorld);
+        this.gold += getRandom(100, 1000);
         gameWorld.AddPerson(this);
     }
 
@@ -24,6 +25,11 @@ public class NonPlayerCharacter extends Person implements Serializable{
     @Override
     public void EventAttacked(Person attacker, int damage) {
         // ignore
+    }
+
+    @Override
+    public void EventDied(Person person) {
+        super.EventDied(person);
     }
 
     @Override

@@ -110,7 +110,7 @@ public class UserCommandHandler extends CommandHandler {
         String itemName = restOfCommand;
         Item item = clientConnection.player.Drop(itemName);
         if (item != null) {
-            clientConnection.Send("You dropped " + item.Name + ".");
+            clientConnection.Send("You dropped " + item.Name);
         }
         else {
             clientConnection.Send("Item " + itemName + " was not found.");
@@ -129,7 +129,7 @@ public class UserCommandHandler extends CommandHandler {
     private void Take() {
         Item item = clientConnection.player.Take(restOfCommand);
         if (item != null) {
-            clientConnection.Send("You picked up " + item.Name + ".");
+            clientConnection.Send("You picked up " + item.Name);
         }
         else {
             clientConnection.Send("Item " + restOfCommand + " was not found.");
@@ -241,6 +241,7 @@ public class UserCommandHandler extends CommandHandler {
 
             if (attackEffect >= 0) {
                 clientConnection.Send("Inflicted damage " + attackEffect + ", opponent " + targetName + " has " + target.getHealth() + " hit points left");
+
                 if (target.getHealth() == 0) {
                     clientConnection.Send("You killed " + targetName + " and earned " + target.getExperienceValue() + " experience points!");
                     if (clientConnection.player.canPromote())
@@ -258,7 +259,9 @@ public class UserCommandHandler extends CommandHandler {
     private void ShowStats() {
         if (clientConnection.player.canPromote())
             clientConnection.Send("You can promote now!");
-        clientConnection.Send("Your personal stats:\r\nLevel: " + clientConnection.player.getLevel() +
+        clientConnection.Send("Your personal stats:" +
+                                                  "\r\nGold: " + clientConnection.player.getGold() +
+                                                  "\r\nLevel: " + clientConnection.player.getLevel() +
                                                   "\r\nHealth :" + clientConnection.player.getHealth() +"/" + clientConnection.player.getMaxHealth() +
                                                   "\r\nAttack :" + clientConnection.player.getAttack() +
                                                   "\r\nDefence: " + clientConnection.player.getDefence() +

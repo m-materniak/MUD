@@ -13,7 +13,7 @@ public class Item extends GameElement implements Serializable{
 
     public enum itemType {
 
-        WEAPON, WEAR, MISC, FOOD, ARTIFACT, JEWELRY;
+        WEAPON, WEAR, MISC, FOOD, ARTIFACT, JEWELRY, GOLD;
 
         public String toString() {
             return name().charAt(0) + name().substring(1).toLowerCase();
@@ -70,6 +70,9 @@ public class Item extends GameElement implements Serializable{
                     return JEWELRY;
                 }
             }
+            if (name.toLowerCase().contains("gold")) {
+                return GOLD;
+            }
 
             return MISC;
 
@@ -82,6 +85,7 @@ public class Item extends GameElement implements Serializable{
     private int defenceModifier;
     private int healthModifier;
     private int experienceModifier;
+    private int value;
 
     public int getDefenceModifier() {
         return defenceModifier;
@@ -99,6 +103,14 @@ public class Item extends GameElement implements Serializable{
         return healthModifier;
     }
 
+    public int getValue() {
+        return value;
+    }
+
+    public itemType getType() {
+        return type;
+    }
+
     private static int getRandom(int min, int max) {
 
         Random generator = new Random();
@@ -114,18 +126,21 @@ public class Item extends GameElement implements Serializable{
             this.defenceModifier = getRandom(1,3);
             this.healthModifier = 0;
             this.experienceModifier = 0;
+            this.value = 50 * (this.attackModifier + this.defenceModifier);
         }
         else if (this.type == itemType.WEAR) {
             this.attackModifier = 0;
             this.defenceModifier = getRandom(3,8);
             this.healthModifier = 0;
             this.experienceModifier = 0;
+            this.value = 100 * (this.defenceModifier);
         }
         else if (this.type == itemType.FOOD) {
             this.attackModifier = 0;
             this.defenceModifier = 0;
             this.healthModifier = getRandom(5,50);
             this.experienceModifier = 0;
+            this.value = this.healthModifier;
         }
         else if (this.type == itemType.ARTIFACT) {
 
@@ -137,24 +152,28 @@ public class Item extends GameElement implements Serializable{
                     this.defenceModifier = 0;
                     this.healthModifier = 0;
                     this.experienceModifier = 0;
+                    this.value = this.attackModifier * 200;
                     break;
                 case 2:
                     this.attackModifier = 0;
                     this.defenceModifier = getRandom(2,10);
                     this.healthModifier = 0;
                     this.experienceModifier = 0;
+                    this.value = this.defenceModifier * 200;
                     break;
                 case 3:
                     this.attackModifier = 0;
                     this.defenceModifier = 0;
                     this.healthModifier = getRandom(5,15);
                     this.experienceModifier = 0;
+                    this.value = this.healthModifier * 200;
                     break;
                 case 4:
                     this.attackModifier = 0;
                     this.defenceModifier = 0;
                     this.healthModifier = 0;
                     this.experienceModifier = getRandom(50,500);
+                    this.value = this.experienceModifier * 10;
                     break;
             }
         }
@@ -168,37 +187,51 @@ public class Item extends GameElement implements Serializable{
                     this.defenceModifier = 0;
                     this.healthModifier = 0;
                     this.experienceModifier = 0;
+                    this.value = this.attackModifier * 50;
                     break;
                 case 2:
                     this.attackModifier = 0;
                     this.defenceModifier = getRandom(3, 12);
                     this.healthModifier = 0;
                     this.experienceModifier = 0;
+                    this.value = this.defenceModifier * 50;
                     break;
                 case 3:
                     this.attackModifier = 0;
                     this.defenceModifier = 0;
                     this.healthModifier = getRandom(10, 20);
                     this.experienceModifier = 0;
+                    this.value = this.healthModifier * 40;
                     break;
             }
+        }
+        else if (this.type == itemType.GOLD) {
+            this.value = getRandom(5,200);
         }
         else {
             this.defenceModifier = 0;
             this.attackModifier = 0;
             this.healthModifier = 0;
             this.experienceModifier = 0;
+            this.value = getRandom(1,20);
         }
 
 
     }
 
 
-    public Item(String name, itemType type, int attackModifier, int defenceModifier) {
+    public Item(String name, itemType type, int attackModifier, int defenceModifier, int healthModifier, int experienceModifier, int value) {
 
         this(name, type);
         this.attackModifier = attackModifier;
         this.defenceModifier = defenceModifier;
+        this.healthModifier = healthModifier;
+        this.value = value;
+
+        // Experience modifier allowed only for type ARTIFACT, due to play logic
+        // - item must be usable and it's without any sense when eating (using FOOD) gives experience
+        if (this.type == itemType.ARTIFACT)
+            this.experienceModifier = experienceModifier;
 
     }
 
@@ -255,6 +288,7 @@ public class Item extends GameElement implements Serializable{
             modifierDescription += " Health +" + healthModifier;
         if (experienceModifier > 0)
             modifierDescription += "Experience +" + experienceModifier;
+        modifierDescription += " Value " + value + " gold";
         return type.toString() + modifierDescription;
     }
 
