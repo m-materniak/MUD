@@ -1,6 +1,7 @@
 package Entities2;
 
 //import com.mud.CollectionHelper;
+import com.mud.Entities.Item;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -13,7 +14,6 @@ public class Cell extends GameElement implements ItemContainer {
 
     public List<Person> people = new ArrayList<>();
     public List<Item> items = new ArrayList<>();
-    private List<Box> boxes = new ArrayList<>();
     public Cell cellNorth, cellEast, cellWest, cellSouth;
     private int type;//może być potrzebne
     private int cordX;
@@ -29,13 +29,6 @@ public class Cell extends GameElement implements ItemContainer {
 
     public List<Person> getPeople() {
         return people;
-    }
-    public List<Box> getBoxes() {
-        return boxes;
-    }
-
-    public void setBoxes(List<Box> boxes) {
-        this.boxes = boxes;
     }
     public Cell getCellNorth() {
         return cellNorth;
@@ -76,12 +69,6 @@ public class Cell extends GameElement implements ItemContainer {
             description += element.Name + "\r\n";
         }
         return description;
-    }
-    @Override
-    public String Describe() {
-        return Name + "\r\n"
-                + DescribeCollection("Items", items)
-                + DescribeExits();
     }
 
     private String DescribeExits() {
@@ -133,7 +120,6 @@ public class Cell extends GameElement implements ItemContainer {
      * tak jak wcześniej addItem
      * @param item 
      */
-    @Override
     public void PutItem(Item item) {
         items.add(item);
     }
@@ -153,14 +139,6 @@ public class Cell extends GameElement implements ItemContainer {
 
     public void removePerson(Person toRemoveEnemy) {
         people.remove(toRemoveEnemy);
-    }
-
-    public void addBox(Box newContainer) {
-        boxes.add(newContainer);
-    }
-
-    public void removeContainer(Box toRemoveContainer) {
-        boxes.remove(toRemoveContainer);
     }
 
     public int getType() {
@@ -185,20 +163,5 @@ public class Cell extends GameElement implements ItemContainer {
 
     public void setCordY(int cordY) {
         this.cordY = cordY;
-    }
-    public com.mud.Entities.Cell toServerCell(){
-        com.mud.Entities.Cell newCell = new com.mud.Entities.Cell();
-        for (Person person : people){
-            newCell.AddPerson(person.toServerPerson());
-        }
-        for (Item item : items){
-            newCell.PutItem(item.toServerItem());
-        }
-        //skoro nie ma box to wypada też itemy z edytorowych boxów powrzucać
-        newCell.cellEast = this.cellEast==null ? null : this.cellEast.toServerCell();
-        newCell.cellWest = this.cellWest==null ? null : this.cellWest.toServerCell();
-        newCell.cellNorth = this.cellNorth==null ? null : this.cellNorth.toServerCell();
-        newCell.cellSouth = this.cellSouth==null ? null : this.cellSouth.toServerCell();
-        return newCell;
     }
 }

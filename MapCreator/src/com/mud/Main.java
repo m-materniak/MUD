@@ -4,8 +4,8 @@ public class Main {
 
     public static void main(String[] args) {
 	    System.out.println("Hello");
-        Worker worker = new Worker();
-        //Worker worker = new Worker("E:\\map.mm");
+        //Worker worker = new Worker();
+        Worker worker = new Worker("E:\\map.mm");
         worker.start();
         MudServer mudServer = new MudServer(8511, worker);
         try {

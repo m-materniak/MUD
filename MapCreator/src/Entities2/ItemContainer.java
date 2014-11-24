@@ -1,5 +1,7 @@
 package Entities2;
 
+import com.mud.Entities.Item;
+
 /**
  * Created by krzysiek on 2014-11-10.
  */

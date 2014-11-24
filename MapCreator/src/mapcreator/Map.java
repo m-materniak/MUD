@@ -82,9 +82,5 @@ public class Map {
         System.out.println("leftUpperCornerY:   " + leftUpperCornerY);
         
     }
-    public GameWorld toGameWorld(){
-        GameWorld gw = null;
-        gw.setStartingCell(cells.get(0).toServerCell());
-        return gw;
-    }
+
 }

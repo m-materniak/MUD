@@ -36,8 +36,29 @@ public class Item extends GameElement implements Serializable{
         };
 
         public static String[] jewelryNames = {
-                "Ring", "Necklace"
+            "Ring", "Necklace"
         };
+
+        public static itemType fromInteger(int x) {
+            switch (x) {
+                case 0:
+                    return WEAPON;
+                case 1:
+                    return WEAR;
+                case 2:
+                    return MISC;
+                case 3:
+                    return FOOD;
+                case 4:
+                    return ARTIFACT;
+                case 5:
+                    return JEWELRY;
+                case 6:
+                    return GOLD;
+                default:
+                    return WEAR;
+            }
+        }
 
         public static itemType typeFromName(String name) {
 

@@ -1,5 +1,6 @@
 package Entities2;
 
+import com.mud.Entities.Item;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,8 @@ public abstract class Person extends GameElement implements ItemContainer{
     private int health;
     private int attack;
     private int defence;
+    private int level;
+    private int gold;
     public List<Item> equipment = new ArrayList<Item>();
     public Cell location;
 
@@ -85,15 +88,21 @@ public abstract class Person extends GameElement implements ItemContainer{
     public void setLocation(Cell location) {
         this.location = location;
     }
-    public com.mud.Entities.Person toServerPerson(){
-        com.mud.Entities.Person newPerson = new com.mud.Entities.NonPlayerCharacter();
-        newPerson.setLocation(this.location.toServerCell());
-        newPerson.setAttack(attack);
-        newPerson.setDefence(defence);
-        newPerson.setHealth(health);
-        
-        return newPerson;
-        
+    
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public int getGold() {
+        return gold;
+    }
+
+    public void setGold(int gold) {
+        this.gold = gold;
     }
     
 }

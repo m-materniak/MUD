@@ -1,22 +1,21 @@
 package mapcreator;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.util.ArrayList;
-import javax.swing.DefaultListModel;
-import Entities2.Item;
-import Entities2.Box;
 import Entities2.Cell;
 import Entities2.ItemContainer;
 import Entities2.NPC;
 import Entities2.Person;
 import com.mud.Entities.GameWorld;
+import com.mud.Entities.Item;
+import java.awt.Color;
+import java.awt.Graphics;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 /**
@@ -54,20 +53,9 @@ public class MainWindow extends javax.swing.JFrame {
         lblMapNumEnemies = new javax.swing.JLabel();
         lblMapNumContainers = new javax.swing.JLabel();
         lblMapNumItems = new javax.swing.JLabel();
-        pnlContainer = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        txtContainerName = new javax.swing.JTextField();
-        btnSaveContainer = new javax.swing.JButton();
-        btnEditContainer = new javax.swing.JButton();
-        btnRemoveContainer = new javax.swing.JButton();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        lstContainer = new javax.swing.JList();
-        lblNumContainer = new javax.swing.JLabel();
-        btnAddContainer = new javax.swing.JButton();
         pnlItem = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         txtItemName = new javax.swing.JTextField();
-        btnSaveItem = new javax.swing.JButton();
         btnEditItem = new javax.swing.JButton();
         btnRemoveItem = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -76,6 +64,18 @@ public class MainWindow extends javax.swing.JFrame {
         btnAddItem = new javax.swing.JButton();
         cobItemParent = new javax.swing.JComboBox();
         jLabel8 = new javax.swing.JLabel();
+        jSpinnerItemAttack = new javax.swing.JSpinner();
+        jSpinnerItemDefence = new javax.swing.JSpinner();
+        jSpinnerItemHealth = new javax.swing.JSpinner();
+        jSpinnerItemExperience = new javax.swing.JSpinner();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jComboBoxItemType = new javax.swing.JComboBox();
+        jSpinnerItemValue = new javax.swing.JSpinner();
+        jLabel16 = new javax.swing.JLabel();
         pnlEnemy = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         lstEnemy = new javax.swing.JList();
@@ -83,7 +83,6 @@ public class MainWindow extends javax.swing.JFrame {
         btnRemoveEnemy = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         txtEnemyName = new javax.swing.JTextField();
-        btnSaveEnemy = new javax.swing.JButton();
         lblNumEnemies = new javax.swing.JLabel();
         btnAddEnemy = new javax.swing.JButton();
         jSpinnerHealth = new javax.swing.JSpinner();
@@ -92,6 +91,10 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        jSpinnerLevel = new javax.swing.JSpinner();
+        jLabel18 = new javax.swing.JLabel();
+        jSpinnerGold = new javax.swing.JSpinner();
+        jLabel19 = new javax.swing.JLabel();
         pnlRooms = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         lstRooms = new javax.swing.JList();
@@ -200,7 +203,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(lblMapNumContainers)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblMapNumItems)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 216, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 217, Short.MAX_VALUE)
                 .addGroup(pnlMapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtFileName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
@@ -213,99 +216,9 @@ public class MainWindow extends javax.swing.JFrame {
 
         pnlSide.addTab("Mapa", pnlMap);
 
-        pnlContainer.setBackground(new java.awt.Color(255, 153, 255));
-
-        jLabel5.setText("Nazwa Skrzyni:");
-
-        btnSaveContainer.setText("Zapisz");
-        btnSaveContainer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSaveContainerActionPerformed(evt);
-            }
-        });
-
-        btnEditContainer.setText("Edytuj");
-
-        btnRemoveContainer.setText("Usuń");
-        btnRemoveContainer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRemoveContainerActionPerformed(evt);
-            }
-        });
-
-        lstContainer.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane4.setViewportView(lstContainer);
-
-        lblNumContainer.setText("jLabel10");
-
-        btnAddContainer.setText("Dodaj");
-        btnAddContainer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddContainerActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout pnlContainerLayout = new javax.swing.GroupLayout(pnlContainer);
-        pnlContainer.setLayout(pnlContainerLayout);
-        pnlContainerLayout.setHorizontalGroup(
-            pnlContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlContainerLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlContainerLayout.createSequentialGroup()
-                        .addComponent(lblNumContainer)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                    .addGroup(pnlContainerLayout.createSequentialGroup()
-                        .addComponent(btnEditContainer, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnRemoveContainer, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlContainerLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(pnlContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnSaveContainer, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnAddContainer, javax.swing.GroupLayout.Alignment.TRAILING))))
-                .addContainerGap())
-            .addGroup(pnlContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(pnlContainerLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jLabel5)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(txtContainerName)
-                    .addContainerGap()))
-        );
-        pnlContainerLayout.setVerticalGroup(
-            pnlContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlContainerLayout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(btnAddContainer)
-                .addGap(114, 114, 114)
-                .addComponent(lblNumContainer)
-                .addGap(3, 3, 3)
-                .addComponent(btnSaveContainer)
-                .addGap(0, 0, 0)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEditContainer)
-                    .addComponent(btnRemoveContainer))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(pnlContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(pnlContainerLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(pnlContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel5)
-                        .addComponent(txtContainerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap(411, Short.MAX_VALUE)))
-        );
-
-        pnlSide.addTab("Skrzynie", pnlContainer);
-
         pnlItem.setBackground(new java.awt.Color(204, 255, 255));
 
         jLabel4.setText("Nazwa:");
-
-        btnSaveItem.setText("Zapisz");
 
         btnEditItem.setText("Edytuj");
 
@@ -319,7 +232,7 @@ public class MainWindow extends javax.swing.JFrame {
         lstItem.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane3.setViewportView(lstItem);
 
-        lblNumItems.setText("jLabel10");
+        lblNumItems.setText(" ");
 
         btnAddItem.setText("Dodaj");
         btnAddItem.addActionListener(new java.awt.event.ActionListener() {
@@ -336,27 +249,77 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel8.setText("Rodzic:");
 
+        jSpinnerItemAttack.setModel(new javax.swing.SpinnerNumberModel());
+
+        jSpinnerItemDefence.setModel(new javax.swing.SpinnerNumberModel());
+
+        jSpinnerItemHealth.setModel(new javax.swing.SpinnerNumberModel());
+        jSpinnerItemHealth.setToolTipText("");
+
+        jSpinnerItemExperience.setModel(new javax.swing.SpinnerNumberModel());
+
+        jLabel5.setText("Atak:");
+
+        jLabel13.setText("Obrona:");
+
+        jLabel14.setText("Zdrowie:");
+
+        jLabel15.setText("Doświadczenie:");
+
+        jLabel17.setText("Typ:");
+
+        jComboBoxItemType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "WEAPON", "WEAR", "MISC", "FOOD", "ARTIFACT", "JEWELRY", "GOLD" }));
+        jComboBoxItemType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxItemTypeActionPerformed(evt);
+            }
+        });
+
+        jSpinnerItemValue.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(10)));
+
+        jLabel16.setText("Wartość:");
+
         javax.swing.GroupLayout pnlItemLayout = new javax.swing.GroupLayout(pnlItem);
         pnlItem.setLayout(pnlItemLayout);
         pnlItemLayout.setHorizontalGroup(
             pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlItemLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlItemLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlItemLayout.createSequentialGroup()
-                        .addComponent(lblNumItems)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
-                        .addComponent(btnAddItem))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlItemLayout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cobItemParent, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGroup(pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblNumItems, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlItemLayout.createSequentialGroup()
+                        .addComponent(btnEditItem, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnRemoveItem, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlItemLayout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel16)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel13))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSpinnerItemValue)
+                            .addGroup(pnlItemLayout.createSequentialGroup()
+                                .addGroup(pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jSpinnerItemAttack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jSpinnerItemDefence, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jSpinnerItemHealth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jSpinnerItemExperience, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(btnAddItem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(pnlItemLayout.createSequentialGroup()
-                        .addComponent(btnEditItem, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnRemoveItem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(btnSaveItem, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel17)
+                            .addComponent(jLabel8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cobItemParent, 0, 127, Short.MAX_VALUE)
+                            .addComponent(jComboBoxItemType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
             .addGroup(pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlItemLayout.createSequentialGroup()
@@ -374,25 +337,47 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(cobItemParent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAddItem)
-                .addGap(87, 87, 87)
-                .addComponent(lblNumItems)
-                .addGap(4, 4, 4)
-                .addComponent(btnSaveItem)
-                .addGap(0, 0, 0)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel17)
+                    .addComponent(jComboBoxItemType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEditItem)
-                    .addComponent(btnRemoveItem))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jSpinnerItemAttack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jSpinnerItemDefence, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jSpinnerItemHealth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jSpinnerItemExperience, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jSpinnerItemValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblNumItems)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAddItem)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRemoveItem)
+                    .addComponent(btnEditItem))
+                .addContainerGap(14, Short.MAX_VALUE))
             .addGroup(pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlItemLayout.createSequentialGroup()
                     .addContainerGap()
                     .addGroup(pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel4)
                         .addComponent(txtItemName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap(411, Short.MAX_VALUE)))
+                    .addContainerGap(412, Short.MAX_VALUE)))
         );
 
         pnlSide.addTab("Przedmioty", pnlItem);
@@ -413,8 +398,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel3.setText("Nazwa:");
 
-        btnSaveEnemy.setText("Zapisz");
-
         lblNumEnemies.setText("jLabel10");
 
         btnAddEnemy.setText("Dodaj");
@@ -424,51 +407,57 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
+        jSpinnerHealth.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+
+        jSpinnerAttack.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+
+        jSpinnerDefence.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+
         jLabel7.setText("Wytrzymałość:");
 
         jLabel10.setText("Atak:");
 
         jLabel11.setText("Obrona:");
 
+        jSpinnerLevel.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+
+        jLabel18.setText("Poziom:");
+
+        jSpinnerGold.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(10)));
+
+        jLabel19.setText("Pieniądze:");
+
         javax.swing.GroupLayout pnlEnemyLayout = new javax.swing.GroupLayout(pnlEnemy);
         pnlEnemy.setLayout(pnlEnemyLayout);
         pnlEnemyLayout.setHorizontalGroup(
             pnlEnemyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlEnemyLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(pnlEnemyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
                     .addGroup(pnlEnemyLayout.createSequentialGroup()
-                        .addGroup(pnlEnemyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlEnemyLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(pnlEnemyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblNumEnemies)
-                                    .addGroup(pnlEnemyLayout.createSequentialGroup()
-                                        .addGroup(pnlEnemyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel10)
-                                            .addComponent(jLabel7))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(pnlEnemyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jSpinnerHealth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jSpinnerAttack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                            .addGroup(pnlEnemyLayout.createSequentialGroup()
-                                .addGap(42, 42, 42)
-                                .addComponent(jLabel11)
-                                .addGap(18, 18, 18)
-                                .addComponent(jSpinnerDefence, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 48, Short.MAX_VALUE))
+                        .addComponent(btnEditEnemy, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnRemoveEnemy, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE))
                     .addGroup(pnlEnemyLayout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGroup(pnlEnemyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel18)
+                            .addComponent(jLabel19))
+                        .addGap(18, 18, 18)
                         .addGroup(pnlEnemyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                            .addGroup(pnlEnemyLayout.createSequentialGroup()
-                                .addComponent(btnEditEnemy, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnRemoveEnemy, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEnemyLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(pnlEnemyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnAddEnemy, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(btnSaveEnemy, javax.swing.GroupLayout.Alignment.TRAILING))))))
+                            .addComponent(jSpinnerHealth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSpinnerAttack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSpinnerDefence, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSpinnerLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSpinnerGold, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(pnlEnemyLayout.createSequentialGroup()
+                        .addComponent(lblNumEnemies)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAddEnemy)))
                 .addContainerGap())
             .addGroup(pnlEnemyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlEnemyLayout.createSequentialGroup()
@@ -494,12 +483,18 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(jSpinnerDefence, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAddEnemy)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                .addComponent(lblNumEnemies)
-                .addGap(5, 5, 5)
-                .addComponent(btnSaveEnemy)
-                .addGap(0, 0, 0)
+                .addGroup(pnlEnemyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jSpinnerLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel18))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlEnemyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jSpinnerGold, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel19))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addGroup(pnlEnemyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAddEnemy)
+                    .addComponent(lblNumEnemies))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlEnemyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -512,7 +507,7 @@ public class MainWindow extends javax.swing.JFrame {
                     .addGroup(pnlEnemyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel3)
                         .addComponent(txtEnemyName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap(411, Short.MAX_VALUE)))
+                    .addContainerGap(412, Short.MAX_VALUE)))
         );
 
         pnlSide.addTab("Wrogowie", pnlEnemy);
@@ -622,7 +617,7 @@ public class MainWindow extends javax.swing.JFrame {
                         .addComponent(btnN)
                         .addGap(18, 18, 18)
                         .addComponent(btnS)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
                 .addGroup(pnlRoomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnSaveRoom, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlRoomsLayout.createSequentialGroup()
@@ -673,7 +668,7 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(pnlScriptLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlScriptLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlScriptLayout.createSequentialGroup()
                         .addComponent(btnEditRoom1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -704,7 +699,7 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addGroup(pnlScriptLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -726,7 +721,7 @@ public class MainWindow extends javax.swing.JFrame {
         panel.setLayout(panelLayout);
         panelLayout.setHorizontalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 662, Short.MAX_VALUE)
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -939,7 +934,7 @@ public class MainWindow extends javax.swing.JFrame {
         }
         updateRoomsList();
         updateItemsList();
-        updateContainerList();
+        updateParentItemCombo();
         updateEnemiesList();
     }//GEN-LAST:event_btnSaveRoomActionPerformed
 
@@ -973,23 +968,6 @@ public class MainWindow extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnEActionPerformed
 
-    private void btnSaveContainerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveContainerActionPerformed
-       
-    }//GEN-LAST:event_btnSaveContainerActionPerformed
-
-    private void btnAddContainerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddContainerActionPerformed
-       //int indRoom=cobContainerParent.getSelectedIndex();
-       Box newContainer=new Box();
-       newContainer.setName(txtContainerName.getText());
-       newContainer.setId(idContainer++);
-       //newContainer.setColor(Color.ORANGE);
-       containers.add(newContainer);
-       activeCell.addBox(newContainer);
-       
-       updateContainerList();
-       repaint();
-    }//GEN-LAST:event_btnAddContainerActionPerformed
-
     private void btnAddEnemyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEnemyActionPerformed
        // int indRoom=cobEnemyParent.getSelectedIndex();
        NPC newEnemy=new NPC();
@@ -998,21 +976,23 @@ public class MainWindow extends javax.swing.JFrame {
        newEnemy.setHealth((Integer)jSpinnerHealth.getValue());
        newEnemy.setAttack((Integer)jSpinnerAttack.getValue());
        newEnemy.setDefence((Integer)jSpinnerDefence.getValue());
+       newEnemy.setLevel((Integer)jSpinnerLevel.getValue());
+       newEnemy.setGold((Integer)jSpinnerGold.getValue());
+       newEnemy.location=activeCell;
        
        enemies.add(newEnemy);
        activeCell.addPerson(newEnemy);
        containers.add(newEnemy);
        
        updateEnemiesList();
+       updateContainers();
        repaint();
     }//GEN-LAST:event_btnAddEnemyActionPerformed
 
     private void btnAddItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddItemActionPerformed
          //int index=activeCell.getSelectedIndex();
          
-       Item newItem=new Item();
-       newItem.setName(txtItemName.getText());
-       newItem.setId(idItem++);
+       Item newItem=new Item(txtItemName.getText(),Item.itemType.fromInteger(jComboBoxItemType.getSelectedIndex()), (Integer)jSpinnerItemAttack.getValue(), (Integer)jSpinnerItemDefence.getValue(), (Integer)jSpinnerItemHealth.getValue(), (Integer)jSpinnerItemExperience.getValue(), (Integer)jSpinnerItemValue.getValue());
        //newItem.setColor(Color.BLUE);
        items.add(newItem);
        
@@ -1053,21 +1033,6 @@ public class MainWindow extends javax.swing.JFrame {
     private void cobItemParentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cobItemParentActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cobItemParentActionPerformed
-
-    private void btnRemoveContainerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveContainerActionPerformed
-        int index = lstContainer.getSelectedIndex();
-        if (index > 0) {
-            ItemContainer toDel = containers.get(index);
-            if (toDel.getClass().equals(Person.class)) {
-                activeCell.people.remove(toDel);
-            } else if (toDel.getClass().equals(Box.class)){
-                            activeCell.getBoxes().remove(toDel);
-            }
-            containers.remove(toDel);
-        } else System.out.println("Nie możesz usunąć pokoju");
-        repaint();
-        updateContainerList();
-    }//GEN-LAST:event_btnRemoveContainerActionPerformed
 
     private void panelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelMouseClicked
         //System.out.println("eloelo" + evt.getY() + " " + evt.getX());
@@ -1155,6 +1120,10 @@ public class MainWindow extends javax.swing.JFrame {
         this.mapSizeY=this.sldSizeY.getValue();
     }//GEN-LAST:event_sldSizeYStateChanged
 
+    private void jComboBoxItemTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxItemTypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxItemTypeActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1236,25 +1205,12 @@ public class MainWindow extends javax.swing.JFrame {
             model.addElement(s);
         }
     }
-
-    public void updateContainerList() {
-        DefaultListModel model = new DefaultListModel();
-        lstContainer.setModel(model);
-        this.lblNumContainer.setText("Liczba kontenerów: " + containers.size());
-        this.lblMapNumContainers.setText("Liczba kontenerów: " + containers.size());
-        for (int i = 0; i < containers.size(); i++) {
-            String s = Integer.toString(i)+"#" + containers.get(i).getLine();
-            model.addElement(s);
-        }
-        updateParentItemCombo();
-    }
     
     public void updateContainers() {
         containers.clear();
         containers.add(activeCell);
-        containers.addAll(activeCell.getBoxes());
         containers.addAll(activeCell.getPeople());
-        updateContainerList();
+        updateParentItemCombo();
     }
 
     public void updateItemsList() {
@@ -1263,7 +1219,7 @@ public class MainWindow extends javax.swing.JFrame {
         this.lblNumItems.setText("Liczba Przedmiotów: " + activeCell.getItems().size());
         this.lblMapNumItems.setText("Liczba Przedmiotów: " + activeCell.getItems().size());
         for (int i = 0; i < activeCell.getItems().size(); i++) {
-            String s = Integer.toString(i)+"#" + activeCell.getItems().get(i).getLine();
+            String s = Integer.toString(i)+"#" + activeCell.getItems().get(i).toString();
             model.addElement(s);
         }
     }
@@ -1317,28 +1273,22 @@ public class MainWindow extends javax.swing.JFrame {
     }
     public GameWorld toGameWorld(){
         System.out.println(rooms.size());
-        HashMap<Cell, com.mud.Entities.Cell> map = new HashMap<Cell, com.mud.Entities.Cell>();
+        GameWorld swiat = new GameWorld();
+        HashMap<Cell, com.mud.Entities.Cell> map = new HashMap<>();
         for (Cell cell : rooms){
             if (!map.containsKey(cell)){
                 com.mud.Entities.Cell newCell = new com.mud.Entities.Cell();
                 newCell.Name=cell.getName();
                 for (Person person : cell.getPeople()){
-                    com.mud.Entities.Person newPerson = new com.mud.Entities.NonPlayerCharacter();
+                    com.mud.Entities.Person newPerson = new com.mud.Entities.NonPlayerCharacter(person.getName(), person.getHealth(), person.getAttack(), person.getDefence(), person.getLevel(), person.getGold());
                     newPerson.setLocation(newCell);
-                    newPerson.setAttack(person.getAttack());
-                    newPerson.setDefence(person.getDefence());
-                    newPerson.setHealth(person.getHealth());
                     newCell.AddPerson(newPerson);
-                    for (Item item : person.equipment){
-                        com.mud.Entities.Item newItem = new com.mud.Entities.Item();
-                        newItem.Name = item.getName();
-                        newPerson.PutItem(newItem);
+                    for (com.mud.Entities.Item item : person.equipment){
+                        newPerson.PutItem(item);
                     }
                 }
-                for (Item item : cell.getItems()){
-                    com.mud.Entities.Item newItem = new com.mud.Entities.Item();
-                    newItem.Name = item.getName();
-                    newCell.PutItem(newItem);
+                for (com.mud.Entities.Item item : cell.getItems()){
+                    newCell.PutItem(item);
                 }
                 map.put(cell, newCell);
             }
@@ -1350,7 +1300,6 @@ public class MainWindow extends javax.swing.JFrame {
             newCell.cellNorth = map.get(cell.cellNorth);
             newCell.cellSouth = map.get(cell.cellSouth);
         }
-        GameWorld swiat = new GameWorld();
         swiat.setStartingCell(map.get(rooms.get(0)));
         return swiat;
     }
@@ -1384,11 +1333,6 @@ public class MainWindow extends javax.swing.JFrame {
                 arg0.fillRect(startX + recSize * y, startY + recSize * x, recSize - 1, recSize - 1);
                 arg0.setColor(Color.DARK_GRAY);
                 arg0.drawRect(startX + recSize * y, startY + recSize * x, recSize - 1, recSize - 1);
-                if(room.getBoxes().size()>0){
-                    //arg0.setColor(room.getContainers().get(0).getColor());
-                    arg0.setColor(Color.MAGENTA);
-                    arg0.fillRect(startX + recSize * y+(int)recSize/4, startY + recSize * x+(int)recSize/4, (int)recSize/4, (int)recSize/4);
-                }
                 if(room.getPeople().size()>0){
                     //arg0.setColor(room.getEnemies().get(0).getColor());
                     arg0.setColor(Color.ORANGE);
@@ -1413,9 +1357,6 @@ public class MainWindow extends javax.swing.JFrame {
     public Cell activeCell = null;
 
     public int inxRoom = -1;
-    public int inxContainer = -1;
-    public int inxItem = -1;
-    public int inxEnemy = -1;
 
     public int idRoom = 0;
     public int idItem = 0;
@@ -1427,26 +1368,20 @@ public class MainWindow extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAddContainer;
     private javax.swing.JButton btnAddEnemy;
     private javax.swing.JButton btnAddItem;
     private javax.swing.JButton btnE;
-    private javax.swing.JButton btnEditContainer;
     private javax.swing.JButton btnEditEnemy;
     private javax.swing.JButton btnEditItem;
     private javax.swing.JButton btnEditRoom;
     private javax.swing.JButton btnEditRoom1;
     private javax.swing.JButton btnN;
     private javax.swing.JButton btnNewMap;
-    private javax.swing.JButton btnRemoveContainer;
     private javax.swing.JButton btnRemoveEnemy;
     private javax.swing.JButton btnRemoveItem;
     private javax.swing.JButton btnRemoveRoom;
     private javax.swing.JButton btnRemoveRoom1;
     private javax.swing.JButton btnS;
-    private javax.swing.JButton btnSaveContainer;
-    private javax.swing.JButton btnSaveEnemy;
-    private javax.swing.JButton btnSaveItem;
     private javax.swing.JButton btnSaveRoom;
     private javax.swing.JButton btnSaveToFile;
     private javax.swing.JButton btnW;
@@ -1454,10 +1389,18 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JComboBox cobScriptType;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton6;
+    private javax.swing.JComboBox jComboBoxItemType;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1469,28 +1412,31 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JSpinner jSpinnerAttack;
     private javax.swing.JSpinner jSpinnerDefence;
+    private javax.swing.JSpinner jSpinnerGold;
     private javax.swing.JSpinner jSpinnerHealth;
+    private javax.swing.JSpinner jSpinnerItemAttack;
+    private javax.swing.JSpinner jSpinnerItemDefence;
+    private javax.swing.JSpinner jSpinnerItemExperience;
+    private javax.swing.JSpinner jSpinnerItemHealth;
+    private javax.swing.JSpinner jSpinnerItemValue;
+    private javax.swing.JSpinner jSpinnerLevel;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lblMapNumContainers;
     private javax.swing.JLabel lblMapNumEnemies;
     private javax.swing.JLabel lblMapNumItems;
     private javax.swing.JLabel lblMapNumRooms;
-    private javax.swing.JLabel lblNumContainer;
     private javax.swing.JLabel lblNumEnemies;
     private javax.swing.JLabel lblNumItems;
     private javax.swing.JLabel lblNumRooms;
-    private javax.swing.JList lstContainer;
     private javax.swing.JList lstEnemy;
     private javax.swing.JList lstItem;
     private javax.swing.JList lstRooms;
     private javax.swing.JList lstRooms1;
     private javax.swing.JPanel panel;
-    private javax.swing.JPanel pnlContainer;
     private javax.swing.JPanel pnlEnemy;
     private javax.swing.JPanel pnlItem;
     private javax.swing.JPanel pnlMap;
@@ -1499,7 +1445,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTabbedPane pnlSide;
     private javax.swing.JSlider sldSizeX;
     private javax.swing.JSlider sldSizeY;
-    private javax.swing.JTextField txtContainerName;
     private javax.swing.JTextField txtEnemyName;
     private javax.swing.JTextField txtFileName;
     private javax.swing.JTextField txtItemName;

@@ -6,7 +6,6 @@ package Entities2;
 public abstract class GameElement {
     private int id;
     public String Name;
-    public abstract String Describe();
     
     public int getId() {
         return id;

@@ -11,8 +11,8 @@ import java.util.List;
 public class Cell extends GameElement implements IItemContainer, Serializable {
 
     public Cell() {
-        people = new ArrayList<>();
-        items = new ArrayList<>();
+        people = new ArrayList<Person>();
+        items = new ArrayList<Item>();
     }
     public List<Person> people;
     public List<Item> items;

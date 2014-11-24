@@ -16,7 +16,11 @@ public class NonPlayerCharacter extends Person implements Serializable{
     public NonPlayerCharacter() {
         super();
     }
-
+    public NonPlayerCharacter(String name, int health, int attack, int defence, int level, int gold) {
+        super(health, attack, defence, level, gold);
+        this.Name=name;
+    }
+    
     @Override
     public void EventShout(Person person, String text) {
         // ignore

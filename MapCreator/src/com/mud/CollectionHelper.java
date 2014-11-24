@@ -19,7 +19,7 @@ public class CollectionHelper {
             return emptyText + "\r\n";
         String description = collectionName + ": \r\n";
         for (GameElement element : collection) {
-            description += element.Name + "\r\n";
+            description += element.Name + " - " + element.Describe() + "\r\n";
         }
         return description;
     }
