@@ -48,13 +48,13 @@ public class UserCommandHandler extends CommandHandler {
         restOfCommand = command;
         String verb = TakeNextWord();
 
-        if (verb.equals("north")) {
+        if (verb.equals("north") || verb.equals("n")) {
             MovePlayer("north");
-        } else if (verb.equals("east")) {
+        } else if (verb.equals("east") || verb.equals("e")) {
             MovePlayer("east");
-        } else if (verb.equals("west")) {
+        } else if (verb.equals("west") || verb.equals("w")) {
             MovePlayer("west");
-        } else if (verb.equals("south")) {
+        } else if (verb.equals("south") || verb.equals("s")) {
             MovePlayer("south");
         } else if (verb.equals("look")) {
             DescribeRoom();

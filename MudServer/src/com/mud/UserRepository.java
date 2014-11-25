@@ -44,6 +44,9 @@ public class UserRepository {
 
     public UserAccount CreateUser(String name, String password, GameWorld gameWorld) {
         UserAccount account = Register(name, password);
+        if (account == null)
+            return null;
+
         Player player = new Player(gameWorld);
         player.Name = name;
         player.setLocation(gameWorld.getStartingCell());

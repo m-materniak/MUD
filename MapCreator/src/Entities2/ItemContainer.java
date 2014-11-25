@@ -9,5 +9,6 @@ public interface ItemContainer {
     Item FindItem(String name);
     Item TakeItem(String name);
     void PutItem(Item item);
+    void removeItem(Item item);
     String getLine();
 }

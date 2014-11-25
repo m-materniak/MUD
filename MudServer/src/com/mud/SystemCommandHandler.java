@@ -57,7 +57,9 @@ public class SystemCommandHandler extends CommandHandler {
     }
 
     protected void Logout() {
-        clientConnection.Send("Ha, ha. You can't log out.");
+        clientConnection.Send("Terminating connection.");
+        clientConnection.Disconnect();
+        gameWorld.RemovePerson(clientConnection.player);
     }
 
     protected void Register() {

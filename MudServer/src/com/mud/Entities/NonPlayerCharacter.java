@@ -41,8 +41,12 @@ public class NonPlayerCharacter extends Person implements Serializable{
         String simpleText = text.toLowerCase();
         //if (person.location == location)
         {
-            if (simpleText.equals("hello") || simpleText.equals("hi")) {
-                Say(person.Name, "No siema, Sandra!");
+            if (simpleText.contains("hello") || simpleText.contains("hi")) {
+                Say(person.Name, "Hello, stranger!");
+            } else if (simpleText.contains("bye")) {
+                Say(person.Name, "Farewell!");
+            } else {
+                Say(person.Name, "Go away!");
             }
         }
     }

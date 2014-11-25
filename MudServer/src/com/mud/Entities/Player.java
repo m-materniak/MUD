@@ -170,4 +170,8 @@ public class Player extends Person{
             return false;
     }
 
+    public void Pay(Person tradingPartner, int price) {
+        gold -= price;
+        tradingPartner.gold += price;
+    }
 }

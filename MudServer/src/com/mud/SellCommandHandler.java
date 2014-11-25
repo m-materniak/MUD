@@ -2,6 +2,7 @@ package com.mud;
 
 import com.mud.Entities.Item;
 import com.mud.Entities.Person;
+import com.mud.Entities.Player;
 
 /**
  * Created by krzysiek on 2014-11-18.
@@ -47,8 +48,14 @@ public class SellCommandHandler extends CommandHandler{
     }
 
     protected void Buy() {
-        clientConnection.Send("You bought " + item + " from " + tradingPartner.Name + ".");
-        clientConnection.player.PutItem(tradingPartner.TakeItem(item.Name));
+        Player player = clientConnection.player;
+        if (player.getGold() >= price) {
+            clientConnection.Send("You bought " + item + " from " + tradingPartner.Name + ".");
+            player.PutItem(tradingPartner.TakeItem(item.Name));
+            player.Pay(tradingPartner, price);
+        } else {
+            clientConnection.Send("You can't afford " + item + ".");
+        }
     }
 
     @Override
