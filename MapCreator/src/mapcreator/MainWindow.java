@@ -112,17 +112,6 @@ public class MainWindow extends javax.swing.JFrame {
         btnW = new javax.swing.JButton();
         btnS = new javax.swing.JButton();
         lblNumRooms = new javax.swing.JLabel();
-        pnlScript = new javax.swing.JPanel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        lstRooms1 = new javax.swing.JList();
-        btnEditRoom1 = new javax.swing.JButton();
-        btnRemoveRoom1 = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
-        cobScriptType = new javax.swing.JComboBox();
-        jLabel12 = new javax.swing.JLabel();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
         panel = new javax.swing.JPanel();
         sldSizeY = new javax.swing.JSlider();
         sldSizeX = new javax.swing.JSlider();
@@ -658,83 +647,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         pnlSide.addTab("Pokoje", pnlRooms);
 
-        jScrollPane5.setViewportView(lstRooms1);
-
-        btnEditRoom1.setText("Edytuj");
-        btnEditRoom1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditRoom1ActionPerformed(evt);
-            }
-        });
-
-        btnRemoveRoom1.setText("Usuń");
-        btnRemoveRoom1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRemoveRoom1ActionPerformed(evt);
-            }
-        });
-
-        jLabel9.setText("Typ:");
-
-        cobScriptType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Typ 1", "Typ 2", "Typ 3", "Typ 4", "Typ 5", "Typ 6" }));
-
-        jLabel12.setText("Treść:");
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane6.setViewportView(jTextArea1);
-
-        jButton1.setText("Dodaj skrypt");
-
-        javax.swing.GroupLayout pnlScriptLayout = new javax.swing.GroupLayout(pnlScript);
-        pnlScript.setLayout(pnlScriptLayout);
-        pnlScriptLayout.setHorizontalGroup(
-            pnlScriptLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlScriptLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlScriptLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlScriptLayout.createSequentialGroup()
-                        .addComponent(btnEditRoom1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnRemoveRoom1, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE))
-                    .addGroup(pnlScriptLayout.createSequentialGroup()
-                        .addGroup(pnlScriptLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel12))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlScriptLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cobScriptType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane6)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlScriptLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
-                .addContainerGap())
-        );
-        pnlScriptLayout.setVerticalGroup(
-            pnlScriptLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlScriptLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlScriptLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(cobScriptType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlScriptLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel12)
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addGroup(pnlScriptLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEditRoom1)
-                    .addComponent(btnRemoveRoom1))
-                .addContainerGap())
-        );
-
-        pnlSide.addTab("Skrypt", pnlScript);
-
         panel.setBackground(new java.awt.Color(220, 240, 240));
         panel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -823,89 +735,57 @@ public class MainWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnNewMapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewMapActionPerformed
-        rooms = new ArrayList<>();
-        enemies = new ArrayList<>();
-        itemsInRoom = new ArrayList<>();
-        containers = new ArrayList<>();
-        map = new Map();
-        map.setName(this.txtMapName.getText());
-        if (!map.getName().isEmpty()){
-            txtFileName.setText(map.getName()+".mm");
-        }
-        Cell firstRoom = new Cell();
-        firstRoom.setId(idRoom++);
-        firstRoom.setName("START");
-        firstRoom.setCordX((int)(mapSizeX/2));
-        firstRoom.setCordY((int)(mapSizeY/2));
-        map.addRoom(firstRoom);
-        rooms.add(firstRoom);
-        inxRoom=firstRoom.getId();
-        activeCell = firstRoom;
-        updateRoomsList();
-        updateEnemiesList();
-        updateContainers();
-        updateItems();
-
-        pnlSide.setEnabled(true);
-        repaint();
-        
-    }//GEN-LAST:event_btnNewMapActionPerformed
-
-    private void btnRemoveRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveRoomActionPerformed
-        int index = -1;
-        index = lstRooms.getSelectedIndex();
-        if (index >= 0) {
-            Cell removeRoom = rooms.get(index);
-            rooms.remove(removeRoom);
-            map.removeRoom(removeRoom);
-        }
-        inxRoom = Integer.MIN_VALUE;
-        repaint();
-        updateRoomsList();
-    }//GEN-LAST:event_btnRemoveRoomActionPerformed
-
-    private void btnEditRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditRoomActionPerformed
-        inxRoom = lstRooms.getSelectedIndex();
-        if (inxRoom >= 0) {
-            Cell editRoom = rooms.get(inxRoom);
-            txtRoomName.setText(editRoom.getName());
-            activeCell = editRoom;
-        }
-        repaint();
-        updateRoomsList();
-    }//GEN-LAST:event_btnEditRoomActionPerformed
-
-    private void btnNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNActionPerformed
-        if (inxRoom >= 0) {
-            Cell baseRoom = rooms.get(inxRoom);
-
-            if (baseRoom.getCordX() > 0) {
-                if (!map.isEmpty(baseRoom.getCordX() - 1, baseRoom.getCordY())) {
-                    inxRoom = getIndexOfRoomFromCord(baseRoom.getCordX() - 1, baseRoom.getCordY());
-                    activeCell = rooms.get(inxRoom);
-                } else {
-                    Cell newRoom = new Cell();
-                    newRoom.setId(idRoom++);
-                    newRoom.setName(txtRoomName.getText());
-                    newRoom.setCordX(baseRoom.getCordX() - 1);
-                    newRoom.setCordY(baseRoom.getCordY());
-                    
-                    updateNeighbours(newRoom);
-                    map.addRoom(newRoom);
-                    rooms.add(newRoom);
-                    activeCell = newRoom;
-                    inxRoom = rooms.size() - 1;
-                }
+    private void panelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelMouseClicked
+        //System.out.println("eloelo" + evt.getY() + " " + evt.getX());
+        if (map !=null) {
+            if (!map.isEmpty(evt.getY() / 16, evt.getX() / 16)) {
+                inxRoom = getIndexOfRoomFromCord(evt.getY() / 16, evt.getX() / 16);
+                activeCell = rooms.get(inxRoom);
+            } else {
+                Cell newRoom = new Cell();
+                newRoom.setId(idRoom++);
+                newRoom.setName(txtRoomName.getText());
+                newRoom.setCordX(evt.getY() / 16);
+                newRoom.setCordY(evt.getX() / 16);
+                updateNeighbours(newRoom);
+                map.addRoom(newRoom);
+                rooms.add(newRoom);
+                activeCell = newRoom;
+                inxRoom = rooms.size() - 1;
             }
+            txtRoomName.setText(activeCell.getName());
+            repaint();
+            updateRoomsList();
+            updateItems();
+            updateContainers();
+            updateEnemiesList();
         }
-        txtRoomName.setText(activeCell.getName());
+
+    }//GEN-LAST:event_panelMouseClicked
+
+    private void sldSizeXStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sldSizeXStateChanged
+        Dimension dim=this.panel.getSize();
+        this.mapSizeX=(int)(dim.height/16*(this.sldSizeX.getValue()/30.0f));
+        this.mapSizeY=(int)(dim.width/16*(this.sldSizeY.getValue()/40.0f));
         repaint();
-        updateRoomsList();
-        updateItems();
-        updateContainers();
-        updateEnemiesList();
-    }//GEN-LAST:event_btnNActionPerformed
+    }//GEN-LAST:event_sldSizeXStateChanged
+
+    private void sldSizeYStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sldSizeYStateChanged
+        Dimension dim=this.panel.getSize();
+        this.mapSizeX=(int)(dim.height/16*(this.sldSizeX.getValue()/30.0f));
+        this.mapSizeY=(int)(dim.width/16*(this.sldSizeY.getValue()/40.0f));
+        repaint();
+    }//GEN-LAST:event_sldSizeYStateChanged
+
+    private void panelPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_panelPropertyChange
+        
+    }//GEN-LAST:event_panelPropertyChange
+
+    private void panelComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_panelComponentResized
+       Dimension dim=this.panel.getSize();
+        this.mapSizeX=(int)(dim.height/16*(this.sldSizeX.getValue()/30.0f));
+        this.mapSizeY=(int)(dim.width/16*(this.sldSizeY.getValue()/40.0f));
+    }//GEN-LAST:event_panelComponentResized
 
     private void btnSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSActionPerformed
         if (inxRoom >= 0) {
@@ -920,7 +800,7 @@ public class MainWindow extends javax.swing.JFrame {
                     newRoom.setName(txtRoomName.getText());
                     newRoom.setCordX(baseRoom.getCordX() + 1);
                     newRoom.setCordY(baseRoom.getCordY());
-                    
+
                     updateNeighbours(newRoom);
                     map.addRoom(newRoom);
                     rooms.add(newRoom);
@@ -950,7 +830,7 @@ public class MainWindow extends javax.swing.JFrame {
                     newRoom.setName(txtRoomName.getText());
                     newRoom.setCordX(baseRoom.getCordX());
                     newRoom.setCordY(baseRoom.getCordY() - 1);
-                    
+
                     updateNeighbours(newRoom);
                     map.addRoom(newRoom);
                     rooms.add(newRoom);
@@ -967,19 +847,6 @@ public class MainWindow extends javax.swing.JFrame {
         updateEnemiesList();
     }//GEN-LAST:event_btnWActionPerformed
 
-    private void btnSaveRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveRoomActionPerformed
-        if (inxRoom >= 0) {
-            Cell saveRoom = rooms.get(inxRoom);
-            if (saveRoom != null) {
-                saveRoom.setName(txtRoomName.getText());
-            }
-        }
-        updateRoomsList();
-        //updateItems();
-        updateParentItemCombo();
-        updateEnemiesList();
-    }//GEN-LAST:event_btnSaveRoomActionPerformed
-
     private void btnEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEActionPerformed
         if (inxRoom >= 0) {
             Cell baseRoom = rooms.get(inxRoom);
@@ -993,7 +860,7 @@ public class MainWindow extends javax.swing.JFrame {
                     newRoom.setName(txtRoomName.getText());
                     newRoom.setCordX(baseRoom.getCordX());
                     newRoom.setCordY(baseRoom.getCordY() + 1);
-                    
+
                     updateNeighbours(newRoom);
                     map.addRoom(newRoom);
                     rooms.add(newRoom);
@@ -1008,8 +875,75 @@ public class MainWindow extends javax.swing.JFrame {
             updateContainers();
             updateEnemiesList();
         }
-
     }//GEN-LAST:event_btnEActionPerformed
+
+    private void btnNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNActionPerformed
+        if (inxRoom >= 0) {
+            Cell baseRoom = rooms.get(inxRoom);
+
+            if (baseRoom.getCordX() > 0) {
+                if (!map.isEmpty(baseRoom.getCordX() - 1, baseRoom.getCordY())) {
+                    inxRoom = getIndexOfRoomFromCord(baseRoom.getCordX() - 1, baseRoom.getCordY());
+                    activeCell = rooms.get(inxRoom);
+                } else {
+                    Cell newRoom = new Cell();
+                    newRoom.setId(idRoom++);
+                    newRoom.setName(txtRoomName.getText());
+                    newRoom.setCordX(baseRoom.getCordX() - 1);
+                    newRoom.setCordY(baseRoom.getCordY());
+
+                    updateNeighbours(newRoom);
+                    map.addRoom(newRoom);
+                    rooms.add(newRoom);
+                    activeCell = newRoom;
+                    inxRoom = rooms.size() - 1;
+                }
+            }
+        }
+        txtRoomName.setText(activeCell.getName());
+        repaint();
+        updateRoomsList();
+        updateItems();
+        updateContainers();
+        updateEnemiesList();
+    }//GEN-LAST:event_btnNActionPerformed
+
+    private void btnSaveRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveRoomActionPerformed
+        if (inxRoom >= 0) {
+            Cell saveRoom = rooms.get(inxRoom);
+            if (saveRoom != null) {
+                saveRoom.setName(txtRoomName.getText());
+            }
+        }
+        updateRoomsList();
+        //updateItems();
+        updateParentItemCombo();
+        updateEnemiesList();
+    }//GEN-LAST:event_btnSaveRoomActionPerformed
+
+    private void btnRemoveRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveRoomActionPerformed
+        int index = -1;
+        index = lstRooms.getSelectedIndex();
+        if (index >= 0) {
+            Cell removeRoom = rooms.get(index);
+            rooms.remove(removeRoom);
+            map.removeRoom(removeRoom);
+        }
+        inxRoom = Integer.MIN_VALUE;
+        repaint();
+        updateRoomsList();
+    }//GEN-LAST:event_btnRemoveRoomActionPerformed
+
+    private void btnEditRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditRoomActionPerformed
+        inxRoom = lstRooms.getSelectedIndex();
+        if (inxRoom >= 0) {
+            Cell editRoom = rooms.get(inxRoom);
+            txtRoomName.setText(editRoom.getName());
+            activeCell = editRoom;
+        }
+        repaint();
+        updateRoomsList();
+    }//GEN-LAST:event_btnEditRoomActionPerformed
 
     private void btnAddEnemyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEnemyActionPerformed
         // int indRoom=cobEnemyParent.getSelectedIndex();
@@ -1036,43 +970,10 @@ public class MainWindow extends javax.swing.JFrame {
             editedEnemy.setLevel((Integer) jSpinnerLevel.getValue());
             editedEnemy.setGold((Integer) jSpinnerGold.getValue());
         }
-       updateEnemiesList();
-       updateContainers();
-       repaint();
-    }//GEN-LAST:event_btnAddEnemyActionPerformed
-
-    private void btnAddItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddItemActionPerformed
-       if (btnAddItem.getText() == "Dodaj") {
-        Item newItem=new Item(txtItemName.getText(),Item.itemType.fromInteger(jComboBoxItemType.getSelectedIndex()), (Integer)jSpinnerItemAttack.getValue(), (Integer)jSpinnerItemDefence.getValue(), (Integer)jSpinnerItemHealth.getValue(), (Integer)jSpinnerItemExperience.getValue(), (Integer)jSpinnerItemValue.getValue());
-       itemsInRoom.add(newItem);
-       containers.get(cobItemParent.getSelectedIndex()).PutItem(newItem);
-       itemnumber++;
-       } else{
-            Item editedItem = itemsInRoom.get(lstItem.getSelectedIndex());
-            editedItem.Name=txtItemName.getText();
-            editedItem.setType(Item.itemType.fromInteger(jComboBoxItemType.getSelectedIndex()));
-            editedItem.setAttackModifier((Integer)jSpinnerItemAttack.getValue());
-            editedItem.setDefenceModifier((Integer)jSpinnerItemDefence.getValue());
-            editedItem.setHealthModifier((Integer)jSpinnerItemHealth.getValue());
-            editedItem.setExperienceModifier((Integer)jSpinnerItemExperience.getValue());
-            editedItem.setValue((Integer)jSpinnerItemValue.getValue());
-       }
-       updateItemsList();
-       repaint();
-    }//GEN-LAST:event_btnAddItemActionPerformed
-
-    private void btnRemoveItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveItemActionPerformed
-        int index = lstItem.getSelectedIndex();
-        if (index >= 0) {
-            Item toDel = itemsInRoom.get(index);
-            containers.get(cobItemParent.getSelectedIndex()).removeItem(toDel);
-            itemsInRoom.remove(toDel);
-            itemnumber--;
-        } 
+        updateEnemiesList();
+        updateContainers();
         repaint();
-        updateItemsList();
-        btnAddItem.setText("Dodaj");
-    }//GEN-LAST:event_btnRemoveItemActionPerformed
+    }//GEN-LAST:event_btnAddEnemyActionPerformed
 
     private void btnRemoveEnemyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveEnemyActionPerformed
         int index = lstEnemy.getSelectedIndex();
@@ -1086,37 +987,141 @@ public class MainWindow extends javax.swing.JFrame {
         btnAddEnemy.setText("Dodaj");
     }//GEN-LAST:event_btnRemoveEnemyActionPerformed
 
+    private void btnEditEnemyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditEnemyActionPerformed
+        if (lstEnemy.getSelectedIndex()>=0){
+            Person editedEnemy= activeCell.getPeople().get(lstEnemy.getSelectedIndex());
+            txtEnemyName.setText(editedEnemy.getName());
+            jSpinnerHealth.setValue(editedEnemy.getHealth());
+            jSpinnerAttack.setValue( editedEnemy.getAttack());
+            jSpinnerDefence.setValue(editedEnemy.getDefence());
+            jSpinnerLevel.setValue(editedEnemy.getLevel());
+            jSpinnerGold.setValue(editedEnemy.getGold());
+            btnAddEnemy.setText("Zapisz");
+        }
+    }//GEN-LAST:event_btnEditEnemyActionPerformed
+
+    private void lstEnemyValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstEnemyValueChanged
+        btnAddEnemy.setText("Dodaj");
+    }//GEN-LAST:event_lstEnemyValueChanged
+
+    private void jComboBoxItemTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxItemTypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxItemTypeActionPerformed
+
     private void cobItemParentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cobItemParentActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cobItemParentActionPerformed
 
-    private void panelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelMouseClicked
-        //System.out.println("eloelo" + evt.getY() + " " + evt.getX());
-        if (map !=null) {
-            if (!map.isEmpty(evt.getY() / 16, evt.getX() / 16)) {
-                inxRoom = getIndexOfRoomFromCord(evt.getY() / 16, evt.getX() / 16);
-                activeCell = rooms.get(inxRoom);
-            } else {
-                Cell newRoom = new Cell();
-                newRoom.setId(idRoom++);
-                newRoom.setName(txtRoomName.getText());
-                newRoom.setCordX(evt.getY() / 16);
-                newRoom.setCordY(evt.getX() / 16);
-                updateNeighbours(newRoom);
-                map.addRoom(newRoom);
-                rooms.add(newRoom);
-                activeCell = newRoom;
-                inxRoom = rooms.size() - 1;
-            }
-            txtRoomName.setText(activeCell.getName());
-            repaint();
-            updateRoomsList();
-            updateItems();
-            updateContainers();
-            updateEnemiesList();
+    private void btnAddItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddItemActionPerformed
+        if (btnAddItem.getText() == "Dodaj") {
+            Item newItem=new Item(txtItemName.getText(),Item.itemType.fromInteger(jComboBoxItemType.getSelectedIndex()), (Integer)jSpinnerItemAttack.getValue(), (Integer)jSpinnerItemDefence.getValue(), (Integer)jSpinnerItemHealth.getValue(), (Integer)jSpinnerItemExperience.getValue(), (Integer)jSpinnerItemValue.getValue());
+            itemsInRoom.add(newItem);
+            containers.get(cobItemParent.getSelectedIndex()).PutItem(newItem);
+            itemnumber++;
+        } else{
+            Item editedItem = itemsInRoom.get(lstItem.getSelectedIndex());
+            editedItem.Name=txtItemName.getText();
+            editedItem.setType(Item.itemType.fromInteger(jComboBoxItemType.getSelectedIndex()));
+            editedItem.setAttackModifier((Integer)jSpinnerItemAttack.getValue());
+            editedItem.setDefenceModifier((Integer)jSpinnerItemDefence.getValue());
+            editedItem.setHealthModifier((Integer)jSpinnerItemHealth.getValue());
+            editedItem.setExperienceModifier((Integer)jSpinnerItemExperience.getValue());
+            editedItem.setValue((Integer)jSpinnerItemValue.getValue());
         }
+        updateItemsList();
+        repaint();
+    }//GEN-LAST:event_btnAddItemActionPerformed
 
-    }//GEN-LAST:event_panelMouseClicked
+    private void lstItemValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstItemValueChanged
+        btnAddItem.setText("Dodaj");
+    }//GEN-LAST:event_lstItemValueChanged
+
+    private void btnRemoveItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveItemActionPerformed
+        int index = lstItem.getSelectedIndex();
+        if (index >= 0) {
+            Item toDel = itemsInRoom.get(index);
+            containers.get(cobItemParent.getSelectedIndex()).removeItem(toDel);
+            itemsInRoom.remove(toDel);
+            itemnumber--;
+        }
+        repaint();
+        updateItemsList();
+        btnAddItem.setText("Dodaj");
+    }//GEN-LAST:event_btnRemoveItemActionPerformed
+
+    private void btnEditItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditItemActionPerformed
+        if (lstItem.getSelectedIndex()>=0){
+            Item editedItem= itemsInRoom.get(lstItem.getSelectedIndex());
+            txtItemName.setText(editedItem.Name);
+            jComboBoxItemType.setSelectedItem(editedItem.getType().toString());
+            jSpinnerItemAttack.setValue( editedItem.getAttackModifier());
+            jSpinnerItemDefence.setValue(editedItem.getDefenceModifier());
+            jSpinnerItemHealth.setValue(editedItem.getHealthModifier());
+            jSpinnerItemExperience.setValue(editedItem.getExperienceModifier());
+            jSpinnerItemValue.setValue(editedItem.getValue());
+            btnAddItem.setText("Zapisz");
+        }
+    }//GEN-LAST:event_btnEditItemActionPerformed
+
+    private void btnNewMapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewMapActionPerformed
+        rooms = new ArrayList<>();
+        enemies = new ArrayList<>();
+        itemsInRoom = new ArrayList<>();
+        containers = new ArrayList<>();
+        map = new Map();
+        map.setName(this.txtMapName.getText());
+        if (!map.getName().isEmpty()){
+            txtFileName.setText(map.getName()+".mm");
+        }
+        Cell firstRoom = new Cell();
+        firstRoom.setId(idRoom++);
+        firstRoom.setName("START");
+        firstRoom.setCordX((int)(mapSizeX/2));
+        firstRoom.setCordY((int)(mapSizeY/2));
+        map.addRoom(firstRoom);
+        rooms.add(firstRoom);
+        inxRoom=firstRoom.getId();
+        activeCell = firstRoom;
+        updateRoomsList();
+        updateEnemiesList();
+        updateContainers();
+        updateItems();
+
+        pnlSide.setEnabled(true);
+        repaint();
+
+    }//GEN-LAST:event_btnNewMapActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        com.mud.Entities.GameWorld gameWorld = null;
+        JFrame parentFrame = new JFrame();
+
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Wybierz skąd wczytać plik");
+        fileChooser.setSelectedFile(new File(txtFileName.getText()));
+
+        int userSelection = fileChooser.showOpenDialog(parentFrame);
+
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File fileToOpen = fileChooser.getSelectedFile();
+            System.out.println("Read from file: " + fileToOpen.getAbsolutePath());
+            try {
+                FileInputStream fileIn = new FileInputStream(fileToOpen);
+                ObjectInputStream in = new ObjectInputStream(fileIn);
+                gameWorld = (GameWorld) in.readObject();
+                fromGameWorld(gameWorld);
+                in.close();
+                fileIn.close();
+            } catch (IOException i) {
+                i.printStackTrace();
+                return;
+            } catch (ClassNotFoundException c) {
+                System.out.println("GameWorld class not found");
+                c.printStackTrace();
+                return;
+            }
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     private void btnSaveToFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveToFileActionPerformed
         JFrame parentFrame = new JFrame();
@@ -1124,7 +1129,7 @@ public class MainWindow extends javax.swing.JFrame {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Wybierz gdzie zapisać");
         fileChooser.setSelectedFile(new File(txtFileName.getText()));
-        
+
         int userSelection = fileChooser.showSaveDialog(parentFrame);
 
         if (userSelection == JFileChooser.APPROVE_OPTION) {
@@ -1158,108 +1163,6 @@ public class MainWindow extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnSaveToFileActionPerformed
-
-    private void btnEditRoom1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditRoom1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEditRoom1ActionPerformed
-
-    private void btnRemoveRoom1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveRoom1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRemoveRoom1ActionPerformed
-
-    private void sldSizeXStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sldSizeXStateChanged
-        Dimension dim=this.panel.getSize();
-        this.mapSizeX=(int)(dim.height/16*(this.sldSizeX.getValue()/30.0f));
-        this.mapSizeY=(int)(dim.width/16*(this.sldSizeY.getValue()/40.0f));
-        repaint();
-    }//GEN-LAST:event_sldSizeXStateChanged
-
-    private void sldSizeYStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sldSizeYStateChanged
-        Dimension dim=this.panel.getSize();
-        this.mapSizeX=(int)(dim.height/16*(this.sldSizeX.getValue()/30.0f));
-        this.mapSizeY=(int)(dim.width/16*(this.sldSizeY.getValue()/40.0f));
-        repaint();
-    }//GEN-LAST:event_sldSizeYStateChanged
-
-    private void jComboBoxItemTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxItemTypeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxItemTypeActionPerformed
-
-    private void btnEditEnemyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditEnemyActionPerformed
-       if (lstEnemy.getSelectedIndex()>=0){
-       Person editedEnemy= activeCell.getPeople().get(lstEnemy.getSelectedIndex());
-       txtEnemyName.setText(editedEnemy.getName());
-       jSpinnerHealth.setValue(editedEnemy.getHealth());
-       jSpinnerAttack.setValue( editedEnemy.getAttack());
-       jSpinnerDefence.setValue(editedEnemy.getDefence());
-       jSpinnerLevel.setValue(editedEnemy.getLevel());
-       jSpinnerGold.setValue(editedEnemy.getGold());
-       btnAddEnemy.setText("Zapisz");
-       }
-    }//GEN-LAST:event_btnEditEnemyActionPerformed
-
-    private void lstEnemyValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstEnemyValueChanged
-        btnAddEnemy.setText("Dodaj");
-    }//GEN-LAST:event_lstEnemyValueChanged
-
-    private void panelPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_panelPropertyChange
-        
-    }//GEN-LAST:event_panelPropertyChange
-
-    private void panelComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_panelComponentResized
-       Dimension dim=this.panel.getSize();
-        this.mapSizeX=(int)(dim.height/16*(this.sldSizeX.getValue()/30.0f));
-        this.mapSizeY=(int)(dim.width/16*(this.sldSizeY.getValue()/40.0f));
-    }//GEN-LAST:event_panelComponentResized
-
-    private void btnEditItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditItemActionPerformed
-       if (lstItem.getSelectedIndex()>=0){
-        Item editedItem= itemsInRoom.get(lstItem.getSelectedIndex());
-       txtItemName.setText(editedItem.Name);
-       jComboBoxItemType.setSelectedItem(editedItem.getType().toString());
-       jSpinnerItemAttack.setValue( editedItem.getAttackModifier());
-       jSpinnerItemDefence.setValue(editedItem.getDefenceModifier());
-       jSpinnerItemHealth.setValue(editedItem.getHealthModifier());
-       jSpinnerItemExperience.setValue(editedItem.getExperienceModifier());
-       jSpinnerItemValue.setValue(editedItem.getValue());
-       btnAddItem.setText("Zapisz");
-       }
-    }//GEN-LAST:event_btnEditItemActionPerformed
-
-    private void lstItemValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstItemValueChanged
-        btnAddItem.setText("Dodaj");
-    }//GEN-LAST:event_lstItemValueChanged
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        com.mud.Entities.GameWorld gameWorld = null;
-        JFrame parentFrame = new JFrame();
-
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setDialogTitle("Wybierz skąd wczytać plik");
-        fileChooser.setSelectedFile(new File(txtFileName.getText()));
-
-        int userSelection = fileChooser.showOpenDialog(parentFrame);
-
-        if (userSelection == JFileChooser.APPROVE_OPTION) {
-            File fileToOpen = fileChooser.getSelectedFile();
-            System.out.println("Read from file: " + fileToOpen.getAbsolutePath());
-            try {
-                FileInputStream fileIn = new FileInputStream(fileToOpen);
-                ObjectInputStream in = new ObjectInputStream(fileIn);
-                gameWorld = (GameWorld) in.readObject();
-                fromGameWorld(gameWorld);
-                in.close();
-                fileIn.close();
-            } catch (IOException i) {
-                i.printStackTrace();
-                return;
-            } catch (ClassNotFoundException c) {
-                System.out.println("GameWorld class not found");
-                c.printStackTrace();
-                return;
-            }
-        }
-    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1599,26 +1502,21 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton btnEditEnemy;
     private javax.swing.JButton btnEditItem;
     private javax.swing.JButton btnEditRoom;
-    private javax.swing.JButton btnEditRoom1;
     private javax.swing.JButton btnN;
     private javax.swing.JButton btnNewMap;
     private javax.swing.JButton btnRemoveEnemy;
     private javax.swing.JButton btnRemoveItem;
     private javax.swing.JButton btnRemoveRoom;
-    private javax.swing.JButton btnRemoveRoom1;
     private javax.swing.JButton btnS;
     private javax.swing.JButton btnSaveRoom;
     private javax.swing.JButton btnSaveToFile;
     private javax.swing.JButton btnW;
     private javax.swing.JComboBox cobItemParent;
-    private javax.swing.JComboBox cobScriptType;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton6;
     private javax.swing.JComboBox jComboBoxItemType;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -1633,12 +1531,9 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JSpinner jSpinnerAttack;
     private javax.swing.JSpinner jSpinnerDefence;
     private javax.swing.JSpinner jSpinnerGold;
@@ -1649,7 +1544,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JSpinner jSpinnerItemHealth;
     private javax.swing.JSpinner jSpinnerItemValue;
     private javax.swing.JSpinner jSpinnerLevel;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lblMapNumEnemies;
     private javax.swing.JLabel lblMapNumItems;
     private javax.swing.JLabel lblMapNumRooms;
@@ -1659,13 +1553,11 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JList lstEnemy;
     private javax.swing.JList lstItem;
     private javax.swing.JList lstRooms;
-    private javax.swing.JList lstRooms1;
     private javax.swing.JPanel panel;
     private javax.swing.JPanel pnlEnemy;
     private javax.swing.JPanel pnlItem;
     private javax.swing.JPanel pnlMap;
     private javax.swing.JPanel pnlRooms;
-    private javax.swing.JPanel pnlScript;
     private javax.swing.JTabbedPane pnlSide;
     private javax.swing.JSlider sldSizeX;
     private javax.swing.JSlider sldSizeY;
