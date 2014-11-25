@@ -105,4 +105,8 @@ public abstract class Person extends GameElement implements ItemContainer{
         this.gold = gold;
     }
     
+    public void removeItem(Item item) {
+        equipment.remove(item);
+    }
+    
 }

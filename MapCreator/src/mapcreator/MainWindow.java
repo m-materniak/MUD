@@ -216,6 +216,11 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel4.setText("Nazwa:");
 
         btnEditItem.setText("Edytuj");
+        btnEditItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditItemActionPerformed(evt);
+            }
+        });
 
         btnRemoveItem.setText("Usuń");
         btnRemoveItem.addActionListener(new java.awt.event.ActionListener() {
@@ -225,6 +230,11 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         lstItem.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        lstItem.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lstItemValueChanged(evt);
+            }
+        });
         jScrollPane3.setViewportView(lstItem);
 
         lblNumItems.setText(" ");
@@ -796,7 +806,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void btnNewMapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewMapActionPerformed
         rooms = new ArrayList<>();
         enemies = new ArrayList<>();
-        items = new ArrayList<>();
+        itemsInRoom = new ArrayList<>();
         containers = new ArrayList<>();
         map = new Map();
         map.setName(this.txtMapName.getText());
@@ -816,7 +826,7 @@ public class MainWindow extends javax.swing.JFrame {
         updateRoomsList();
         updateEnemiesList();
         updateContainers();
-        updateItemsList();
+        updateItems();
 
         pnlSide.setEnabled(true);
         repaint();
@@ -873,7 +883,7 @@ public class MainWindow extends javax.swing.JFrame {
         txtRoomName.setText(activeCell.getName());
         repaint();
         updateRoomsList();
-        updateItemsList();
+        updateItems();
         updateContainers();
         updateEnemiesList();
     }//GEN-LAST:event_btnNActionPerformed
@@ -903,7 +913,7 @@ public class MainWindow extends javax.swing.JFrame {
         txtRoomName.setText(activeCell.getName());
         repaint();
         updateRoomsList();
-        updateItemsList();
+        updateItems();
         updateContainers();
         updateEnemiesList();
     }//GEN-LAST:event_btnSActionPerformed
@@ -933,7 +943,7 @@ public class MainWindow extends javax.swing.JFrame {
         txtRoomName.setText(activeCell.getName());
         repaint();
         updateRoomsList();
-        updateItemsList();
+        updateItems();
         updateContainers();
         updateEnemiesList();
     }//GEN-LAST:event_btnWActionPerformed
@@ -946,7 +956,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
         }
         updateRoomsList();
-        updateItemsList();
+        //updateItems();
         updateParentItemCombo();
         updateEnemiesList();
     }//GEN-LAST:event_btnSaveRoomActionPerformed
@@ -975,7 +985,7 @@ public class MainWindow extends javax.swing.JFrame {
             txtRoomName.setText(activeCell.getName());
             repaint();
             updateRoomsList();
-            updateItemsList();
+            updateItems();
             updateContainers();
             updateEnemiesList();
         }
@@ -1013,9 +1023,21 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddEnemyActionPerformed
 
     private void btnAddItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddItemActionPerformed
-       Item newItem=new Item(txtItemName.getText(),Item.itemType.fromInteger(jComboBoxItemType.getSelectedIndex()), (Integer)jSpinnerItemAttack.getValue(), (Integer)jSpinnerItemDefence.getValue(), (Integer)jSpinnerItemHealth.getValue(), (Integer)jSpinnerItemExperience.getValue(), (Integer)jSpinnerItemValue.getValue());
-       items.add(newItem);
-       activeCell.PutItem(newItem);
+       if (btnAddItem.getText() == "Dodaj") {
+        Item newItem=new Item(txtItemName.getText(),Item.itemType.fromInteger(jComboBoxItemType.getSelectedIndex()), (Integer)jSpinnerItemAttack.getValue(), (Integer)jSpinnerItemDefence.getValue(), (Integer)jSpinnerItemHealth.getValue(), (Integer)jSpinnerItemExperience.getValue(), (Integer)jSpinnerItemValue.getValue());
+       itemsInRoom.add(newItem);
+       containers.get(cobItemParent.getSelectedIndex()).PutItem(newItem);
+       itemnumber++;
+       } else{
+            Item editedItem = itemsInRoom.get(lstItem.getSelectedIndex());
+            editedItem.Name=txtItemName.getText();
+            editedItem.setType(Item.itemType.fromInteger(jComboBoxItemType.getSelectedIndex()));
+            editedItem.setAttackModifier((Integer)jSpinnerItemAttack.getValue());
+            editedItem.setDefenceModifier((Integer)jSpinnerItemDefence.getValue());
+            editedItem.setHealthModifier((Integer)jSpinnerItemHealth.getValue());
+            editedItem.setExperienceModifier((Integer)jSpinnerItemExperience.getValue());
+            editedItem.setValue((Integer)jSpinnerItemValue.getValue());
+       }
        updateItemsList();
        repaint();
     }//GEN-LAST:event_btnAddItemActionPerformed
@@ -1023,12 +1045,14 @@ public class MainWindow extends javax.swing.JFrame {
     private void btnRemoveItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveItemActionPerformed
         int index = lstItem.getSelectedIndex();
         if (index >= 0) {
-            Item toDel = activeCell.items.get(index);
-            activeCell.items.remove(toDel);
-            items.remove(toDel);
-        }
+            Item toDel = itemsInRoom.get(index);
+            containers.get(cobItemParent.getSelectedIndex()).removeItem(toDel);
+            itemsInRoom.remove(toDel);
+            itemnumber--;
+        } 
         repaint();
         updateItemsList();
+        btnAddItem.setText("Dodaj");
     }//GEN-LAST:event_btnRemoveItemActionPerformed
 
     private void btnRemoveEnemyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveEnemyActionPerformed
@@ -1040,6 +1064,7 @@ public class MainWindow extends javax.swing.JFrame {
         }
         repaint();
         updateEnemiesList();
+        btnAddEnemy.setText("Dodaj");
     }//GEN-LAST:event_btnRemoveEnemyActionPerformed
 
     private void cobItemParentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cobItemParentActionPerformed
@@ -1067,7 +1092,7 @@ public class MainWindow extends javax.swing.JFrame {
             txtRoomName.setText(activeCell.getName());
             repaint();
             updateRoomsList();
-            updateItemsList();
+            updateItems();
             updateContainers();
             updateEnemiesList();
         }
@@ -1138,7 +1163,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxItemTypeActionPerformed
 
     private void btnEditEnemyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditEnemyActionPerformed
-       // int indRoom=cobEnemyParent.getSelectedIndex();
+       if (lstEnemy.getSelectedIndex()>=0){
        Person editedEnemy= activeCell.getPeople().get(lstEnemy.getSelectedIndex());
        txtEnemyName.setText(editedEnemy.getName());
        jSpinnerHealth.setValue(editedEnemy.getHealth());
@@ -1147,11 +1172,30 @@ public class MainWindow extends javax.swing.JFrame {
        jSpinnerLevel.setValue(editedEnemy.getLevel());
        jSpinnerGold.setValue(editedEnemy.getGold());
        btnAddEnemy.setText("Zapisz");
+       }
     }//GEN-LAST:event_btnEditEnemyActionPerformed
 
     private void lstEnemyValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstEnemyValueChanged
         btnAddEnemy.setText("Dodaj");
     }//GEN-LAST:event_lstEnemyValueChanged
+
+    private void btnEditItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditItemActionPerformed
+       if (lstItem.getSelectedIndex()>=0){
+        Item editedItem= itemsInRoom.get(lstItem.getSelectedIndex());
+       txtItemName.setText(editedItem.Name);
+       jComboBoxItemType.setSelectedItem(editedItem.getType().toString());
+       jSpinnerItemAttack.setValue( editedItem.getAttackModifier());
+       jSpinnerItemDefence.setValue(editedItem.getDefenceModifier());
+       jSpinnerItemHealth.setValue(editedItem.getHealthModifier());
+       jSpinnerItemExperience.setValue(editedItem.getExperienceModifier());
+       jSpinnerItemValue.setValue(editedItem.getValue());
+       btnAddItem.setText("Zapisz");
+       }
+    }//GEN-LAST:event_btnEditItemActionPerformed
+
+    private void lstItemValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstItemValueChanged
+        btnAddItem.setText("Dodaj");
+    }//GEN-LAST:event_lstItemValueChanged
 
     /**
      * @param args the command line arguments
@@ -1242,15 +1286,29 @@ public class MainWindow extends javax.swing.JFrame {
         updateParentItemCombo();
     }
 
-    public void updateItemsList() {
+    public void updateItems() {
+        itemsInRoom.clear();
+        for (int i = 0; i < activeCell.getItems().size(); i++) {
+            itemsInRoom.add(activeCell.getItems().get(i));
+        }
+        for (Person person : activeCell.getPeople()){
+            for (Item item : person.equipment){
+                itemsInRoom.add(item);
+            }
+        }
+        updateItemsList();
+        
+    }
+        public void updateItemsList() {
         DefaultListModel model = new DefaultListModel();
         lstItem.setModel(model);
-        this.lblNumItems.setText("Liczba Przedmiotów: " + activeCell.getItems().size());
-        this.lblMapNumItems.setText("Liczba Przedmiotów: " + activeCell.getItems().size());
-        for (int i = 0; i < activeCell.getItems().size(); i++) {
-            String s = Integer.toString(i)+"#" + activeCell.getItems().get(i).toString();
-            model.addElement(s);
+        for (int i = 0; i < itemsInRoom.size(); i++) {
+            String s = Integer.toString(i)+"#" + itemsInRoom.get(i).toString();
+            model.addElement(Integer.toString(i) +"#" + itemsInRoom.get(i).toString());
         }
+        this.lblNumItems.setText("Liczba przedmiotów: " + itemsInRoom.size());
+        this.lblMapNumItems.setText("Liczba przedmiotów: " + itemnumber);
+        
     }
 
     public int getIndexOfRoom(Cell roomToFind) {
@@ -1311,7 +1369,6 @@ public class MainWindow extends javax.swing.JFrame {
                 for (Person person : cell.getPeople()){
                     com.mud.Entities.Person newPerson = new com.mud.Entities.NonPlayerCharacter(person.getName(), person.getHealth(), person.getAttack(), person.getDefence(), person.getLevel(), person.getGold());
                     newPerson.setLocation(newCell);
-                    newCell.AddPerson(newPerson);
                     for (com.mud.Entities.Item item : person.equipment){
                         newPerson.PutItem(item);
                     }
@@ -1381,7 +1438,8 @@ public class MainWindow extends javax.swing.JFrame {
     public Map map;
     public ArrayList<Cell> rooms;
     public ArrayList<Person> enemies;
-    public ArrayList<Item> items;
+    public int itemnumber = 0;
+    public ArrayList<Item> itemsInRoom;
     public ArrayList<ItemContainer> containers;
     public Cell activeCell = null;
 

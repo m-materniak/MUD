@@ -124,6 +124,7 @@ public class Cell extends GameElement implements ItemContainer {
         items.add(item);
     }
 
+    @Override
     public void removeItem(Item toRemoveItem) {
         items.remove(toRemoveItem);
     }

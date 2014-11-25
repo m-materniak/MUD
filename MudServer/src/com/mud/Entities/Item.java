@@ -313,6 +313,31 @@ public class Item extends GameElement implements Serializable{
         return type.toString() + modifierDescription;
     }
 
+    public void setType(itemType type) {
+        this.type = type;
+    }
+
+    public void setAttackModifier(int attackModifier) {
+        this.attackModifier = attackModifier;
+    }
+
+    public void setDefenceModifier(int defenceModifier) {
+        this.defenceModifier = defenceModifier;
+    }
+
+    public void setHealthModifier(int healthModifier) {
+        this.healthModifier = healthModifier;
+    }
+
+    public void setExperienceModifier(int experienceModifier) {
+        this.experienceModifier = experienceModifier;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+    
+
     @Override
     public String toString() { return Name; }
 }
