@@ -21,7 +21,9 @@ public class GameWorld implements Serializable{
     private Cell startingCell;
 
     public void AddPerson(Person person){
-        peopleInGame.add(person);
+        if (!peopleInGame.contains(person)) {
+            peopleInGame.add(person);
+        }
     }
 
     public void RemovePerson(Person person) {

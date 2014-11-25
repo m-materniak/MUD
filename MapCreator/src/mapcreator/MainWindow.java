@@ -4,18 +4,22 @@ import Entities2.Cell;
 import Entities2.ItemContainer;
 import Entities2.NPC;
 import Entities2.Person;
+import Entities2.Triple;
 import com.mud.Entities.GameWorld;
 import com.mud.Entities.Item;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -141,6 +145,11 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel6.setText("Nazwa pliku:");
 
         jButton6.setText("Wczytaj");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         btnNewMap.setText("Nowa Mapa");
         btnNewMap.addActionListener(new java.awt.event.ActionListener() {
@@ -822,7 +831,6 @@ public class MainWindow extends javax.swing.JFrame {
         map = new Map();
         map.setName(this.txtMapName.getText());
         if (!map.getName().isEmpty()){
-            System.out.println("eloelo");
             txtFileName.setText(map.getName()+".mm");
         }
         Cell firstRoom = new Cell();
@@ -1115,10 +1123,8 @@ public class MainWindow extends javax.swing.JFrame {
 
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Wybierz gdzie zapisać");
-        //fileChooser.setName("twojastara");
         fileChooser.setSelectedFile(new File(txtFileName.getText()));
-        //fileChooser.getUI().setFileName( name )
-
+        
         int userSelection = fileChooser.showSaveDialog(parentFrame);
 
         if (userSelection == JFileChooser.APPROVE_OPTION) {
@@ -1223,6 +1229,37 @@ public class MainWindow extends javax.swing.JFrame {
     private void lstItemValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstItemValueChanged
         btnAddItem.setText("Dodaj");
     }//GEN-LAST:event_lstItemValueChanged
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        com.mud.Entities.GameWorld gameWorld = null;
+        JFrame parentFrame = new JFrame();
+
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Wybierz skąd wczytać plik");
+        fileChooser.setSelectedFile(new File(txtFileName.getText()));
+
+        int userSelection = fileChooser.showOpenDialog(parentFrame);
+
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File fileToOpen = fileChooser.getSelectedFile();
+            System.out.println("Read from file: " + fileToOpen.getAbsolutePath());
+            try {
+                FileInputStream fileIn = new FileInputStream(fileToOpen);
+                ObjectInputStream in = new ObjectInputStream(fileIn);
+                gameWorld = (GameWorld) in.readObject();
+                fromGameWorld(gameWorld);
+                in.close();
+                fileIn.close();
+            } catch (IOException i) {
+                i.printStackTrace();
+                return;
+            } catch (ClassNotFoundException c) {
+                System.out.println("GameWorld class not found");
+                c.printStackTrace();
+                return;
+            }
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1415,6 +1452,76 @@ public class MainWindow extends javax.swing.JFrame {
         }
         swiat.setStartingCell(map.get(rooms.get(0)));
         return swiat;
+    }
+    public void fromGameWorld(GameWorld gameWorld) {
+        this.map = new Map();
+        rooms = new ArrayList<>();
+        enemies = new ArrayList<>();
+        itemsInRoom = new ArrayList<>();
+        containers = new ArrayList<>();
+        HashMap<com.mud.Entities.Cell, Triple> mapa = new HashMap<>();
+        LinkedList<com.mud.Entities.Cell> lista = new LinkedList<>();
+        lista.add(gameWorld.getStartingCell());
+        mapa.put(gameWorld.getStartingCell(), new Triple(15, 20, new Cell()));
+        while (!lista.isEmpty()) {
+            com.mud.Entities.Cell master = lista.pop();
+            if (master.cellEast!=null){
+            if (!mapa.containsKey(master.cellEast)) {
+                mapa.put(master.cellEast, new Triple(mapa.get(master).x, mapa.get(master).y + 1, new Cell()));
+                lista.push(master.cellEast);
+            }}
+            if (master.cellWest!=null){
+            if (!mapa.containsKey(master.cellWest)) {
+                mapa.put(master.cellWest, new Triple(mapa.get(master).x, mapa.get(master).y - 1, new Cell()));
+                lista.push(master.cellWest);
+            }}
+            if (master.cellNorth!=null){
+            if (!mapa.containsKey(master.cellNorth)) {
+                mapa.put(master.cellNorth, new Triple(mapa.get(master).x - 1, mapa.get(master).y, new Cell()));
+                lista.push(master.cellNorth);
+            }}
+            if (master.cellSouth!=null){
+            if (!mapa.containsKey(master.cellSouth)) {
+                mapa.put(master.cellSouth, new Triple(mapa.get(master).x + 1, mapa.get(master).y, new Cell()));
+                lista.push(master.cellSouth);
+            }}
+        }
+        //ustawienie koordynatów
+        for (Triple trojka : mapa.values()) {
+            trojka.cell.setCordX(trojka.x);
+            trojka.cell.setCordY(trojka.y);
+        }
+        for (com.mud.Entities.Cell cell : mapa.keySet()) {
+            Cell newCell = mapa.get(cell).cell;
+            if (cell.cellEast!= null) newCell.cellEast = mapa.get(cell.cellEast).cell;
+            if (cell.cellWest!= null) newCell.cellWest = mapa.get(cell.cellWest).cell;
+            if (cell.cellNorth!= null) newCell.cellNorth = mapa.get(cell.cellNorth).cell;
+            if (cell.cellSouth!= null) newCell.cellSouth = mapa.get(cell.cellSouth).cell;
+            newCell.Name = cell.Name;
+            newCell.items = cell.items;
+            for (com.mud.Entities.Person person : cell.people) {
+                NPC newPerson = new NPC();
+                newPerson.setName(person.Name);
+                newPerson.setAttack(person.getAttack());
+                newPerson.setDefence(person.getDefence());
+                newPerson.setGold(person.getGold());
+                newPerson.setHealth(person.getHealth());
+                newPerson.setLevel(person.getLevel());
+                newPerson.setLocation(newCell);
+                newPerson.equipment = person.equipment;
+                enemies.add(newPerson);
+            }
+            map.addRoom(newCell);
+            rooms.add(newCell);
+        }
+        activeCell = getRoomFromCord(15, 20);
+        inxRoom=1;//??
+        updateRoomsList();
+        updateEnemiesList();
+        updateContainers();
+        updateItems();
+        pnlSide.setEnabled(true);
+        repaint();
     }
 
     public void paint(Graphics arg0) {
