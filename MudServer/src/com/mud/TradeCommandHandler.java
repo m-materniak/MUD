@@ -82,9 +82,9 @@ public class TradeCommandHandler extends CommandHandler implements ITradeCommand
                 otherSideOfTransaction.EventSell(item, price);
             }
         } else if (verb.equals("buy")) {
-            clientConnection.Send("buy not supported yet");
+            clientConnection.Send("To buy ask your partner to sell you an item");
         } else if (verb.equals("offer")) {
-            clientConnection.Send("You can't see the offer yet");
+            clientConnection.Send("You can't see the offer");
         } else if (verb.equals("help")) {
             Help();
         } else {
