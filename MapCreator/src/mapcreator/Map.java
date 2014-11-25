@@ -38,7 +38,7 @@ public class Map {
     public void addRoom(Cell newRoom){
         cells.add(newRoom);
         updateMapSize();
-        printMapSize();
+        //printMapSize();
     }
     public void removeRoom(Cell toRemoveRoom){
         cells.remove(toRemoveRoom);
