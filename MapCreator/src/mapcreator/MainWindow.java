@@ -7,6 +7,7 @@ import Entities2.Person;
 import com.mud.Entities.GameWorld;
 import com.mud.Entities.Item;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -721,6 +722,16 @@ public class MainWindow extends javax.swing.JFrame {
                 panelMouseClicked(evt);
             }
         });
+        panel.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                panelComponentResized(evt);
+            }
+        });
+        panel.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                panelPropertyChange(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
@@ -807,8 +818,8 @@ public class MainWindow extends javax.swing.JFrame {
         Cell firstRoom = new Cell();
         firstRoom.setId(idRoom++);
         firstRoom.setName("START");
-        firstRoom.setCordX(15);
-        firstRoom.setCordY(20);
+        firstRoom.setCordX((int)(mapSizeX/2));
+        firstRoom.setCordY((int)(mapSizeY/2));
         map.addRoom(firstRoom);
         rooms.add(firstRoom);
         inxRoom=firstRoom.getId();
@@ -1126,11 +1137,17 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRemoveRoom1ActionPerformed
 
     private void sldSizeXStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sldSizeXStateChanged
-        this.mapSizeX=this.sldSizeX.getValue();
+        Dimension dim=this.panel.getSize();
+        this.mapSizeX=(int)(dim.height/16*(this.sldSizeX.getValue()/30.0f));
+        this.mapSizeY=(int)(dim.width/16*(this.sldSizeY.getValue()/40.0f));
+        repaint();
     }//GEN-LAST:event_sldSizeXStateChanged
 
     private void sldSizeYStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sldSizeYStateChanged
-        this.mapSizeY=this.sldSizeY.getValue();
+        Dimension dim=this.panel.getSize();
+        this.mapSizeX=(int)(dim.height/16*(this.sldSizeX.getValue()/30.0f));
+        this.mapSizeY=(int)(dim.width/16*(this.sldSizeY.getValue()/40.0f));
+        repaint();
     }//GEN-LAST:event_sldSizeYStateChanged
 
     private void jComboBoxItemTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxItemTypeActionPerformed
@@ -1152,6 +1169,16 @@ public class MainWindow extends javax.swing.JFrame {
     private void lstEnemyValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstEnemyValueChanged
         btnAddEnemy.setText("Dodaj");
     }//GEN-LAST:event_lstEnemyValueChanged
+
+    private void panelPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_panelPropertyChange
+        
+    }//GEN-LAST:event_panelPropertyChange
+
+    private void panelComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_panelComponentResized
+       Dimension dim=this.panel.getSize();
+        this.mapSizeX=(int)(dim.height/16*(this.sldSizeX.getValue()/30.0f));
+        this.mapSizeY=(int)(dim.width/16*(this.sldSizeY.getValue()/40.0f));
+    }//GEN-LAST:event_panelComponentResized
 
     /**
      * @param args the command line arguments
@@ -1342,9 +1369,13 @@ public class MainWindow extends javax.swing.JFrame {
         //rysowanie planszy
         for (int i = 0; i < mapSizeX; i++) {
             for (int j = 0; j < mapSizeY; j++) {
-                arg0.setColor(Color.GRAY);
+                if (map!=null){
+                    arg0.setColor(Color.LIGHT_GRAY);
+                }else{
+                    arg0.setColor(Color.GRAY);
+                }
                 arg0.fillRect(startX + recSize * j, startY + recSize * i, recSize - 1, recSize - 1);
-                arg0.setColor(Color.black);
+                arg0.setColor(Color.DARK_GRAY);
                 arg0.drawRect(startX + recSize * j, startY + recSize * i, recSize - 1, recSize - 1);
             }
         }
